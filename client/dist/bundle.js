@@ -2185,7 +2185,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _StockPrice__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./StockPrice */ "./client/src/components/StockPrice.jsx");
 
 
 /* eslint-disable object-shorthand */
@@ -2194,60 +2193,72 @@ __webpack_require__.r(__webpack_exports__);
 
 /* eslint-disable react/function-component-definition */
 
-
-
+ // import StockPrice from './StockPrice';
 
 var StockInterface = function StockInterface() {
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(10000),
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)('TIME_SERIES_DAILY'),
       _useState2 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState, 2),
-      currentCash = _useState2[0],
-      setCurrentCash = _useState2[1];
+      timeInterval = _useState2[0],
+      setTimeInterval = _useState2[1];
 
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)('AAPL'),
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(10000),
       _useState4 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState3, 2),
-      currentStockSymbol = _useState4[0],
-      setCurrentStockSymbol = _useState4[1];
+      cash = _useState4[0],
+      setCash = _useState4[1];
 
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(0),
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)('AAPL'),
       _useState6 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState5, 2),
-      currentStockPrice = _useState6[0],
-      setCurrentStockPrice = _useState6[1];
+      stockSymbol = _useState6[0],
+      setStockSymbol = _useState6[1];
 
-  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)({}),
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(0),
       _useState8 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState7, 2),
-      currentStockHistory = _useState8[0],
-      setCurrentStockHistory = _useState8[1]; // HELPER FUNCTIONS
+      stockPrice = _useState8[0],
+      setStockPrice = _useState8[1];
 
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)({}),
+      _useState10 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState9, 2),
+      stockPriceHistory = _useState10[0],
+      setStockPriceHistory = _useState10[1];
+
+  var timeSeriesMapping = {
+    'TIME_SERIES_DAILY': 'Time Series (Daily)'
+  }; // HELPER FUNCTIONS
 
   var capitalizeStockSymbol = function capitalizeStockSymbol(symbol) {
     return symbol.toUpperCase();
   };
 
-  var getStockPrice = function getStockPrice(symbol) {
+  var getStockPrice = function getStockPrice(symbol, callback) {// const priceHistoryKeys = Object.keys(priceHistory);
+    // const latestStockPrice = priceHistory[priceHistory[0]];
+  };
+
+  var getStockPriceHistory = function getStockPriceHistory(symbol, callback) {
     axios__WEBPACK_IMPORTED_MODULE_1___default().get('https://alpha-vantage.p.rapidapi.com/query', {
       headers: {
         'x-rapidapi-host': 'alpha-vantage.p.rapidapi.com',
         'x-rapidapi-key': '1b1e7cf330mshfe2a919e34e9dd1p12059bjsna4c74a6efb05'
       },
       params: {
-        "function": 'TIME_SERIES_DAILY',
+        "function": timeInterval,
         symbol: symbol,
         datatype: 'json',
         output_size: 'compact'
       }
     }).then(function (results) {
-      console.log(results.data); // res.send(results.data);
+      console.log(results.data);
+      var timeSeriesKey = timeSeriesMapping[timeInterval];
+      var priceHistory = results.data[timeSeriesKey];
+      callback(priceHistory);
     })["catch"](function (err) {
       console.log(err);
     });
   };
 
-  var getStockPriceHistory = function getStockPriceHistory(symbol) {};
-
   (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function () {
-    setCurrentStockPrice(getStockPrice(currentStockSymbol));
+    getStockPriceHistory(stockSymbol, setStockPriceHistory);
   });
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", null, currentStockPrice, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(_StockPrice__WEBPACK_IMPORTED_MODULE_3__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("button", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", null, stockPrice, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("button", {
     type: "submit"
   }, "Buy"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("button", {
     type: "submit"
@@ -2257,28 +2268,6 @@ var StockInterface = function StockInterface() {
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (StockInterface);
-
-/***/ }),
-
-/***/ "./client/src/components/StockPrice.jsx":
-/*!**********************************************!*\
-  !*** ./client/src/components/StockPrice.jsx ***!
-  \**********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-
-
-var StockPrice = function StockPrice() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "$100");
-};
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (StockPrice);
 
 /***/ }),
 
