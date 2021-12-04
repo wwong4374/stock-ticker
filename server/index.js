@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 app.use(express.json());
 
 // Serve static files to browser
-// Separate path with commas to account for both Mac and Windows OS path conventions
+// Separate path with commas to account for both Mac and Windows OS filepath conventions
 app.use(express.static(path.join(__dirname, '..', 'client', 'dist')));
 
 app.get('/api/stocks', (req, res) => {
@@ -56,7 +56,9 @@ app.post('/api/stocks', (req, res) => {
 });
 
 app.put('/api/stocks', (req, res) => {
+  console.log(req.body);
   const { quantity, stockSymbol } = req.body;
+  // console.log(quantity);
   db.query(`UPDATE stocks SET quantity = ? WHERE stockSymbol = ?`, [quantity, stockSymbol], (err, data) => {
     if (err) {
       console.log(err);
@@ -65,9 +67,8 @@ app.put('/api/stocks', (req, res) => {
   });
 });
 
-app.delete('/api/stocks', (req, res) => {
-  const { stockSymbol } = req.body;
-  console.log('DELETEING', stockSymbol);
+app.delete('/api/stocks/:stockSymbol', (req, res) => {
+  const { stockSymbol } = req.params;
   db.query(`DELETE FROM stocks WHERE stockSymbol = ?`, [stockSymbol], (err, data) => {
     if (err) {
       console.log(err);

@@ -31,18 +31,24 @@ const StockTile = ({ stockObj, getPortfolio, incrementStockQuantity }) => {
   //     })
   //     .catch((err) => { console.log(err); });
   // };
+  const handleSellAllStock = () => {
+    axios.delete(`http://localhost:3000/api/stocks/${stockObj.stockSymbol}`)
+      .then((results) => { getPortfolio(); })
+      .catch((err) => { console.log(err); });
+  };
 
   const handleSellStock = () => {
     axios.put('http://localhost:3000/api/stocks', { stockSymbol: stockObj.stockSymbol, quantity: stockObj.quantity - 1 })
+      .then(() => {
+        // If quantity is now 0
+        axios.get(`http://localhost:3000/api/stocks/${stockObj.stockSymbol}/quantity`)
+          .then((results) => { if (results.data.quantity === 0) { handleSellAllStock(); } })
+          .catch((err) => { console.log(err); });
+      })
       .then((results) => { getPortfolio(); })
       .catch((err) => { console.log(err); });
   };
 
-  const handleSellAllStock = () => {
-    axios.delete('http://localhost:3000/api/stocks', { stockSymbol: stockObj.stockSymbol })
-      .then((results) => { getPortfolio(); })
-      .catch((err) => { console.log(err); });
-  };
 
   return (
     <div className="stockTile">
@@ -50,6 +56,7 @@ const StockTile = ({ stockObj, getPortfolio, incrementStockQuantity }) => {
         <span className="stockSymbol">{stockObj.stockSymbol}</span>
         <span className="stockQuantity">{stockObj.quantity}</span>
         <span className="stockPrice">{`$${stockPrice.toLocaleString()}`}</span>
+        <span className="marketValue">{`$${(stockObj.quantity * stockPrice).toLocaleString()}`}</span>
       </div>
       <div className="stockTileButtons">
         <button className="stockTileButton" onClick={incrementStockQuantity}>Buy</button>

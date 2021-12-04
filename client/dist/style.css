@@ -6,13 +6,22 @@
   gap: 15px;
 }
 
+.upperContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 500px;
+  gap: 20px;
+}
+
 .stockPriceTitle {
   font-weight: bold;
   font-size: 30px;
 }
 
-button
-{
+button,
+input {
   height: 30px;
   width: 100px;
   border: black 2px solid;
@@ -26,8 +35,8 @@ button:hover {
 }
 
 input {
-  height: 22px;
-  border-radius: 3px;
+  height: 23px;
+  cursor: auto;
 }
 
 .stockPortfolio {
@@ -35,6 +44,15 @@ input {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 10px;
+  border: solid 2px black;
+}
+
+.stockPortfolioTitle,
+.stockPortfolioValue {
+  font-size: 25px;
+  font-weight: bold;
+  margin: 10px;
 }
 
 .stockPortfolioLabelContainer,
@@ -45,22 +63,19 @@ input {
   margin-bottom: 10px;
 }
 
+.stockPortfolioLabel {
+  font-weight: bold;
+}
+
 .stockTile {
   display: flex;
   flex-direction: row;
-  /* width: 600px; */
 }
-
-/* .stockTileLabels {} */
 
 .stockSymbol,
 .stockQuantity,
 .stockPrice {
   width: 100px;
-}
-
-.stockTileButtons {
-
 }
 
 .stockTileButton {

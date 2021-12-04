@@ -83,49 +83,35 @@ const StockInterface = () => {
   //   getStockPriceHistory();
   // }, [stockSymbol]);
 
-  // useEffect(() => {
-  //   getPrice();
-  // }, [stockSymbol]);
+  useEffect(() => {
+    getPrice();
+  }, [stockSymbol]);
 
   // CLICK HANDLERS
-  const getStockQuantity = () => {
+  const incrementStockQuantity = () => {
     let quantity = 0;
     axios.get(`http://localhost:3000/api/stocks/${stockSymbol}/quantity`)
       .then((results) => { quantity = results.data.quantity; })
-      .then(() => { return quantity; })
-      .catch((err) => { console.log(err); });
-  };
-
-  const incrementStockQuantity = () => {
-    const quantity = getStockQuantity();
-    axios.put('http://localhost:3000/api/stocks', { stockSymbol: stockSymbol, quantity: quantity + 1 })
-      .then((results) => { getPortfolio(); })
-      .catch((err) => { console.log(err); });
-  };
-
-  const getStockSymbolsInPortfolio = () => {
-    axios.get('http://localhost:3000/api/stocks/symbols')
-      .then((results) => {
-        const stockSymbolsInPortfolio = results.data;
-        if (stockSymbolsInPortfolio.includes(stockSymbol)) {
-          // Add 1 to quantity
-          incrementStockQuantity();
-        } else {
-          addStockToPortfolio();
-        }
+      .then(() => {
+        axios.put('http://localhost:3000/api/stocks', { stockSymbol: stockSymbol, quantity: quantity + 1 })
+          .then((results) => { getPortfolio(); })
+          .catch((err) => { console.log(err); });
       })
       .catch((err) => { console.log(err); });
   };
 
   const handleBuyStock = () => {
-    // Check database for current stockSymbol
-    getStockSymbolsInPortfolio();
-    // If already own the stock
-      // Update quantity
-    // Else
-      // POST new stock to database
-    // addStockToPortfolio();
-    // getPortfolio();
+    axios.get('http://localhost:3000/api/stocks/symbols')
+      .then((results) => {
+        const stockSymbolsInPortfolio = results.data;
+        if (stockSymbolsInPortfolio.includes(stockSymbol)) {
+          incrementStockQuantity();
+        } else {
+          addStockToPortfolio();
+        }
+      })
+      .then(getPortfolio)
+      .catch((err) => { console.log(err); });
   };
 
   const handleStockInput = (e) => {
@@ -140,20 +126,22 @@ const StockInterface = () => {
   return (
     <div className="stockInterface">
       <h1>RobynHood</h1>
-      <div className="stockPriceTitle">
-        {stockSymbol}
-        {':'}
-        {' '}
-        {'$'}
-        {(Math.round(stockPrice * 100) / 100).toLocaleString()}
-      </div>
-      <div className="buttons">
-        <button type="submit" onClick={handleBuyStock}>Buy</button>
-        <button type="submit">YOLO</button>
-      </div>
-      <div>
-        <input placeholder="Ticker symbol..." onChange={handleStockInput}></input>
-        <button type="submit" onClick={handleStockSearch}>Search</button>
+      <div className="upperContainer">
+        <div className="stockPriceTitle">
+          {stockSymbol}
+          {':'}
+          {' '}
+          {'$'}
+          {(Math.round(stockPrice * 100) / 100).toLocaleString()}
+        </div>
+        <div>
+          <input placeholder="Symbol..." onChange={handleStockInput}></input>
+          <button type="submit" onClick={handleStockSearch}>Search</button>
+        </div>
+        <div className="buttons">
+          <button type="submit" onClick={handleBuyStock}>Buy</button>
+          <button type="submit">YOLO</button>
+        </div>
       </div>
       <StockPortfolio portfolio={portfolio} getPortfolio={getPortfolio} incrementStockQuantity={incrementStockQuantity}/>
     </div>

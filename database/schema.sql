@@ -11,13 +11,13 @@ CREATE TABLE stocks (
 );
 
 INSERT INTO stocks (id, stockSymbol, quantity)
-VALUES (1, 'TSLA', 500);
+VALUES (DEFAULT, 'TSLA', 500);
 
 INSERT INTO stocks (id, stockSymbol, quantity)
-VALUES (2, 'AAPL', 100);
+VALUES (DEFAULT, 'AAPL', 100);
 
 INSERT INTO stocks (id, stockSymbol, quantity)
-VALUES (3, 'GM', 200);
+VALUES (DEFAULT, 'GM', 200);
 
 INSERT INTO stocks (id, stockSymbol, quantity)
-VALUES (4, 'V', 1000);
+VALUES (DEFAULT, 'V', 1000);
