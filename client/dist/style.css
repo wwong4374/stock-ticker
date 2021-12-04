@@ -1,0 +1,46 @@
+.stockInterface {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+
+.stockPrice {
+  font-size: 30px;
+}
+
+button
+{
+  height: 30px;
+  width: 100px;
+  border-radius: 0;
+}
+
+input {
+  height: 25px;
+}
+
+.stockPortfolioLabelContainer {
+  /* font-size: 15px;
+  margin: 5px; */
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.stockTile {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.stockSymbol,
+.stockQuantity {
+  width: 70px;
+}
+
+.stockTileSellButton {
+  height: 25px;
+  width: 70px;
+}

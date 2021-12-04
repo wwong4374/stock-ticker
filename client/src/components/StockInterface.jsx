@@ -1,14 +1,16 @@
+/* eslint-disable import/extensions */
 /* eslint-disable object-shorthand */
 /* eslint-disable comma-dangle */
 /* eslint-disable react/function-component-definition */
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import stockPriceObj from './stockPriceObj.js';
+import StockPortfolio from './StockPortfolio.jsx';
 
 const StockInterface = () => {
   const [timeInterval, setTimeInterval] = useState('TIME_SERIES_DAILY');
   const [cash, setCash] = useState(10000);
-  const [stockSymbol, setStockSymbol] = useState('F');
+  const [stockSymbol, setStockSymbol] = useState('TSLA');
   const [stockToSearch, setStockToSearch] = useState('');
   const [stockPrice, setStockPrice] = useState(0);
   const [stockPriceHistory, setStockPriceHistory] = useState(stockPriceObj);
@@ -40,41 +42,48 @@ const StockInterface = () => {
     setStockPrice(latestStockPrice);
   };
 
-  // const getStockPriceHistory = () => {
-  //   axios.get('https://alpha-vantage.p.rapidapi.com/query', {
-  //     headers: {
-  //       'x-rapidapi-host': 'alpha-vantage.p.rapidapi.com',
-  //       'x-rapidapi-key': '1b1e7cf330mshfe2a919e34e9dd1p12059bjsna4c74a6efb05'
-  //     },
-  //     params: {
-  //       function: timeInterval,
-  //       symbol: stockSymbol,
-  //       datatype: 'json',
-  //       outputsize: 'compact'
-  //     }
-  //   })
-  //     .then((results) => {
-  //       const timeSeriesKey = timeSeriesMapping[timeInterval];
-  //       debugger;
-  //       const priceHistory = results.data[timeSeriesKey];
-  //       setStockPriceHistory({ ...priceHistory });
-  //     })
-  //     .then(() => {
-  //       console.log(stockPriceHistory);
-  //       updateStockPrice();
-  //     })
-  //     .catch((err) => { console.log(err); });
-  // };
-
-  // useEffect(() => {
-  //   getStockPriceHistory();
-  // }, [stockSymbol]);
+  const getStockPriceHistory = () => {
+    axios.get('https://alpha-vantage.p.rapidapi.com/query', {
+      headers: {
+        'x-rapidapi-host': 'alpha-vantage.p.rapidapi.com',
+        'x-rapidapi-key': '1b1e7cf330mshfe2a919e34e9dd1p12059bjsna4c74a6efb05'
+      },
+      params: {
+        function: timeInterval,
+        symbol: stockSymbol,
+        datatype: 'json',
+        outputsize: 'compact'
+      }
+    })
+      .then((results) => {
+        const timeSeriesKey = timeSeriesMapping[timeInterval];
+        const priceHistory = results.data[timeSeriesKey];
+        setStockPriceHistory({ ...priceHistory });
+      })
+      .then(() => {
+        console.log(stockPriceHistory);
+        updateStockPrice();
+      })
+      .catch((err) => { console.log(err); });
+  };
 
   useEffect(() => {
-    updateStockPrice();
-  });
+    getStockPriceHistory();
+  }, [stockSymbol]);
+
+  // useEffect(() => {
+  //   updateStockPrice();
+  // });
 
   // CLICK HANDLERS
+  const handleBuyStock = () => {
+
+  };
+
+  const handleSellStock = () => {
+
+  };
+
   const handleStockInput = (e) => {
     setStockToSearch(stockToSearch + e.nativeEvent.data);
     console.log(stockToSearch);
@@ -86,20 +95,24 @@ const StockInterface = () => {
   };
 
   return (
-    <div>
-      {stockSymbol}
-      {':'}
-      {' '}
-      {stockPrice}
-      <div>
-        <button type="submit">Buy</button>
-        <button type="submit">Sell</button>
+    <div className="stockInterface">
+      <div className="stockPrice">
+        {stockSymbol}
+        {':'}
+        {' '}
+        {'$'}
+        {Math.round(stockPrice * 100) / 100}
+      </div>
+      <div className="buttons">
+        <button type="submit" onClick={handleBuyStock}>Buy</button>
+        {/* <button type="submit" onClick={handleSellStock}>Sell</button> */}
         <button type="submit">YOLO</button>
       </div>
       <div>
         <input placeholder="Enter stock ticker..." onChange={handleStockInput}></input>
         <button type="submit" onClick={handleStockSearch}>Search</button>
       </div>
+      <StockPortfolio />
     </div>
   );
 };

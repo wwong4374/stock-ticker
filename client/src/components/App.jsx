@@ -5,7 +5,7 @@ import StockInterface from './StockInterface.jsx';
 
 const App = () => {
   return (
-    <div>
+    <div className="app">
       <StockInterface />
     </div>
   );
