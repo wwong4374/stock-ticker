@@ -13,33 +13,33 @@ const StockInterface = () => {
   const [stockSymbol, setStockSymbol] = useState('TSLA');
   const [stockToSearch, setStockToSearch] = useState('');
   const [stockPrice, setStockPrice] = useState(0);
-  const [stockPriceHistory, setStockPriceHistory] = useState(stockPriceObj);
-  // const [stockPriceHistory, setStockPriceHistory] = useState({});
+  // const [stockPriceHistory, setStockPriceHistory] = useState(stockPriceObj);
+  const [stockPriceHistory, setStockPriceHistory] = useState({});
+  const [portfolio, setPortfolio] = useState([]);
   const timeSeriesMapping = {
     TIME_SERIES_DAILY: 'Time Series (Daily)',
     TIME_SERIES_WEEKLY: 'Weekly Time Series'
   };
 
   // HELPER FUNCTIONS
-  const capitalizeStockSymbol = (symbol) => { setStockSymbol(symbol.toUpperCase()); };
+  // const capitalizeStockSymbol = (symbol) => { setStockSymbol(symbol.toUpperCase()); };
 
-  const updateStockPrice = () => {
-    // Find latest price of current stock
-    const priceHistoryKeys = Object.keys(stockPriceHistory);
-    const priceHistoryDates = [];
-    priceHistoryKeys.forEach((dateString) => {
-      priceHistoryDates.push(new Date(dateString));
-    });
-    priceHistoryDates.sort((a, b) => (a - b));
-    const latestDate = priceHistoryDates[priceHistoryDates.length - 1];
-    const latestYear = latestDate.getUTCFullYear();
-    const latestMonth = latestDate.getUTCMonth() + 1;
-    const latestMonthString = latestMonth > 9 ? latestMonth.toString() : `0${latestMonth.toString()}`;
-    const latestDay = latestDate.getUTCDate();
-    const latestDayString = latestDay > 9 ? latestDay.toString() : `0${latestDay.toString()}`;
-    const latestPriceKey = `${latestYear}-${latestMonthString}-${latestDayString}`;
-    const latestStockPrice = stockPriceHistory[latestPriceKey]['4. close'];
-    setStockPrice(latestStockPrice);
+  const getPrice = () => {
+    axios.get('https://alpha-vantage.p.rapidapi.com/query', {
+      headers: {
+        'x-rapidapi-host': 'alpha-vantage.p.rapidapi.com',
+        'x-rapidapi-key': '1b1e7cf330mshfe2a919e34e9dd1p12059bjsna4c74a6efb05'
+      },
+      params: {
+        function: 'GLOBAL_QUOTE',
+        symbol: stockSymbol,
+        datatype: 'json'
+      }
+    })
+      .then((results) => {
+        setStockPrice(Math.round(results.data['Global Quote']['05. price'] * 100) / 100);
+      })
+      .catch((err) => { console.log(err); });
   };
 
   const getStockPriceHistory = () => {
@@ -59,11 +59,23 @@ const StockInterface = () => {
         const timeSeriesKey = timeSeriesMapping[timeInterval];
         const priceHistory = results.data[timeSeriesKey];
         setStockPriceHistory({ ...priceHistory });
+        getPrice();
       })
-      .then(() => {
-        console.log(stockPriceHistory);
-        updateStockPrice();
+      .catch((err) => { console.log(err); });
+  };
+
+  const getPortfolio = () => {
+    axios.get('http://localhost:3000/api/stocks')
+      .then((res) => {
+        const data = res.data;
+        setPortfolio([...data]);
       })
+      .catch((err) => { console.log(err); });
+  };
+
+  const addStockToPortfolio = () => {
+    axios.post('http://localhost:3000/api/stocks', { stockSymbol: stockSymbol, quantity: 1 })
+      .then()
       .catch((err) => { console.log(err); });
   };
 
@@ -71,32 +83,34 @@ const StockInterface = () => {
     getStockPriceHistory();
   }, [stockSymbol]);
 
-  // useEffect(() => {
-  //   updateStockPrice();
-  // });
+  useEffect(() => {
+    getPrice();
+  }, [stockSymbol]);
 
   // CLICK HANDLERS
   const handleBuyStock = () => {
+    // Check database for current stockSymbol
 
-  };
-
-  const handleSellStock = () => {
-
+    // If already own the stock
+      // Update quantity
+    // Else
+      // POST new stock to database
+    addStockToPortfolio();
+    getPortfolio();
   };
 
   const handleStockInput = (e) => {
-    setStockToSearch(stockToSearch + e.nativeEvent.data);
-    console.log(stockToSearch);
+    setStockToSearch(e.nativeEvent.target.value);
   };
   const handleStockSearch = () => {
     setStockSymbol(stockToSearch);
-    updateStockPrice();
+    getPrice();
     setStockToSearch('');
   };
 
   return (
     <div className="stockInterface">
-      <div className="stockPrice">
+      <div className="stockPriceTitle">
         {stockSymbol}
         {':'}
         {' '}
@@ -105,14 +119,13 @@ const StockInterface = () => {
       </div>
       <div className="buttons">
         <button type="submit" onClick={handleBuyStock}>Buy</button>
-        {/* <button type="submit" onClick={handleSellStock}>Sell</button> */}
         <button type="submit">YOLO</button>
       </div>
       <div>
-        <input placeholder="Enter stock ticker..." onChange={handleStockInput}></input>
+        <input placeholder="Ticker symbol..." onChange={handleStockInput}></input>
         <button type="submit" onClick={handleStockSearch}>Search</button>
       </div>
-      <StockPortfolio />
+      <StockPortfolio portfolio={portfolio} getPortfolio={getPortfolio} />
     </div>
   );
 };

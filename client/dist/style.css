@@ -6,7 +6,7 @@
   gap: 15px;
 }
 
-.stockPrice {
+.stockPriceTitle {
   font-size: 30px;
 }
 
@@ -40,7 +40,7 @@ input {
   width: 70px;
 }
 
-.stockTileSellButton {
+.stockTileButton {
   height: 25px;
   width: 70px;
 }

@@ -26,14 +26,29 @@ app.get('/api/stocks', (req, res) => {
   });
 });
 
-// app.post('/api/stocks', (req, res) => {
-
-// });
+app.post('/api/stocks', (req, res) => {
+  const { quantity, stockSymbol } = req.body;
+  db.query(`INSERT INTO stocks (quantity, stockSymbol) VALUES (?, ?)`, [quantity, stockSymbol], (err, data) => {
+    if (err) {
+      console.log(err);
+    }
+    res.sendStatus(201);
+  });
+});
 
 app.put('/api/stocks', (req, res) => {
   const { quantity, stockSymbol } = req.body;
+  db.query(`UPDATE stocks SET quantity = ? WHERE stockSymbol = ?`, [quantity, stockSymbol], (err, data) => {
+    if (err) {
+      console.log(err);
+    }
+    res.send(data);
+  });
+});
 
-  db.query(`UPDATE stocks SET quantity = ? WHERE stockSymbol = ?`, [quantity - 1, stockSymbol], (err, data) => {
+app.delete('/api/stocks', (req, res) => {
+  const { stockSymbol } = req.body;
+  db.query(`DELETE FROM stocks WHERE stockSymbol = ?`, [stockSymbol], (err, data) => {
     if (err) {
       console.log(err);
     }
