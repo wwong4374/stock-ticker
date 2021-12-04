@@ -7,6 +7,7 @@
 }
 
 .stockPriceTitle {
+  font-weight: bold;
   font-size: 30px;
 }
 
@@ -14,30 +15,52 @@ button
 {
   height: 30px;
   width: 100px;
-  border-radius: 0;
+  border: black 2px solid;
+  border-radius: 7px;
+  background-color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: rgb(18, 235, 235);
 }
 
 input {
-  height: 25px;
+  height: 22px;
+  border-radius: 3px;
 }
 
-.stockPortfolioLabelContainer {
-  /* font-size: 15px;
-  margin: 5px; */
+.stockPortfolio {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.stockPortfolioLabelContainer,
+.stockTileLabels {
   display: flex;
   justify-content: space-between;
+  width: 300px;
   margin-bottom: 10px;
 }
 
 .stockTile {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  /* width: 600px; */
 }
 
+/* .stockTileLabels {} */
+
 .stockSymbol,
-.stockQuantity {
-  width: 70px;
+.stockQuantity,
+.stockPrice {
+  width: 100px;
+}
+
+.stockTileButtons {
+
 }
 
 .stockTileButton {

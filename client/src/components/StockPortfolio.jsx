@@ -4,7 +4,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import StockTile from './StockTile.jsx';
 
-const StockPortfolio = ({ portfolio, getPortfolio }) => {
+const StockPortfolio = ({ portfolio, getPortfolio, incrementStockQuantity }) => {
   // const [portfolio, setPortfolio] = useState([]);
 
   // const getPortfolio = () => {
@@ -22,16 +22,18 @@ const StockPortfolio = ({ portfolio, getPortfolio }) => {
 
   return (
     <div className="stockPortfolio">
-      <h3 className="stockPortfolioTitle">Portfolio</h3>
+      <h2 className="stockPortfolioTitle">Portfolio</h2>
       <div className="stockPortfolioLabelContainer">
         <span className="stockPortfolioLabel">Company</span>
         <span className="stockPortfolioLabel">Quantity</span>
         <span className="stockPortfolioLabel">Price</span>
-        <span className="stockPortfolioLabel">Action</span>
+        {/* <span className="stockPortfolioLabel">Action</span> */}
       </div>
-      {portfolio.map((stockObj) => {
-        return <StockTile stockObj={stockObj} getPortfolio={getPortfolio} key={stockObj.stockSymbol}/>
-      })}
+      <div className="stockTiles">
+        {portfolio.map((stockObj) => {
+          return <StockTile stockObj={stockObj} getPortfolio={getPortfolio} incrementStockQuantity={incrementStockQuantity} key={stockObj.stockSymbol}/>
+        })}
+      </div>
     </div>
   );
 };

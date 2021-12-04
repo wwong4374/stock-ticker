@@ -3,7 +3,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 
-const StockTile = ({ stockObj, getPortfolio }) => {
+const StockTile = ({ stockObj, getPortfolio, incrementStockQuantity }) => {
   const [stockPrice, setStockPrice] = useState(0.00);
   const getThisStockPrice = () => {
     axios.get('https://alpha-vantage.p.rapidapi.com/query', {
@@ -24,30 +24,39 @@ const StockTile = ({ stockObj, getPortfolio }) => {
       .catch((err) => { console.log(err); });
   };
 
-  const handleBuyStock = () => {
-    axios.put('http://localhost:3000/api/stocks', { stockSymbol: stockObj.stockSymbol, quantity: stockObj.quantity + 1 })
-      .then((res) => {
-        getPortfolio();
-      })
-      .catch((err) => { console.log(err); });
-  };
+  // const handleBuyStock = () => {
+  //   axios.put('http://localhost:3000/api/stocks', { stockSymbol: stockObj.stockSymbol, quantity: stockObj.quantity + 1 })
+  //     .then((res) => {
+  //       getPortfolio();
+  //     })
+  //     .catch((err) => { console.log(err); });
+  // };
 
   const handleSellStock = () => {
     axios.put('http://localhost:3000/api/stocks', { stockSymbol: stockObj.stockSymbol, quantity: stockObj.quantity - 1 })
-      .then((res) => {
-        getPortfolio();
-      })
+      .then((results) => { getPortfolio(); })
+      .catch((err) => { console.log(err); });
+  };
+
+  const handleSellAllStock = () => {
+    axios.delete('http://localhost:3000/api/stocks', { stockSymbol: stockObj.stockSymbol })
+      .then((results) => { getPortfolio(); })
       .catch((err) => { console.log(err); });
   };
 
   return (
     <div className="stockTile">
-      <span className="stockSymbol">{stockObj.stockSymbol}</span>
-      <span className="stockQuantity">{stockObj.quantity}</span>
-      <span className="stockPrice">{`$${stockPrice}`}</span>
-      <button className="stockTileButton" onClick={handleBuyStock}>Buy</button>
-      <button className="stockTileButton" onClick={handleSellStock}>Sell</button>
-      <button className="stockTileButton" onClick={getThisStockPrice}>Quote</button>
+      <div className="stockTileLabels">
+        <span className="stockSymbol">{stockObj.stockSymbol}</span>
+        <span className="stockQuantity">{stockObj.quantity}</span>
+        <span className="stockPrice">{`$${stockPrice.toLocaleString()}`}</span>
+      </div>
+      <div className="stockTileButtons">
+        <button className="stockTileButton" onClick={incrementStockQuantity}>Buy</button>
+        <button className="stockTileButton" onClick={handleSellStock}>Sell</button>
+        <button className="stockTileButton" onClick={getThisStockPrice}>Quote</button>
+        <button className="stockTileButton" onClick={handleSellAllStock}>Sell All</button>
+      </div>
     </div>
   );
 };

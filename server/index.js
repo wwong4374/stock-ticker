@@ -21,8 +21,27 @@ app.get('/api/stocks', (req, res) => {
       console.log(err);
     }
     const key = Object.keys(data[0])[0];
-    console.log(data[0][key]);
     res.send(data[0][key]);
+  });
+});
+
+app.get('/api/stocks/symbols', (req, res) => {
+  db.query(`SELECT JSON_ARRAYAGG(stockSymbol) FROM stocks`, (err, data) => {
+    if (err) {
+      console.log(err);
+    }
+    const key = Object.keys(data[0])[0];
+    res.send(data[0][key]);
+  });
+});
+
+app.get('/api/stocks/:stockSymbol/quantity', (req, res) => {
+  const stockSymbol = req.params.stockSymbol;
+  db.query(`SELECT quantity FROM stocks WHERE stockSymbol = ?`, [stockSymbol], (err, data) => {
+    if (err) {
+      console.log(err);
+    }
+    res.send(data[0]);
   });
 });
 
@@ -48,6 +67,7 @@ app.put('/api/stocks', (req, res) => {
 
 app.delete('/api/stocks', (req, res) => {
   const { stockSymbol } = req.body;
+  console.log('DELETEING', stockSymbol);
   db.query(`DELETE FROM stocks WHERE stockSymbol = ?`, [stockSymbol], (err, data) => {
     if (err) {
       console.log(err);
