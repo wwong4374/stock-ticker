@@ -1,3 +1,9 @@
+html,
+body {
+  height: 100%;
+  background: linear-gradient(hsl(127, 75%, 68%),#01FF70);
+}
+
 .stockInterface {
   display: flex;
   flex-direction: column;
@@ -18,6 +24,10 @@
 .stockPriceTitle {
   font-weight: bold;
   font-size: 30px;
+}
+
+.stockSearch {
+  flex-direction: column;
 }
 
 button,
@@ -44,6 +54,7 @@ input {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 800px;
   padding: 10px;
   border: solid 2px black;
 }
@@ -57,9 +68,10 @@ input {
 
 .stockPortfolioLabelContainer,
 .stockTileLabels {
+  font-size: 23px;
   display: flex;
   justify-content: space-between;
-  width: 300px;
+  width: 500px;
   margin-bottom: 10px;
 }
 
@@ -70,6 +82,7 @@ input {
 .stockTile {
   display: flex;
   flex-direction: row;
+  height: 50px;
 }
 
 .stockSymbol,

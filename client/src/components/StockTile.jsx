@@ -3,9 +3,10 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 
-const StockTile = ({ stockObj, getPortfolio, incrementStockQuantity }) => {
+const StockTile = ({ stockObj, getPortfolio, incrementStockQuantity, setStockSymbol }) => {
   const [stockPrice, setStockPrice] = useState(0.00);
-  const getThisStockPrice = () => {
+
+  const updateStockPrice = () => {
     axios.get('https://alpha-vantage.p.rapidapi.com/query', {
       headers: {
         'x-rapidapi-host': 'alpha-vantage.p.rapidapi.com',
@@ -24,15 +25,20 @@ const StockTile = ({ stockObj, getPortfolio, incrementStockQuantity }) => {
       .catch((err) => { console.log(err); });
   };
 
-  // const handleBuyStock = () => {
-  //   axios.put('http://localhost:3000/api/stocks', { stockSymbol: stockObj.stockSymbol, quantity: stockObj.quantity + 1 })
-  //     .then((res) => {
-  //       getPortfolio();
-  //     })
-  //     .catch((err) => { console.log(err); });
-  // };
+  const getStockPrice = () => {
+    axios.get(`http://localhost:3000/api/stocks/${stockObj.stockSymbol}/price`)
+      .then((results) => {
+        const price = results.data.price;
+        setStockPrice(price);
+        console.log('PRICE:', stockPrice);
+        // return price;
+      })
+      .catch((err) => { console.log(err); });
+  };
+
   const handleSellAllStock = () => {
     axios.delete(`http://localhost:3000/api/stocks/${stockObj.stockSymbol}`)
+      .then(() => { setStockSymbol('TSLA'); })
       .then((results) => { getPortfolio(); })
       .catch((err) => { console.log(err); });
   };
@@ -40,30 +46,33 @@ const StockTile = ({ stockObj, getPortfolio, incrementStockQuantity }) => {
   const handleSellStock = () => {
     axios.put('http://localhost:3000/api/stocks', { stockSymbol: stockObj.stockSymbol, quantity: stockObj.quantity - 1 })
       .then(() => {
-        // If quantity is now 0
         axios.get(`http://localhost:3000/api/stocks/${stockObj.stockSymbol}/quantity`)
-          .then((results) => { if (results.data.quantity === 0) { handleSellAllStock(); } })
+          .then((results) => {
+            if (results.data.quantity === 0) { handleSellAllStock(); }
+          })
           .catch((err) => { console.log(err); });
       })
       .then((results) => { getPortfolio(); })
       .catch((err) => { console.log(err); });
   };
 
+  getStockPrice();
 
   return (
     <div className="stockTile">
       <div className="stockTileLabels">
-        <span className="stockSymbol">{stockObj.stockSymbol}</span>
-        <span className="stockQuantity">{stockObj.quantity}</span>
-        <span className="stockPrice">{`$${stockPrice.toLocaleString()}`}</span>
-        <span className="marketValue">{`$${(stockObj.quantity * stockPrice).toLocaleString()}`}</span>
+        <div className="stockSymbol">{stockObj.stockSymbol}</div>
+        <div className="stockQuantity">{stockObj.quantity}</div>
+        {/* <div className="stockPrice">{stockPrice}</div> */}
+        <div className="stockPrice">{`$${stockPrice}`}</div>
+        <div className="marketValue">{`$${(stockObj.quantity * stockPrice).toLocaleString()}`}</div>
       </div>
-      <div className="stockTileButtons">
-        <button className="stockTileButton" onClick={incrementStockQuantity}>Buy</button>
+      {/* <div className="stockTileButtons">
+        <button className="stockTileButton" onClick={() => { incrementStockQuantity(stockObj.stockSymbol); }}>Buy</button>
         <button className="stockTileButton" onClick={handleSellStock}>Sell</button>
-        <button className="stockTileButton" onClick={getThisStockPrice}>Quote</button>
+        <button className="stockTileButton" onClick={updateStockPrice}>Quote</button>
         <button className="stockTileButton" onClick={handleSellAllStock}>Sell All</button>
-      </div>
+      </div> */}
     </div>
   );
 };

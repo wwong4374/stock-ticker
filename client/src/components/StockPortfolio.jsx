@@ -4,13 +4,12 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import StockTile from './StockTile.jsx';
 
-const StockPortfolio = ({ portfolio, getPortfolio, incrementStockQuantity }) => {
-
+const StockPortfolio = ({ portfolio, getPortfolio, incrementStockQuantity, setStockSymbol }) => {
   useEffect(() => {
     getPortfolio();
   }, []);
 
-  console.log(portfolio);
+  // console.log(portfolio);
 
   const getPortfolioValue = () => {
     let portfolioValue = 0;
@@ -20,7 +19,7 @@ const StockPortfolio = ({ portfolio, getPortfolio, incrementStockQuantity }) => 
         // Get stockSymbol
         // Get quantity
         // Get current price
-        
+
         // Get current market value
         // Increment portfolio value
     });
@@ -30,7 +29,7 @@ const StockPortfolio = ({ portfolio, getPortfolio, incrementStockQuantity }) => 
   return (
     <div className="stockPortfolio">
       <span className="stockPortfolioTitle">Portfolio</span>
-      <span className="stockPortfolioValue">{`$${getPortfolioValue}`}</span>
+      {/* <span className="stockPortfolioValue">{`$${getPortfolioValue}`}</span> */}
       <div className="stockPortfolioLabelContainer">
         <span className="stockPortfolioLabel">Company</span>
         <span className="stockPortfolioLabel">Quantity</span>
@@ -39,7 +38,7 @@ const StockPortfolio = ({ portfolio, getPortfolio, incrementStockQuantity }) => 
       </div>
       <div className="stockTiles">
         {portfolio.map((stockObj) => {
-          return <StockTile stockObj={stockObj} getPortfolio={getPortfolio} incrementStockQuantity={incrementStockQuantity} key={stockObj.stockSymbol}/>
+          return <StockTile stockObj={stockObj} getPortfolio={getPortfolio} incrementStockQuantity={incrementStockQuantity} setStockSymbol={setStockSymbol} key={stockObj.stockSymbol}/>
         })}
       </div>
     </div>

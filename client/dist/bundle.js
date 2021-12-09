@@ -2366,11 +2366,13 @@ var StockInterface = function StockInterface() {
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("div", {
     className: "stockInterface"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("h1", null, "RobynHood"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("h1", null, "Stock Tracker"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("div", {
     className: "upperContainer"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("div", {
     className: "stockPriceTitle"
-  }, stockSymbol, ':', ' ', '$', (Math.round(stockPrice * 100) / 100).toLocaleString()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("input", {
+  }, stockSymbol, ':', ' ', '$', (Math.round(stockPrice * 100) / 100).toLocaleString()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("div", {
+    className: "stockSearch"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("input", {
     placeholder: "Symbol...",
     onChange: handleStockInput
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("button", {
@@ -2419,11 +2421,11 @@ __webpack_require__.r(__webpack_exports__);
 var StockPortfolio = function StockPortfolio(_ref) {
   var portfolio = _ref.portfolio,
       getPortfolio = _ref.getPortfolio,
-      incrementStockQuantity = _ref.incrementStockQuantity;
+      incrementStockQuantity = _ref.incrementStockQuantity,
+      setStockSymbol = _ref.setStockSymbol;
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     getPortfolio();
-  }, []);
-  console.log(portfolio);
+  }, []); // console.log(portfolio);
 
   var getPortfolioValue = function getPortfolioValue() {
     var portfolioValue = 0; // Iterate portfolio, an array of objects
@@ -2441,9 +2443,7 @@ var StockPortfolio = function StockPortfolio(_ref) {
     className: "stockPortfolio"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("span", {
     className: "stockPortfolioTitle"
-  }, "Portfolio"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("span", {
-    className: "stockPortfolioValue"
-  }, "$".concat(getPortfolioValue)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
+  }, "Portfolio"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
     className: "stockPortfolioLabelContainer"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("span", {
     className: "stockPortfolioLabel"
@@ -2460,6 +2460,7 @@ var StockPortfolio = function StockPortfolio(_ref) {
       stockObj: stockObj,
       getPortfolio: getPortfolio,
       incrementStockQuantity: incrementStockQuantity,
+      setStockSymbol: setStockSymbol,
       key: stockObj.stockSymbol
     });
   })));
@@ -2495,14 +2496,15 @@ __webpack_require__.r(__webpack_exports__);
 var StockTile = function StockTile(_ref) {
   var stockObj = _ref.stockObj,
       getPortfolio = _ref.getPortfolio,
-      incrementStockQuantity = _ref.incrementStockQuantity;
+      incrementStockQuantity = _ref.incrementStockQuantity,
+      setStockSymbol = _ref.setStockSymbol;
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(0.00),
       _useState2 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState, 2),
       stockPrice = _useState2[0],
       setStockPrice = _useState2[1];
 
-  var getThisStockPrice = function getThisStockPrice() {
+  var updateStockPrice = function updateStockPrice() {
     axios__WEBPACK_IMPORTED_MODULE_1___default().get('https://alpha-vantage.p.rapidapi.com/query', {
       headers: {
         'x-rapidapi-host': 'alpha-vantage.p.rapidapi.com',
@@ -2519,17 +2521,22 @@ var StockTile = function StockTile(_ref) {
     })["catch"](function (err) {
       console.log(err);
     });
-  }; // const handleBuyStock = () => {
-  //   axios.put('http://localhost:3000/api/stocks', { stockSymbol: stockObj.stockSymbol, quantity: stockObj.quantity + 1 })
-  //     .then((res) => {
-  //       getPortfolio();
-  //     })
-  //     .catch((err) => { console.log(err); });
-  // };
+  };
 
+  var getStockPrice = function getStockPrice() {
+    axios__WEBPACK_IMPORTED_MODULE_1___default().get("http://localhost:3000/api/stocks/".concat(stockObj.stockSymbol, "/price")).then(function (results) {
+      var price = results.data.price;
+      setStockPrice(price);
+      console.log('PRICE:', stockPrice); // return price;
+    })["catch"](function (err) {
+      console.log(err);
+    });
+  };
 
   var handleSellAllStock = function handleSellAllStock() {
-    axios__WEBPACK_IMPORTED_MODULE_1___default()["delete"]("http://localhost:3000/api/stocks/".concat(stockObj.stockSymbol)).then(function (results) {
+    axios__WEBPACK_IMPORTED_MODULE_1___default()["delete"]("http://localhost:3000/api/stocks/".concat(stockObj.stockSymbol)).then(function () {
+      setStockSymbol('TSLA');
+    }).then(function (results) {
       getPortfolio();
     })["catch"](function (err) {
       console.log(err);
@@ -2541,7 +2548,6 @@ var StockTile = function StockTile(_ref) {
       stockSymbol: stockObj.stockSymbol,
       quantity: stockObj.quantity - 1
     }).then(function () {
-      // If quantity is now 0
       axios__WEBPACK_IMPORTED_MODULE_1___default().get("http://localhost:3000/api/stocks/".concat(stockObj.stockSymbol, "/quantity")).then(function (results) {
         if (results.data.quantity === 0) {
           handleSellAllStock();
@@ -2556,33 +2562,20 @@ var StockTile = function StockTile(_ref) {
     });
   };
 
+  getStockPrice();
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", {
     className: "stockTile"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", {
     className: "stockTileLabels"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("span", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", {
     className: "stockSymbol"
-  }, stockObj.stockSymbol), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("span", {
+  }, stockObj.stockSymbol), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", {
     className: "stockQuantity"
-  }, stockObj.quantity), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("span", {
+  }, stockObj.quantity), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", {
     className: "stockPrice"
-  }, "$".concat(stockPrice.toLocaleString())), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("span", {
+  }, "$".concat(stockPrice)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", {
     className: "marketValue"
-  }, "$".concat((stockObj.quantity * stockPrice).toLocaleString()))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", {
-    className: "stockTileButtons"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("button", {
-    className: "stockTileButton",
-    onClick: incrementStockQuantity
-  }, "Buy"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("button", {
-    className: "stockTileButton",
-    onClick: handleSellStock
-  }, "Sell"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("button", {
-    className: "stockTileButton",
-    onClick: getThisStockPrice
-  }, "Quote"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("button", {
-    className: "stockTileButton",
-    onClick: handleSellAllStock
-  }, "Sell All")));
+  }, "$".concat((stockObj.quantity * stockPrice).toLocaleString()))));
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (StockTile);

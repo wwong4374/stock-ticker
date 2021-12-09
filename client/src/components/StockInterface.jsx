@@ -125,7 +125,7 @@ const StockInterface = () => {
 
   return (
     <div className="stockInterface">
-      <h1>RobynHood</h1>
+      <h1>Stock Tracker</h1>
       <div className="upperContainer">
         <div className="stockPriceTitle">
           {stockSymbol}
@@ -134,7 +134,7 @@ const StockInterface = () => {
           {'$'}
           {(Math.round(stockPrice * 100) / 100).toLocaleString()}
         </div>
-        <div>
+        <div className="stockSearch">
           <input placeholder="Symbol..." onChange={handleStockInput}></input>
           <button type="submit" onClick={handleStockSearch}>Search</button>
         </div>

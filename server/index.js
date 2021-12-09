@@ -17,9 +17,7 @@ app.use(express.static(path.join(__dirname, '..', 'client', 'dist')));
 
 app.get('/api/stocks', (req, res) => {
   db.query(`SELECT JSON_ARRAYAGG(JSON_OBJECT('stockSymbol', s.stockSymbol, 'quantity', s.quantity)) FROM stocks AS s`, (err, data) => {
-    if (err) {
-      console.log(err);
-    }
+    if (err) { console.log(err); }
     const key = Object.keys(data[0])[0];
     res.send(data[0][key]);
   });
@@ -27,9 +25,7 @@ app.get('/api/stocks', (req, res) => {
 
 app.get('/api/stocks/symbols', (req, res) => {
   db.query(`SELECT JSON_ARRAYAGG(stockSymbol) FROM stocks`, (err, data) => {
-    if (err) {
-      console.log(err);
-    }
+    if (err) { console.log(err); }
     const key = Object.keys(data[0])[0];
     res.send(data[0][key]);
   });
@@ -38,31 +34,31 @@ app.get('/api/stocks/symbols', (req, res) => {
 app.get('/api/stocks/:stockSymbol/quantity', (req, res) => {
   const stockSymbol = req.params.stockSymbol;
   db.query(`SELECT quantity FROM stocks WHERE stockSymbol = ?`, [stockSymbol], (err, data) => {
-    if (err) {
-      console.log(err);
-    }
+    if (err) { console.log(err); }
+    res.send(data[0]);
+  });
+});
+
+app.get('/api/stocks/:stockSymbol/price', (req, res) => {
+  const stockSymbol = req.params.stockSymbol;
+  db.query(`SELECT price FROM stocks WHERE stockSymbol = ?`, [stockSymbol], (err, data) => {
+    if (err) { console.log(err); }
     res.send(data[0]);
   });
 });
 
 app.post('/api/stocks', (req, res) => {
-  const { quantity, stockSymbol } = req.body;
-  db.query(`INSERT INTO stocks (quantity, stockSymbol) VALUES (?, ?)`, [quantity, stockSymbol], (err, data) => {
-    if (err) {
-      console.log(err);
-    }
+  const { quantity, stockSymbol, price } = req.body;
+  db.query(`INSERT INTO stocks (quantity, stockSymbol, price) VALUES (?, ?, ?)`, [quantity, stockSymbol, price], (err, data) => {
+    if (err) { console.log(err); }
     res.sendStatus(201);
   });
 });
 
 app.put('/api/stocks', (req, res) => {
-  console.log(req.body);
   const { quantity, stockSymbol } = req.body;
-  // console.log(quantity);
   db.query(`UPDATE stocks SET quantity = ? WHERE stockSymbol = ?`, [quantity, stockSymbol], (err, data) => {
-    if (err) {
-      console.log(err);
-    }
+    if (err) { console.log(err); }
     res.send(data);
   });
 });
@@ -70,9 +66,7 @@ app.put('/api/stocks', (req, res) => {
 app.delete('/api/stocks/:stockSymbol', (req, res) => {
   const { stockSymbol } = req.params;
   db.query(`DELETE FROM stocks WHERE stockSymbol = ?`, [stockSymbol], (err, data) => {
-    if (err) {
-      console.log(err);
-    }
+    if (err) { console.log(err); }
     res.send(data);
   });
 });
