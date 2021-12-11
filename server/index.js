@@ -71,6 +71,10 @@ app.delete('/api/stocks/:stockSymbol', (req, res) => {
   });
 });
 
-app.listen(3000, () => {
+app.post('/api/trades' , (req, res) => {
+  const {} = req.body;
+});
+
+app.listen(1234, () => {
   console.log('Server is listening on port 3000');
 });

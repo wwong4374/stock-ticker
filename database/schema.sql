@@ -11,6 +11,15 @@ CREATE TABLE stocks (
   price FLOAT
 );
 
+CREATE TABLE trades (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  stockSymbol VARCHAR(10),
+  quantity INT,
+  executionPrice FLOAT,
+  tradeType VARCHAR (5),
+  date DATE
+);
+
 INSERT INTO stocks (id, stockSymbol, quantity, price)
 VALUES (DEFAULT, 'TSLA', 500, 1010.10);
 

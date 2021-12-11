@@ -4,26 +4,13 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import StockTile from './StockTile.jsx';
 
-const StockPortfolio = ({ portfolio, getPortfolio, incrementStockQuantity, setStockSymbol }) => {
-  useEffect(() => {
-    getPortfolio();
-  }, []);
-
-  // console.log(portfolio);
+const StockPortfolio = ({ portfolio, getPortfolio, incrementStockQuantity, setStockSymbol, host }) => {
+  useEffect(() => { getPortfolio(); }, []);
 
   const getPortfolioValue = () => {
     let portfolioValue = 0;
     // Iterate portfolio, an array of objects
-    portfolio.forEach((stockObj) => {
-      // For current object
-        // Get stockSymbol
-        // Get quantity
-        // Get current price
-
-        // Get current market value
-        // Increment portfolio value
-    });
-    // return portfolio value
+    portfolio.forEach((stockObj) => {});
   };
 
   return (
@@ -38,7 +25,7 @@ const StockPortfolio = ({ portfolio, getPortfolio, incrementStockQuantity, setSt
       </div>
       <div className="stockTiles">
         {portfolio.map((stockObj) => {
-          return <StockTile stockObj={stockObj} getPortfolio={getPortfolio} incrementStockQuantity={incrementStockQuantity} setStockSymbol={setStockSymbol} key={stockObj.stockSymbol}/>
+          return <StockTile stockObj={stockObj} getPortfolio={getPortfolio} incrementStockQuantity={incrementStockQuantity} setStockSymbol={setStockSymbol} host={host} key={stockObj.stockSymbol}/>
         })}
       </div>
     </div>

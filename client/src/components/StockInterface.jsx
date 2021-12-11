@@ -5,6 +5,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import stockPriceObj from './stockPriceObj.js';
+import helperFunctions from '../helperFunctions.js';
 import StockPortfolio from './StockPortfolio.jsx';
 
 const StockInterface = () => {
@@ -13,17 +14,16 @@ const StockInterface = () => {
   const [stockSymbol, setStockSymbol] = useState('TSLA');
   const [stockToSearch, setStockToSearch] = useState('');
   const [stockPrice, setStockPrice] = useState(0);
-  // const [stockPriceHistory, setStockPriceHistory] = useState(stockPriceObj);
   const [stockPriceHistory, setStockPriceHistory] = useState({});
-  const [portfolio, setPortfolio] = useState([]);
+  const [selectedStocks, setSelectedStocks] = useState([]);
+  const [portfolio, setPortfolio] = useState([]); // array of stockObj objects
   const timeSeriesMapping = {
     TIME_SERIES_DAILY: 'Time Series (Daily)',
     TIME_SERIES_WEEKLY: 'Weekly Time Series'
   };
+  const host = 'http://localhost:1234';
 
   // HELPER FUNCTIONS
-  // const capitalizeStockSymbol = (symbol) => { setStockSymbol(symbol.toUpperCase()); };
-
   const getPrice = () => {
     axios.get('https://alpha-vantage.p.rapidapi.com/query', {
       headers: {
@@ -65,7 +65,7 @@ const StockInterface = () => {
   };
 
   const getPortfolio = () => {
-    axios.get('http://localhost:3000/api/stocks')
+    axios.get(`${host}/api/stocks`)
       .then((results) => {
         const data = results.data;
         setPortfolio([...data]);
@@ -74,26 +74,26 @@ const StockInterface = () => {
   };
 
   const addStockToPortfolio = () => {
-    axios.post('http://localhost:3000/api/stocks', { stockSymbol: stockSymbol, quantity: 1 })
+    axios.post(`${host}/api/stocks`, { stockSymbol: stockSymbol, quantity: 1 })
       .then()
       .catch((err) => { console.log(err); });
   };
-
-  // useEffect(() => {
-  //   getStockPriceHistory();
-  // }, [stockSymbol]);
 
   useEffect(() => {
     getPrice();
   }, [stockSymbol]);
 
-  // CLICK HANDLERS
+  // HELPER FUNCTIONS AND CLICK HANDLERS
+  const addTradeToDB = (tradeType) => {
+    axios.post();
+  };
+
   const incrementStockQuantity = () => {
     let quantity = 0;
-    axios.get(`http://localhost:3000/api/stocks/${stockSymbol}/quantity`)
+    axios.get(`${host}/api/stocks/${stockSymbol}/quantity`)
       .then((results) => { quantity = results.data.quantity; })
       .then(() => {
-        axios.put('http://localhost:3000/api/stocks', { stockSymbol: stockSymbol, quantity: quantity + 1 })
+        axios.put(`${host}/api/stocks`, { stockSymbol: stockSymbol, quantity: quantity + 1 })
           .then((results) => { getPortfolio(); })
           .catch((err) => { console.log(err); });
       })
@@ -101,7 +101,7 @@ const StockInterface = () => {
   };
 
   const handleBuyStock = () => {
-    axios.get('http://localhost:3000/api/stocks/symbols')
+    axios.get(`${host}/api/stocks/symbols`)
       .then((results) => {
         const stockSymbolsInPortfolio = results.data;
         if (stockSymbolsInPortfolio.includes(stockSymbol)) {
@@ -118,9 +118,45 @@ const StockInterface = () => {
     setStockToSearch(e.nativeEvent.target.value);
   };
   const handleStockSearch = () => {
-    setStockSymbol(stockToSearch);
+    setStockSymbol(stockToSearch.toUpperCase());
     getPrice();
     setStockToSearch('');
+  };
+
+  const handleSellStock = () => {
+    axios.put(`${host}/api/stocks`, { stockSymbol: stockObj.stockSymbol, quantity: stockObj.quantity - 1 })
+      .then(() => {
+        axios.get(`${host}/api/stocks/${stockObj.stockSymbol}/quantity`)
+          .then((results) => {
+            if (results.data.quantity === 0) { handleSellAllStock(); }
+          })
+          .catch((err) => { console.log(err); });
+      })
+      .then((results) => { getPortfolio(); })
+      .catch((err) => { console.log(err); });
+  };
+
+  const updateStockPrice = () => {
+    axios.get('https://alpha-vantage.p.rapidapi.com/query', {
+      headers: {
+        'x-rapidapi-host': 'alpha-vantage.p.rapidapi.com',
+        'x-rapidapi-key': '1b1e7cf330mshfe2a919e34e9dd1p12059bjsna4c74a6efb05'
+      },
+      params: {
+        function: 'GLOBAL_QUOTE',
+        symbol: stockObj.stockSymbol,
+        datatype: 'json'
+      }
+    })
+      .then((results) => { setStockPrice(Math.round(results.data['Global Quote']['05. price'] * 100) / 100); })
+      .catch((err) => { console.log(err); });
+  };
+
+  const handleSellAllStock = () => {
+    axios.delete(`${host}/api/stocks/${stockObj.stockSymbol}`)
+      .then(() => { setStockSymbol('TSLA'); })
+      .then((results) => { getPortfolio(); })
+      .catch((err) => { console.log(err); });
   };
 
   return (
@@ -143,7 +179,13 @@ const StockInterface = () => {
           <button type="submit">YOLO</button>
         </div>
       </div>
-      <StockPortfolio portfolio={portfolio} getPortfolio={getPortfolio} incrementStockQuantity={incrementStockQuantity}/>
+      <StockPortfolio portfolio={portfolio} getPortfolio={getPortfolio} incrementStockQuantity={incrementStockQuantity} host={host}/>
+      <div className="stockTileButtons">
+        <button className="stockTileButton" onClick={() => { incrementStockQuantity(stockObj.stockSymbol); }}>Buy</button>
+        <button className="stockTileButton" onClick={handleSellStock}>Sell</button>
+        <button className="stockTileButton" onClick={updateStockPrice}>Quote</button>
+        <button className="stockTileButton" onClick={handleSellAllStock}>Sell All</button>
+      </div>
     </div>
   );
 };
