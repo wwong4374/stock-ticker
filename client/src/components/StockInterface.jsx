@@ -1,3 +1,4 @@
+/* eslint-disable react/self-closing-comp */
 /* eslint-disable import/extensions */
 /* eslint-disable object-shorthand */
 /* eslint-disable comma-dangle */
@@ -8,14 +9,17 @@ import stockPriceObj from './stockPriceObj.js';
 import helperFunctions from '../helperFunctions.js';
 import StockPortfolio from './StockPortfolio.jsx';
 
-const StockInterface = () => {
+export const SelectedStockContext = React.createContext();
+export const SetSelectedStockContext = React.createContext();
+
+export const StockInterface = () => {
   const [timeInterval, setTimeInterval] = useState('TIME_SERIES_DAILY');
   const [cash, setCash] = useState(10000);
   const [stockSymbol, setStockSymbol] = useState('TSLA');
   const [stockToSearch, setStockToSearch] = useState('');
   const [stockPrice, setStockPrice] = useState(0);
   const [stockPriceHistory, setStockPriceHistory] = useState({});
-  const [selectedStocks, setSelectedStocks] = useState([]);
+  const [selectedStock, setSelectedStock] = useState(null);
   const [portfolio, setPortfolio] = useState([]); // array of stockObj objects
   const timeSeriesMapping = {
     TIME_SERIES_DAILY: 'Time Series (Daily)',
@@ -160,34 +164,41 @@ const StockInterface = () => {
   };
 
   return (
-    <div className="stockInterface">
-      <h1>Stock Tracker</h1>
-      <div className="upperContainer">
-        <div className="stockPriceTitle">
-          {stockSymbol}
-          {':'}
-          {' '}
-          {'$'}
-          {(Math.round(stockPrice * 100) / 100).toLocaleString()}
+    <SelectedStockContext.Provider value={selectedStock}>
+      <SetSelectedStockContext.Provider value={{ setSelectedStock: setSelectedStock }}>
+        <div className="stockInterface">
+          <h1>Stock Tracker</h1>
+          <div className="upperContainer">
+            <div className="stockPriceTitle">
+              {stockSymbol}
+              {':'}
+              {' '}
+              {'$'}
+              {(Math.round(stockPrice * 100) / 100).toLocaleString()}
+            </div>
+            <div className="stockSearch">
+              <input placeholder="Symbol..." onChange={handleStockInput}></input>
+              <button type="submit" onClick={handleStockSearch}>Search</button>
+            </div>
+            <div className="buttons">
+              <button type="submit" onClick={handleBuyStock}>Buy</button>
+              <button type="submit">YOLO</button>
+            </div>
+          </div>
+          <StockPortfolio
+            portfolio={portfolio}
+            getPortfolio={getPortfolio}
+            incrementStockQuantity={incrementStockQuantity}
+            host={host}
+          />
+          <div className="stockTileButtons">
+            <button type="button" className="stockTileButton" onClick={() => { incrementStockQuantity(stockObj.stockSymbol); }}>Buy</button>
+            <button type="button" className="stockTileButton" onClick={handleSellStock}>Sell</button>
+            <button type="button" className="stockTileButton" onClick={updateStockPrice}>Quote</button>
+            <button type="button" className="stockTileButton" onClick={handleSellAllStock}>Sell All</button>
+          </div>
         </div>
-        <div className="stockSearch">
-          <input placeholder="Symbol..." onChange={handleStockInput}></input>
-          <button type="submit" onClick={handleStockSearch}>Search</button>
-        </div>
-        <div className="buttons">
-          <button type="submit" onClick={handleBuyStock}>Buy</button>
-          <button type="submit">YOLO</button>
-        </div>
-      </div>
-      <StockPortfolio portfolio={portfolio} getPortfolio={getPortfolio} incrementStockQuantity={incrementStockQuantity} host={host}/>
-      <div className="stockTileButtons">
-        <button className="stockTileButton" onClick={() => { incrementStockQuantity(stockObj.stockSymbol); }}>Buy</button>
-        <button className="stockTileButton" onClick={handleSellStock}>Sell</button>
-        <button className="stockTileButton" onClick={updateStockPrice}>Quote</button>
-        <button className="stockTileButton" onClick={handleSellAllStock}>Sell All</button>
-      </div>
-    </div>
+      </SetSelectedStockContext.Provider>
+    </SelectedStockContext.Provider>
   );
 };
-
-export default StockInterface;

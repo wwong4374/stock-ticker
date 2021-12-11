@@ -2159,6 +2159,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _StockInterface_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./StockInterface.jsx */ "./client/src/components/StockInterface.jsx");
+/* eslint-disable react/function-component-definition */
+
 /* eslint-disable import/extensions */
 
 /* eslint-disable arrow-body-style */
@@ -2168,7 +2170,7 @@ __webpack_require__.r(__webpack_exports__);
 var App = function App() {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "app"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_StockInterface_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], null));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_StockInterface_jsx__WEBPACK_IMPORTED_MODULE_1__.StockInterface, null));
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (App);
@@ -2184,7 +2186,9 @@ var App = function App() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */   "SelectedStockContext": () => (/* binding */ SelectedStockContext),
+/* harmony export */   "SetSelectedStockContext": () => (/* binding */ SetSelectedStockContext),
+/* harmony export */   "StockInterface": () => (/* binding */ StockInterface)
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/toConsumableArray */ "./node_modules/@babel/runtime/helpers/esm/toConsumableArray.js");
 /* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/esm/defineProperty.js");
@@ -2204,6 +2208,8 @@ function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (O
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_1__["default"])(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
+/* eslint-disable react/self-closing-comp */
+
 /* eslint-disable import/extensions */
 
 /* eslint-disable object-shorthand */
@@ -2216,7 +2222,8 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 
 
-
+var SelectedStockContext = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createContext();
+var SetSelectedStockContext = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createContext();
 var StockInterface = function StockInterface() {
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_4__.useState)('TIME_SERIES_DAILY'),
       _useState2 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_2__["default"])(_useState, 2),
@@ -2248,10 +2255,10 @@ var StockInterface = function StockInterface() {
       stockPriceHistory = _useState12[0],
       setStockPriceHistory = _useState12[1];
 
-  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_4__.useState)([]),
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_4__.useState)(null),
       _useState14 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_2__["default"])(_useState13, 2),
-      selectedStocks = _useState14[0],
-      setSelectedStocks = _useState14[1];
+      selectedStock = _useState14[0],
+      setSelectedStock = _useState14[1];
 
   var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_4__.useState)([]),
       _useState16 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_2__["default"])(_useState15, 2),
@@ -2420,7 +2427,13 @@ var StockInterface = function StockInterface() {
     });
   };
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("div", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement(SelectedStockContext.Provider, {
+    value: selectedStock
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement(SetSelectedStockContext.Provider, {
+    value: {
+      setSelectedStock: setSelectedStock
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("div", {
     className: "stockInterface"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("h1", null, "Stock Tracker"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("div", {
     className: "upperContainer"
@@ -2449,23 +2462,25 @@ var StockInterface = function StockInterface() {
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("div", {
     className: "stockTileButtons"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("button", {
+    type: "button",
     className: "stockTileButton",
     onClick: function onClick() {
       incrementStockQuantity(stockObj.stockSymbol);
     }
   }, "Buy"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("button", {
+    type: "button",
     className: "stockTileButton",
     onClick: handleSellStock
   }, "Sell"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("button", {
+    type: "button",
     className: "stockTileButton",
     onClick: updateStockPrice
   }, "Quote"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("button", {
+    type: "button",
     className: "stockTileButton",
     onClick: handleSellAllStock
-  }, "Sell All")));
+  }, "Sell All")))));
 };
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (StockInterface);
 
 /***/ }),
 
@@ -2554,11 +2569,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _StockInterface__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./StockInterface */ "./client/src/components/StockInterface.jsx");
 
+
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 
 /* eslint-disable comma-dangle */
 
 /* eslint-disable react/function-component-definition */
+
 
 
 
@@ -2594,26 +2613,35 @@ var StockTile = function StockTile(_ref) {
   };
 
   getStockPrice();
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", {
-    className: className,
-    onClick: function onClick() {
-      if (className === 'stockTile') {
-        setClassName('stockTileClicked');
-      } else {
-        setClassName('stockTile');
-      }
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", {
-    className: "stockTileLabels"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", {
-    className: "stockSymbol"
-  }, stockObj.stockSymbol), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", {
-    className: "stockQuantity"
-  }, stockObj.quantity), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", {
-    className: "stockPrice"
-  }, "$".concat(stockPrice)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", {
-    className: "marketValue"
-  }, "$".concat((stockObj.quantity * stockPrice).toLocaleString()))));
+  return (
+    /*#__PURE__*/
+    // <SelectedStockContext.Consumer>
+    react__WEBPACK_IMPORTED_MODULE_2__.createElement(_StockInterface__WEBPACK_IMPORTED_MODULE_3__.SetSelectedStockContext.Consumer, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", {
+      className: className,
+      onClick: function onClick() {
+        if (className === 'stockTile') {
+          setClassName('stockTileClicked');
+        } else {
+          setClassName('stockTile');
+        }
+
+        setSelectedStock();
+      },
+      role: "button",
+      tabIndex: 0
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", {
+      className: "stockTileLabels"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", {
+      className: "stockSymbol"
+    }, stockObj.stockSymbol), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", {
+      className: "stockQuantity"
+    }, stockObj.quantity), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", {
+      className: "stockPrice"
+    }, "$".concat(stockPrice)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", {
+      className: "marketValue"
+    }, "$".concat((stockObj.quantity * stockPrice).toLocaleString()))))) // </SelectedStockContext.Consumer>
+
+  );
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (StockTile);

@@ -1,7 +1,9 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable comma-dangle */
 /* eslint-disable react/function-component-definition */
 import axios from 'axios';
 import React, { useState } from 'react';
+import { SelectedStockContext, SetSelectedStockContext } from './StockInterface';
 
 const StockTile = ({ stockObj, getPortfolio, incrementStockQuantity, setStockSymbol, host }) => {
   const [className, setClassName] = useState('stockTile');
@@ -20,27 +22,27 @@ const StockTile = ({ stockObj, getPortfolio, incrementStockQuantity, setStockSym
   getStockPrice();
 
   return (
-    <div
-      className={className}
-      onClick={() => {
-        if (className === 'stockTile') { setClassName('stockTileClicked'); }
-        else { setClassName('stockTile'); }
-
-      }}
-    >
-      <div className="stockTileLabels">
-        <div className="stockSymbol">{stockObj.stockSymbol}</div>
-        <div className="stockQuantity">{stockObj.quantity}</div>
-        <div className="stockPrice">{`$${stockPrice}`}</div>
-        <div className="marketValue">{`$${(stockObj.quantity * stockPrice).toLocaleString()}`}</div>
-      </div>
-      {/* <div className="stockTileButtons">
-        <button className="stockTileButton" onClick={() => { incrementStockQuantity(stockObj.stockSymbol); }}>Buy</button>
-        <button className="stockTileButton" onClick={handleSellStock}>Sell</button>
-        <button className="stockTileButton" onClick={updateStockPrice}>Quote</button>
-        <button className="stockTileButton" onClick={handleSellAllStock}>Sell All</button>
-      </div> */}
-    </div>
+    // <SelectedStockContext.Consumer>
+      <SetSelectedStockContext.Consumer>
+        <div
+          className={className}
+          onClick={() => {
+            if (className === 'stockTile') { setClassName('stockTileClicked'); }
+            else { setClassName('stockTile'); }
+            setSelectedStock();
+          }}
+          role="button"
+          tabIndex={0}
+        >
+          <div className="stockTileLabels">
+            <div className="stockSymbol">{stockObj.stockSymbol}</div>
+            <div className="stockQuantity">{stockObj.quantity}</div>
+            <div className="stockPrice">{`$${stockPrice}`}</div>
+            <div className="marketValue">{`$${(stockObj.quantity * stockPrice).toLocaleString()}`}</div>
+          </div>
+        </div>
+      </SetSelectedStockContext.Consumer>
+    // </SelectedStockContext.Consumer>
   );
 };
 
