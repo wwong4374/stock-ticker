@@ -5,7 +5,6 @@
 /* eslint-disable react/function-component-definition */
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import stockPriceObj from './stockPriceObj.js';
 import helperFunctions from '../../helperFunctions.js';
 import StockPortfolio from './StockPortfolio.jsx';
 

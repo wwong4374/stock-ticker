@@ -4,6 +4,7 @@ body {
   background: linear-gradient(hsl(127, 75%, 68%),#01FF70);
 }
 
+/* PORTFOLIO */
 .stockInterface {
   display: flex;
   flex-direction: column;
@@ -119,4 +120,20 @@ input {
   font-weight: bold;
   height: 35px;
   width: 100px;
+}
+
+/* NAVBAR */
+.navBar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  list-style-type: none;
+  height: 50px;
+  border: solid 2px black;
+}
+
+.navBarOption {
+  height: 20px;
+  width: 60px;
+  border: solid 1px black;
 }
