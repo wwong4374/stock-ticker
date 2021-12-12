@@ -103,19 +103,19 @@ export const StockInterface = () => {
       .catch((err) => { console.log(err); });
   };
 
-  // const handleBuyStock = () => {
-  //   axios.get(`${host}/api/stocks/symbols`)
-  //     .then((results) => {
-  //       const stockSymbolsInPortfolio = results.data;
-  //       if (stockSymbolsInPortfolio.includes(stockSymbol)) {
-  //         incrementStockQuantity();
-  //       } else {
-  //         addStockToPortfolio();
-  //       }
-  //     })
-  //     .then(getPortfolio)
-  //     .catch((err) => { console.log(err); });
-  // };
+  const handleBuyStock = () => {
+    axios.get(`${host}/api/stocks/symbols`)
+      .then((results) => {
+        const stockSymbolsInPortfolio = results.data;
+        if (stockSymbolsInPortfolio.includes(stockSymbol)) {
+          incrementStockQuantity();
+        } else {
+          addStockToPortfolio();
+        }
+      })
+      .then(getPortfolio)
+      .catch((err) => { console.log(err); });
+  };
 
   const handleStockInput = (e) => {
     setStockToSearch(e.nativeEvent.target.value);
@@ -194,12 +194,12 @@ export const StockInterface = () => {
             incrementStockQuantity={incrementStockQuantity}
             host={host}
           />
-          <div className="stockTileButtons">
+          {/* <div className="stockTileButtons">
             <button type="button" className="stockTileButton" onClick={() => { incrementStockQuantity(stockObj.stockSymbol); }}>Buy</button>
             <button type="button" className="stockTileButton" onClick={handleSellStock}>Sell</button>
             <button type="button" className="stockTileButton" onClick={updateStockPrice}>Quote</button>
             <button type="button" className="stockTileButton" onClick={handleSellAllStock}>Sell All</button>
-          </div>
+          </div> */}
         </div>
     </StockContext.Provider>
   );
