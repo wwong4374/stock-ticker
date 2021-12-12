@@ -6,11 +6,10 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import stockPriceObj from './stockPriceObj.js';
-import helperFunctions from '../helperFunctions.js';
+import helperFunctions from '../../helperFunctions.js';
 import StockPortfolio from './StockPortfolio.jsx';
 
-export const SelectedStockContext = React.createContext();
-export const SetSelectedStockContext = React.createContext();
+export const StockContext = React.createContext();
 
 export const StockInterface = () => {
   const [timeInterval, setTimeInterval] = useState('TIME_SERIES_DAILY');
@@ -41,6 +40,12 @@ export const StockInterface = () => {
       }
     })
       .then((results) => {
+        if (results.data['Global Quote']['05. price'] === undefined
+            || Number.isNaN(results.data['Global Quote']['05. price'])) {
+          alert('Please enter a valid stock symbol.');
+          setStockToSearch('');
+          return;
+        }
         setStockPrice(Math.round(results.data['Global Quote']['05. price'] * 100) / 100);
       })
       .catch((err) => { console.log(err); });
@@ -122,8 +127,12 @@ export const StockInterface = () => {
     setStockToSearch(e.nativeEvent.target.value);
   };
   const handleStockSearch = () => {
-    setStockSymbol(stockToSearch.toUpperCase());
+    if (stockToSearch === '') {
+      alert('Please enter a stock symbol.');
+      return;
+    }
     getPrice();
+    setStockSymbol(stockToSearch.toUpperCase());
     setStockToSearch('');
   };
 
@@ -164,8 +173,7 @@ export const StockInterface = () => {
   };
 
   return (
-    <SelectedStockContext.Provider value={selectedStock}>
-      <SetSelectedStockContext.Provider value={{ setSelectedStock: setSelectedStock }}>
+    <StockContext.Provider value={{ setSelectedStock }}>
         <div className="stockInterface">
           <h1>Stock Tracker</h1>
           <div className="upperContainer">
@@ -198,7 +206,6 @@ export const StockInterface = () => {
             <button type="button" className="stockTileButton" onClick={handleSellAllStock}>Sell All</button>
           </div>
         </div>
-      </SetSelectedStockContext.Provider>
-    </SelectedStockContext.Provider>
+    </StockContext.Provider>
   );
 };

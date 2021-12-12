@@ -2158,7 +2158,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _StockInterface_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./StockInterface.jsx */ "./client/src/components/StockInterface.jsx");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/index.js");
+/* harmony import */ var _portfolio_StockInterface_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./portfolio/StockInterface.jsx */ "./client/src/components/portfolio/StockInterface.jsx");
+/* harmony import */ var _graph_StockGraph_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./graph/StockGraph.jsx */ "./client/src/components/graph/StockGraph.jsx");
+/* harmony import */ var _navbar_NavBar_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./navbar/NavBar.jsx */ "./client/src/components/navbar/NavBar.jsx");
 /* eslint-disable react/function-component-definition */
 
 /* eslint-disable import/extensions */
@@ -2167,27 +2171,93 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+ // const App = () => {
+//   return (
+//     <div className="app">
+//       <StockInterface />
+//     </div>
+//   );
+// };
+
 var App = function App() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    className: "app"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_StockInterface_jsx__WEBPACK_IMPORTED_MODULE_1__.StockInterface, null));
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.BrowserRouter, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_navbar_NavBar_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Routes, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Route, {
+    path: "/",
+    exact: true,
+    element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_portfolio_StockInterface_jsx__WEBPACK_IMPORTED_MODULE_1__.StockInterface, null)
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Route, {
+    path: "/graph",
+    element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_graph_StockGraph_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], null)
+  })));
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (App);
 
 /***/ }),
 
-/***/ "./client/src/components/StockInterface.jsx":
-/*!**************************************************!*\
-  !*** ./client/src/components/StockInterface.jsx ***!
-  \**************************************************/
+/***/ "./client/src/components/graph/StockGraph.jsx":
+/*!****************************************************!*\
+  !*** ./client/src/components/graph/StockGraph.jsx ***!
+  \****************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "SelectedStockContext": () => (/* binding */ SelectedStockContext),
-/* harmony export */   "SetSelectedStockContext": () => (/* binding */ SetSelectedStockContext),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+var StockGraph = function StockGraph() {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null);
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (StockGraph);
+
+/***/ }),
+
+/***/ "./client/src/components/navbar/NavBar.jsx":
+/*!*************************************************!*\
+  !*** ./client/src/components/navbar/NavBar.jsx ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/index.js");
+/* eslint-disable arrow-body-style */
+
+/* eslint-disable react/function-component-definition */
+
+
+
+var NavBar = function NavBar() {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
+    to: "/"
+  }, "Portfolio")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
+    to: "/graph"
+  }, "Graph")));
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (NavBar);
+
+/***/ }),
+
+/***/ "./client/src/components/portfolio/StockInterface.jsx":
+/*!************************************************************!*\
+  !*** ./client/src/components/portfolio/StockInterface.jsx ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "StockContext": () => (/* binding */ StockContext),
 /* harmony export */   "StockInterface": () => (/* binding */ StockInterface)
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_helpers_toConsumableArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/toConsumableArray */ "./node_modules/@babel/runtime/helpers/esm/toConsumableArray.js");
@@ -2196,10 +2266,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _stockPriceObj_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./stockPriceObj.js */ "./client/src/components/stockPriceObj.js");
-/* harmony import */ var _helperFunctions_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../helperFunctions.js */ "./client/src/helperFunctions.js");
+/* harmony import */ var _stockPriceObj_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./stockPriceObj.js */ "./client/src/components/portfolio/stockPriceObj.js");
+/* harmony import */ var _stockPriceObj_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_stockPriceObj_js__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _helperFunctions_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../helperFunctions.js */ "./client/src/helperFunctions.js");
 /* harmony import */ var _helperFunctions_js__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_helperFunctions_js__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _StockPortfolio_jsx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./StockPortfolio.jsx */ "./client/src/components/StockPortfolio.jsx");
+/* harmony import */ var _StockPortfolio_jsx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./StockPortfolio.jsx */ "./client/src/components/portfolio/StockPortfolio.jsx");
 
 
 
@@ -2222,8 +2293,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 
 
-var SelectedStockContext = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createContext();
-var SetSelectedStockContext = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createContext();
+var StockContext = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createContext();
 var StockInterface = function StockInterface() {
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_4__.useState)('TIME_SERIES_DAILY'),
       _useState2 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_2__["default"])(_useState, 2),
@@ -2284,6 +2354,12 @@ var StockInterface = function StockInterface() {
         datatype: 'json'
       }
     }).then(function (results) {
+      if (results.data['Global Quote']['05. price'] === undefined || Number.isNaN(results.data['Global Quote']['05. price'])) {
+        alert('Please enter a valid stock symbol.');
+        setStockToSearch('');
+        return;
+      }
+
       setStockPrice(Math.round(results.data['Global Quote']['05. price'] * 100) / 100);
     })["catch"](function (err) {
       console.log(err);
@@ -2375,8 +2451,13 @@ var StockInterface = function StockInterface() {
   };
 
   var handleStockSearch = function handleStockSearch() {
-    setStockSymbol(stockToSearch.toUpperCase());
+    if (stockToSearch === '') {
+      alert('Please enter a stock symbol.');
+      return;
+    }
+
     getPrice();
+    setStockSymbol(stockToSearch.toUpperCase());
     setStockToSearch('');
   };
 
@@ -2427,9 +2508,7 @@ var StockInterface = function StockInterface() {
     });
   };
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement(SelectedStockContext.Provider, {
-    value: selectedStock
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement(SetSelectedStockContext.Provider, {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement(StockContext.Provider, {
     value: {
       setSelectedStock: setSelectedStock
     }
@@ -2479,15 +2558,15 @@ var StockInterface = function StockInterface() {
     type: "button",
     className: "stockTileButton",
     onClick: handleSellAllStock
-  }, "Sell All")))));
+  }, "Sell All"))));
 };
 
 /***/ }),
 
-/***/ "./client/src/components/StockPortfolio.jsx":
-/*!**************************************************!*\
-  !*** ./client/src/components/StockPortfolio.jsx ***!
-  \**************************************************/
+/***/ "./client/src/components/portfolio/StockPortfolio.jsx":
+/*!************************************************************!*\
+  !*** ./client/src/components/portfolio/StockPortfolio.jsx ***!
+  \************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -2498,7 +2577,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _StockTile_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./StockTile.jsx */ "./client/src/components/StockTile.jsx");
+/* harmony import */ var _StockTile_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./StockTile.jsx */ "./client/src/components/portfolio/StockTile.jsx");
 /* eslint-disable react/function-component-definition */
 
 /* eslint-disable comma-dangle */
@@ -2554,10 +2633,10 @@ var StockPortfolio = function StockPortfolio(_ref) {
 
 /***/ }),
 
-/***/ "./client/src/components/StockTile.jsx":
-/*!*********************************************!*\
-  !*** ./client/src/components/StockTile.jsx ***!
-  \*********************************************/
+/***/ "./client/src/components/portfolio/StockTile.jsx":
+/*!*******************************************************!*\
+  !*** ./client/src/components/portfolio/StockTile.jsx ***!
+  \*******************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -2569,8 +2648,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _StockInterface__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./StockInterface */ "./client/src/components/StockInterface.jsx");
+/* harmony import */ var _StockInterface__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./StockInterface */ "./client/src/components/portfolio/StockInterface.jsx");
 
+
+/* eslint-disable arrow-body-style */
 
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 
@@ -2613,19 +2694,16 @@ var StockTile = function StockTile(_ref) {
   };
 
   getStockPrice();
-  return (
-    /*#__PURE__*/
-    // <SelectedStockContext.Consumer>
-    react__WEBPACK_IMPORTED_MODULE_2__.createElement(_StockInterface__WEBPACK_IMPORTED_MODULE_3__.SetSelectedStockContext.Consumer, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(_StockInterface__WEBPACK_IMPORTED_MODULE_3__.StockContext.Consumer, null, function () {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", {
       className: className,
       onClick: function onClick() {
         if (className === 'stockTile') {
           setClassName('stockTileClicked');
         } else {
           setClassName('stockTile');
-        }
+        } // Stock();
 
-        setSelectedStock();
       },
       role: "button",
       tabIndex: 0
@@ -2639,729 +2717,123 @@ var StockTile = function StockTile(_ref) {
       className: "stockPrice"
     }, "$".concat(stockPrice)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", {
       className: "marketValue"
-    }, "$".concat((stockObj.quantity * stockPrice).toLocaleString()))))) // </SelectedStockContext.Consumer>
-
-  );
+    }, "$".concat((stockObj.quantity * stockPrice).toLocaleString()))));
+  });
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (StockTile);
 
 /***/ }),
 
-/***/ "./client/src/components/stockPriceObj.js":
-/*!************************************************!*\
-  !*** ./client/src/components/stockPriceObj.js ***!
-  \************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ "./client/src/components/portfolio/stockPriceObj.js":
+/*!**********************************************************!*\
+  !*** ./client/src/components/portfolio/stockPriceObj.js ***!
+  \**********************************************************/
+/***/ (() => {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-var stockPriceObj = {
-  '2021-07-14': {
-    '1. open': '148.1000',
-    '2. high': '149.5700',
-    '3. low': '147.6800',
-    '4. close': '149.1500',
-    '5. volume': '127050785'
-  },
-  '2021-07-15': {
-    '1. open': '149.2400',
-    '2. high': '150.0000',
-    '3. low': '147.0900',
-    '4. close': '148.4800',
-    '5. volume': '106820297'
-  },
-  '2021-07-16': {
-    '1. open': '148.4600',
-    '2. high': '149.7600',
-    '3. low': '145.8800',
-    '4. close': '146.3900',
-    '5. volume': '93251426'
-  },
-  '2021-07-19': {
-    '1. open': '143.7500',
-    '2. high': '144.0700',
-    '3. low': '141.6700',
-    '4. close': '142.4500',
-    '5. volume': '121434571'
-  },
-  '2021-07-20': {
-    '1. open': '143.4600',
-    '2. high': '147.0997',
-    '3. low': '142.9600',
-    '4. close': '146.1500',
-    '5. volume': '96350036'
-  },
-  '2021-07-21': {
-    '1. open': '145.5300',
-    '2. high': '146.1300',
-    '3. low': '144.6300',
-    '4. close': '145.4000',
-    '5. volume': '74993460'
-  },
-  '2021-07-22': {
-    '1. open': '145.9350',
-    '2. high': '148.1950',
-    '3. low': '145.8100',
-    '4. close': '146.8000',
-    '5. volume': '77338156'
-  },
-  '2021-07-23': {
-    '1. open': '147.5500',
-    '2. high': '148.7177',
-    '3. low': '146.9200',
-    '4. close': '148.5600',
-    '5. volume': '71447416'
-  },
-  '2021-07-26': {
-    '1. open': '148.2700',
-    '2. high': '149.8300',
-    '3. low': '147.7000',
-    '4. close': '148.9900',
-    '5. volume': '72434089'
-  },
-  '2021-07-27': {
-    '1. open': '149.1200',
-    '2. high': '149.2100',
-    '3. low': '145.5500',
-    '4. close': '146.7700',
-    '5. volume': '104818578'
-  },
-  '2021-07-28': {
-    '1. open': '144.8100',
-    '2. high': '146.9700',
-    '3. low': '142.5400',
-    '4. close': '144.9800',
-    '5. volume': '118931191'
-  },
-  '2021-07-29': {
-    '1. open': '144.6850',
-    '2. high': '146.5500',
-    '3. low': '144.5800',
-    '4. close': '145.6400',
-    '5. volume': '54323047'
-  },
-  '2021-07-30': {
-    '1. open': '144.3800',
-    '2. high': '146.3300',
-    '3. low': '144.1100',
-    '4. close': '145.8600',
-    '5. volume': '70440626'
-  },
-  '2021-08-02': {
-    '1. open': '146.3600',
-    '2. high': '146.9500',
-    '3. low': '145.2500',
-    '4. close': '145.5200',
-    '5. volume': '62879961'
-  },
-  '2021-08-03': {
-    '1. open': '145.8100',
-    '2. high': '148.0450',
-    '3. low': '145.1800',
-    '4. close': '147.3600',
-    '5. volume': '64786618'
-  },
-  '2021-08-04': {
-    '1. open': '147.2700',
-    '2. high': '147.7900',
-    '3. low': '146.2800',
-    '4. close': '146.9500',
-    '5. volume': '56368271'
-  },
-  '2021-08-05': {
-    '1. open': '146.9800',
-    '2. high': '147.8400',
-    '3. low': '146.1700',
-    '4. close': '147.0600',
-    '5. volume': '46397674'
-  },
-  '2021-08-06': {
-    '1. open': '146.3500',
-    '2. high': '147.1100',
-    '3. low': '145.6300',
-    '4. close': '146.1400',
-    '5. volume': '54126813'
-  },
-  '2021-08-09': {
-    '1. open': '146.2000',
-    '2. high': '146.7000',
-    '3. low': '145.5200',
-    '4. close': '146.0900',
-    '5. volume': '48908689'
-  },
-  '2021-08-10': {
-    '1. open': '146.4400',
-    '2. high': '147.7100',
-    '3. low': '145.3000',
-    '4. close': '145.6000',
-    '5. volume': '69023081'
-  },
-  '2021-08-11': {
-    '1. open': '146.0500',
-    '2. high': '146.7200',
-    '3. low': '145.5300',
-    '4. close': '145.8600',
-    '5. volume': '48493463'
-  },
-  '2021-08-12': {
-    '1. open': '146.1900',
-    '2. high': '149.0500',
-    '3. low': '145.8400',
-    '4. close': '148.8900',
-    '5. volume': '73779113'
-  },
-  '2021-08-13': {
-    '1. open': '148.9700',
-    '2. high': '149.4444',
-    '3. low': '148.2700',
-    '4. close': '149.1000',
-    '5. volume': '58846293'
-  },
-  '2021-08-16': {
-    '1. open': '148.5350',
-    '2. high': '151.1900',
-    '3. low': '146.4700',
-    '4. close': '151.1200',
-    '5. volume': '103558782'
-  },
-  '2021-08-17': {
-    '1. open': '150.2300',
-    '2. high': '151.6800',
-    '3. low': '149.0900',
-    '4. close': '150.1900',
-    '5. volume': '92229735'
-  },
-  '2021-08-18': {
-    '1. open': '149.8000',
-    '2. high': '150.7200',
-    '3. low': '146.1500',
-    '4. close': '146.3600',
-    '5. volume': '86325990'
-  },
-  '2021-08-19': {
-    '1. open': '145.0300',
-    '2. high': '148.0000',
-    '3. low': '144.5000',
-    '4. close': '146.7000',
-    '5. volume': '86960310'
-  },
-  '2021-08-20': {
-    '1. open': '147.4400',
-    '2. high': '148.5000',
-    '3. low': '146.7800',
-    '4. close': '148.1900',
-    '5. volume': '60549630'
-  },
-  '2021-08-23': {
-    '1. open': '148.3100',
-    '2. high': '150.1900',
-    '3. low': '147.8900',
-    '4. close': '149.7100',
-    '5. volume': '60131810'
-  },
-  '2021-08-24': {
-    '1. open': '149.4500',
-    '2. high': '150.8600',
-    '3. low': '149.1500',
-    '4. close': '149.6200',
-    '5. volume': '48606428'
-  },
-  '2021-08-25': {
-    '1. open': '149.8100',
-    '2. high': '150.3200',
-    '3. low': '147.8000',
-    '4. close': '148.3600',
-    '5. volume': '58991297'
-  },
-  '2021-08-26': {
-    '1. open': '148.3500',
-    '2. high': '149.1200',
-    '3. low': '147.5100',
-    '4. close': '147.5400',
-    '5. volume': '48597195'
-  },
-  '2021-08-27': {
-    '1. open': '147.4800',
-    '2. high': '148.7500',
-    '3. low': '146.8300',
-    '4. close': '148.6000',
-    '5. volume': '55802388'
-  },
-  '2021-08-30': {
-    '1. open': '149.0000',
-    '2. high': '153.4900',
-    '3. low': '148.6100',
-    '4. close': '153.1200',
-    '5. volume': '90956723'
-  },
-  '2021-08-31': {
-    '1. open': '152.6600',
-    '2. high': '152.8000',
-    '3. low': '151.2900',
-    '4. close': '151.8300',
-    '5. volume': '86453117'
-  },
-  '2021-09-01': {
-    '1. open': '152.8300',
-    '2. high': '154.9800',
-    '3. low': '152.3400',
-    '4. close': '152.5100',
-    '5. volume': '80313711'
-  },
-  '2021-09-02': {
-    '1. open': '153.8700',
-    '2. high': '154.7200',
-    '3. low': '152.4000',
-    '4. close': '153.6500',
-    '5. volume': '71171317'
-  },
-  '2021-09-03': {
-    '1. open': '153.7600',
-    '2. high': '154.6300',
-    '3. low': '153.0900',
-    '4. close': '154.3000',
-    '5. volume': '57866066'
-  },
-  '2021-09-07': {
-    '1. open': '154.9700',
-    '2. high': '157.2600',
-    '3. low': '154.3900',
-    '4. close': '156.6900',
-    '5. volume': '82278261'
-  },
-  '2021-09-08': {
-    '1. open': '156.9800',
-    '2. high': '157.0400',
-    '3. low': '153.9750',
-    '4. close': '155.1100',
-    '5. volume': '74420207'
-  },
-  '2021-09-09': {
-    '1. open': '155.4900',
-    '2. high': '156.1100',
-    '3. low': '153.9500',
-    '4. close': '154.0700',
-    '5. volume': '57305730'
-  },
-  '2021-09-10': {
-    '1. open': '155.0000',
-    '2. high': '155.4800',
-    '3. low': '148.7000',
-    '4. close': '148.9700',
-    '5. volume': '140893235'
-  },
-  '2021-09-13': {
-    '1. open': '150.6300',
-    '2. high': '151.4200',
-    '3. low': '148.7500',
-    '4. close': '149.5500',
-    '5. volume': '102404329'
-  },
-  '2021-09-14': {
-    '1. open': '150.3500',
-    '2. high': '151.0700',
-    '3. low': '146.9100',
-    '4. close': '148.1200',
-    '5. volume': '109296295'
-  },
-  '2021-09-15': {
-    '1. open': '148.5600',
-    '2. high': '149.4400',
-    '3. low': '146.3700',
-    '4. close': '149.0300',
-    '5. volume': '83281315'
-  },
-  '2021-09-16': {
-    '1. open': '148.4400',
-    '2. high': '148.9700',
-    '3. low': '147.2210',
-    '4. close': '148.7900',
-    '5. volume': '68034149'
-  },
-  '2021-09-17': {
-    '1. open': '148.8200',
-    '2. high': '148.8200',
-    '3. low': '145.7600',
-    '4. close': '146.0600',
-    '5. volume': '129868824'
-  },
-  '2021-09-20': {
-    '1. open': '143.8000',
-    '2. high': '144.8400',
-    '3. low': '141.2700',
-    '4. close': '142.9400',
-    '5. volume': '123478863'
-  },
-  '2021-09-21': {
-    '1. open': '143.9300',
-    '2. high': '144.6000',
-    '3. low': '142.7800',
-    '4. close': '143.4300',
-    '5. volume': '75833962'
-  },
-  '2021-09-22': {
-    '1. open': '144.4500',
-    '2. high': '146.4300',
-    '3. low': '143.7001',
-    '4. close': '145.8500',
-    '5. volume': '76404341'
-  },
-  '2021-09-23': {
-    '1. open': '146.6500',
-    '2. high': '147.0800',
-    '3. low': '145.6400',
-    '4. close': '146.8300',
-    '5. volume': '64838170'
-  },
-  '2021-09-24': {
-    '1. open': '145.6600',
-    '2. high': '147.4701',
-    '3. low': '145.5600',
-    '4. close': '146.9200',
-    '5. volume': '53477869'
-  },
-  '2021-09-27': {
-    '1. open': '145.4700',
-    '2. high': '145.9600',
-    '3. low': '143.8200',
-    '4. close': '145.3700',
-    '5. volume': '74150729'
-  },
-  '2021-09-28': {
-    '1. open': '143.2500',
-    '2. high': '144.7500',
-    '3. low': '141.6900',
-    '4. close': '141.9100',
-    '5. volume': '108972340'
-  },
-  '2021-09-29': {
-    '1. open': '142.4700',
-    '2. high': '144.4500',
-    '3. low': '142.0300',
-    '4. close': '142.8300',
-    '5. volume': '74602044'
-  },
-  '2021-09-30': {
-    '1. open': '143.6600',
-    '2. high': '144.3780',
-    '3. low': '141.2800',
-    '4. close': '141.5000',
-    '5. volume': '89056664'
-  },
-  '2021-10-01': {
-    '1. open': '141.9000',
-    '2. high': '142.9200',
-    '3. low': '139.1101',
-    '4. close': '142.6500',
-    '5. volume': '94639581'
-  },
-  '2021-10-04': {
-    '1. open': '141.7600',
-    '2. high': '142.2100',
-    '3. low': '138.2700',
-    '4. close': '139.1400',
-    '5. volume': '98322008'
-  },
-  '2021-10-05': {
-    '1. open': '139.4900',
-    '2. high': '142.2400',
-    '3. low': '139.3600',
-    '4. close': '141.1100',
-    '5. volume': '80861062'
-  },
-  '2021-10-06': {
-    '1. open': '139.4700',
-    '2. high': '142.1500',
-    '3. low': '138.3700',
-    '4. close': '142.0000',
-    '5. volume': '83221119'
-  },
-  '2021-10-07': {
-    '1. open': '143.0600',
-    '2. high': '144.2150',
-    '3. low': '142.7200',
-    '4. close': '143.2900',
-    '5. volume': '61732656'
-  },
-  '2021-10-08': {
-    '1. open': '144.0300',
-    '2. high': '144.1781',
-    '3. low': '142.5600',
-    '4. close': '142.9000',
-    '5. volume': '58773155'
-  },
-  '2021-10-11': {
-    '1. open': '142.2700',
-    '2. high': '144.8100',
-    '3. low': '141.8100',
-    '4. close': '142.8100',
-    '5. volume': '64452219'
-  },
-  '2021-10-12': {
-    '1. open': '143.2300',
-    '2. high': '143.2500',
-    '3. low': '141.0401',
-    '4. close': '141.5100',
-    '5. volume': '73035859'
-  },
-  '2021-10-13': {
-    '1. open': '141.2350',
-    '2. high': '141.4000',
-    '3. low': '139.2000',
-    '4. close': '140.9100',
-    '5. volume': '78762721'
-  },
-  '2021-10-14': {
-    '1. open': '142.1100',
-    '2. high': '143.8800',
-    '3. low': '141.5100',
-    '4. close': '143.7600',
-    '5. volume': '69907100'
-  },
-  '2021-10-15': {
-    '1. open': '143.7700',
-    '2. high': '144.8950',
-    '3. low': '143.5100',
-    '4. close': '144.8400',
-    '5. volume': '67940334'
-  },
-  '2021-10-18': {
-    '1. open': '143.4450',
-    '2. high': '146.8400',
-    '3. low': '143.1600',
-    '4. close': '146.5500',
-    '5. volume': '85589175'
-  },
-  '2021-10-19': {
-    '1. open': '147.0100',
-    '2. high': '149.1700',
-    '3. low': '146.5500',
-    '4. close': '148.7600',
-    '5. volume': '76378894'
-  },
-  '2021-10-20': {
-    '1. open': '148.7000',
-    '2. high': '149.7539',
-    '3. low': '148.1200',
-    '4. close': '149.2600',
-    '5. volume': '58418788'
-  },
-  '2021-10-21': {
-    '1. open': '148.8100',
-    '2. high': '149.6400',
-    '3. low': '147.8700',
-    '4. close': '149.4800',
-    '5. volume': '61420990'
-  },
-  '2021-10-22': {
-    '1. open': '149.6900',
-    '2. high': '150.1800',
-    '3. low': '148.6400',
-    '4. close': '148.6900',
-    '5. volume': '58883443'
-  },
-  '2021-10-25': {
-    '1. open': '148.6800',
-    '2. high': '149.3700',
-    '3. low': '147.6211',
-    '4. close': '148.6400',
-    '5. volume': '50720556'
-  },
-  '2021-10-26': {
-    '1. open': '149.3300',
-    '2. high': '150.8400',
-    '3. low': '149.0101',
-    '4. close': '149.3200',
-    '5. volume': '60893395'
-  },
-  '2021-10-27': {
-    '1. open': '149.3600',
-    '2. high': '149.7300',
-    '3. low': '148.4900',
-    '4. close': '148.8500',
-    '5. volume': '56094929'
-  },
-  '2021-10-28': {
-    '1. open': '149.8200',
-    '2. high': '153.1650',
-    '3. low': '149.7200',
-    '4. close': '152.5700',
-    '5. volume': '100077888'
-  },
-  '2021-10-29': {
-    '1. open': '147.2150',
-    '2. high': '149.9400',
-    '3. low': '146.4128',
-    '4. close': '149.8000',
-    '5. volume': '124953168'
-  },
-  '2021-11-01': {
-    '1. open': '148.9850',
-    '2. high': '149.7000',
-    '3. low': '147.8000',
-    '4. close': '148.9600',
-    '5. volume': '73396551'
-  },
-  '2021-11-02': {
-    '1. open': '148.6600',
-    '2. high': '151.5700',
-    '3. low': '148.6500',
-    '4. close': '150.0200',
-    '5. volume': '68922374'
-  },
-  '2021-11-03': {
-    '1. open': '150.3900',
-    '2. high': '151.9700',
-    '3. low': '149.8200',
-    '4. close': '151.4900',
-    '5. volume': '54511534'
-  },
-  '2021-11-04': {
-    '1. open': '151.5800',
-    '2. high': '152.4300',
-    '3. low': '150.6400',
-    '4. close': '150.9600',
-    '5. volume': '60394616'
-  },
-  '2021-11-05': {
-    '1. open': '151.8900',
-    '2. high': '152.2000',
-    '3. low': '150.0600',
-    '4. close': '151.2800',
-    '5. volume': '65463883'
-  },
-  '2021-11-08': {
-    '1. open': '151.4100',
-    '2. high': '151.5700',
-    '3. low': '150.1600',
-    '4. close': '150.4400',
-    '5. volume': '55020868'
-  },
-  '2021-11-09': {
-    '1. open': '150.2000',
-    '2. high': '151.4280',
-    '3. low': '150.0601',
-    '4. close': '150.8100',
-    '5. volume': '56573449'
-  },
-  '2021-11-10': {
-    '1. open': '150.0200',
-    '2. high': '150.1300',
-    '3. low': '147.8500',
-    '4. close': '147.9200',
-    '5. volume': '65187092'
-  },
-  '2021-11-11': {
-    '1. open': '148.9600',
-    '2. high': '149.4300',
-    '3. low': '147.6810',
-    '4. close': '147.8700',
-    '5. volume': '40999950'
-  },
-  '2021-11-12': {
-    '1. open': '148.4300',
-    '2. high': '150.4000',
-    '3. low': '147.4800',
-    '4. close': '149.9900',
-    '5. volume': '63245197'
-  },
-  '2021-11-15': {
-    '1. open': '150.3700',
-    '2. high': '151.8800',
-    '3. low': '149.4300',
-    '4. close': '150.0000',
-    '5. volume': '59222803'
-  },
-  '2021-11-16': {
-    '1. open': '149.9400',
-    '2. high': '151.4880',
-    '3. low': '149.3400',
-    '4. close': '151.0000',
-    '5. volume': '59256210'
-  },
-  '2021-11-17': {
-    '1. open': '150.9950',
-    '2. high': '155.0000',
-    '3. low': '150.9900',
-    '4. close': '153.4900',
-    '5. volume': '88807000'
-  },
-  '2021-11-18': {
-    '1. open': '153.7100',
-    '2. high': '158.6700',
-    '3. low': '153.0500',
-    '4. close': '157.8700',
-    '5. volume': '137827673'
-  },
-  '2021-11-19': {
-    '1. open': '157.6500',
-    '2. high': '161.0200',
-    '3. low': '156.5328',
-    '4. close': '160.5500',
-    '5. volume': '117305597'
-  },
-  '2021-11-22': {
-    '1. open': '161.6800',
-    '2. high': '165.7000',
-    '3. low': '161.0000',
-    '4. close': '161.0200',
-    '5. volume': '117467889'
-  },
-  '2021-11-23': {
-    '1. open': '161.1200',
-    '2. high': '161.8000',
-    '3. low': '159.0601',
-    '4. close': '161.4100',
-    '5. volume': '96041899'
-  },
-  '2021-11-24': {
-    '1. open': '160.7500',
-    '2. high': '162.1400',
-    '3. low': '159.6400',
-    '4. close': '161.9400',
-    '5. volume': '69463623'
-  },
-  '2021-11-26': {
-    '1. open': '159.5650',
-    '2. high': '160.4500',
-    '3. low': '156.3600',
-    '4. close': '156.8100',
-    '5. volume': '76959752'
-  },
-  '2021-11-29': {
-    '1. open': '159.3700',
-    '2. high': '161.1900',
-    '3. low': '158.7901',
-    '4. close': '160.2400',
-    '5. volume': '88748217'
-  },
-  '2021-11-30': {
-    '1. open': '159.9850',
-    '2. high': '165.5200',
-    '3. low': '159.9200',
-    '4. close': '165.3000',
-    '5. volume': '174048056'
-  },
-  '2021-12-01': {
-    '1. open': '167.4800',
-    '2. high': '170.3000',
-    '3. low': '164.5300',
-    '4. close': '164.7700',
-    '5. volume': '152423003'
-  },
-  '2021-12-02': {
-    '1. open': '158.7350',
-    '2. high': '164.2000',
-    '3. low': '157.8000',
-    '4. close': '163.7600',
-    '5. volume': '136739174'
-  }
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (stockPriceObj);
+// const stockPriceObj = {
+//   '2021-07-14': {'1. open': '148.1000', '2. high': '149.5700', '3. low': '147.6800', '4. close': '149.1500', '5. volume': '127050785'},
+//   '2021-07-15': {'1. open': '149.2400', '2. high': '150.0000', '3. low': '147.0900', '4. close': '148.4800', '5. volume': '106820297'},
+//   '2021-07-16': {'1. open': '148.4600', '2. high': '149.7600', '3. low': '145.8800', '4. close': '146.3900', '5. volume': '93251426'},
+//   '2021-07-19': {'1. open': '143.7500', '2. high': '144.0700', '3. low': '141.6700', '4. close': '142.4500', '5. volume': '121434571'},
+//   '2021-07-20': {'1. open': '143.4600', '2. high': '147.0997', '3. low': '142.9600', '4. close': '146.1500', '5. volume': '96350036'},
+//   '2021-07-21': {'1. open': '145.5300', '2. high': '146.1300', '3. low': '144.6300', '4. close': '145.4000', '5. volume': '74993460'},
+//   '2021-07-22': {'1. open': '145.9350', '2. high': '148.1950', '3. low': '145.8100', '4. close': '146.8000', '5. volume': '77338156'},
+//   '2021-07-23': {'1. open': '147.5500', '2. high': '148.7177', '3. low': '146.9200', '4. close': '148.5600', '5. volume': '71447416'},
+//   '2021-07-26': {'1. open': '148.2700', '2. high': '149.8300', '3. low': '147.7000', '4. close': '148.9900', '5. volume': '72434089'},
+//   '2021-07-27': {'1. open': '149.1200', '2. high': '149.2100', '3. low': '145.5500', '4. close': '146.7700', '5. volume': '104818578'},
+//   '2021-07-28': {'1. open': '144.8100', '2. high': '146.9700', '3. low': '142.5400', '4. close': '144.9800', '5. volume': '118931191'},
+//   '2021-07-29': {'1. open': '144.6850', '2. high': '146.5500', '3. low': '144.5800', '4. close': '145.6400', '5. volume': '54323047'},
+//   '2021-07-30': {'1. open': '144.3800', '2. high': '146.3300', '3. low': '144.1100', '4. close': '145.8600', '5. volume': '70440626'},
+//   '2021-08-02': {'1. open': '146.3600', '2. high': '146.9500', '3. low': '145.2500', '4. close': '145.5200', '5. volume': '62879961'},
+//   '2021-08-03': {'1. open': '145.8100', '2. high': '148.0450', '3. low': '145.1800', '4. close': '147.3600', '5. volume': '64786618'},
+//   '2021-08-04': {'1. open': '147.2700', '2. high': '147.7900', '3. low': '146.2800', '4. close': '146.9500', '5. volume': '56368271'},
+//   '2021-08-05': {'1. open': '146.9800', '2. high': '147.8400', '3. low': '146.1700', '4. close': '147.0600', '5. volume': '46397674'},
+//   '2021-08-06': {'1. open': '146.3500', '2. high': '147.1100', '3. low': '145.6300', '4. close': '146.1400', '5. volume': '54126813'},
+//   '2021-08-09': {'1. open': '146.2000', '2. high': '146.7000', '3. low': '145.5200', '4. close': '146.0900', '5. volume': '48908689'},
+//   '2021-08-10': {'1. open': '146.4400', '2. high': '147.7100', '3. low': '145.3000', '4. close': '145.6000', '5. volume': '69023081'},
+//   '2021-08-11': {'1. open': '146.0500', '2. high': '146.7200', '3. low': '145.5300', '4. close': '145.8600', '5. volume': '48493463'},
+//   '2021-08-12': {'1. open': '146.1900', '2. high': '149.0500', '3. low': '145.8400', '4. close': '148.8900', '5. volume': '73779113'},
+//   '2021-08-13': {'1. open': '148.9700', '2. high': '149.4444', '3. low': '148.2700', '4. close': '149.1000', '5. volume': '58846293'},
+//   '2021-08-16': {'1. open': '148.5350', '2. high': '151.1900', '3. low': '146.4700', '4. close': '151.1200', '5. volume': '103558782'},
+//   '2021-08-17': {'1. open': '150.2300', '2. high': '151.6800', '3. low': '149.0900', '4. close': '150.1900', '5. volume': '92229735'},
+//   '2021-08-18': {'1. open': '149.8000', '2. high': '150.7200', '3. low': '146.1500', '4. close': '146.3600', '5. volume': '86325990'},
+//   '2021-08-19': {'1. open': '145.0300', '2. high': '148.0000', '3. low': '144.5000', '4. close': '146.7000', '5. volume': '86960310'},
+//   '2021-08-20': {'1. open': '147.4400', '2. high': '148.5000', '3. low': '146.7800', '4. close': '148.1900', '5. volume': '60549630'},
+//   '2021-08-23': {'1. open': '148.3100', '2. high': '150.1900', '3. low': '147.8900', '4. close': '149.7100', '5. volume': '60131810'},
+//   '2021-08-24': {'1. open': '149.4500', '2. high': '150.8600', '3. low': '149.1500', '4. close': '149.6200', '5. volume': '48606428'},
+//   '2021-08-25': {'1. open': '149.8100', '2. high': '150.3200', '3. low': '147.8000', '4. close': '148.3600', '5. volume': '58991297'},
+//   '2021-08-26': {'1. open': '148.3500', '2. high': '149.1200', '3. low': '147.5100', '4. close': '147.5400', '5. volume': '48597195'},
+//   '2021-08-27': {'1. open': '147.4800', '2. high': '148.7500', '3. low': '146.8300', '4. close': '148.6000', '5. volume': '55802388'},
+//   '2021-08-30': {'1. open': '149.0000', '2. high': '153.4900', '3. low': '148.6100', '4. close': '153.1200', '5. volume': '90956723'},
+//   '2021-08-31': {'1. open': '152.6600', '2. high': '152.8000', '3. low': '151.2900', '4. close': '151.8300', '5. volume': '86453117'},
+//   '2021-09-01': {'1. open': '152.8300', '2. high': '154.9800', '3. low': '152.3400', '4. close': '152.5100', '5. volume': '80313711'},
+//   '2021-09-02': {'1. open': '153.8700', '2. high': '154.7200', '3. low': '152.4000', '4. close': '153.6500', '5. volume': '71171317'},
+//   '2021-09-03': {'1. open': '153.7600', '2. high': '154.6300', '3. low': '153.0900', '4. close': '154.3000', '5. volume': '57866066'},
+//   '2021-09-07': {'1. open': '154.9700', '2. high': '157.2600', '3. low': '154.3900', '4. close': '156.6900', '5. volume': '82278261'},
+//   '2021-09-08': {'1. open': '156.9800', '2. high': '157.0400', '3. low': '153.9750', '4. close': '155.1100', '5. volume': '74420207'},
+//   '2021-09-09': {'1. open': '155.4900', '2. high': '156.1100', '3. low': '153.9500', '4. close': '154.0700', '5. volume': '57305730'},
+//   '2021-09-10': {'1. open': '155.0000', '2. high': '155.4800', '3. low': '148.7000', '4. close': '148.9700', '5. volume': '140893235'},
+//   '2021-09-13': {'1. open': '150.6300', '2. high': '151.4200', '3. low': '148.7500', '4. close': '149.5500', '5. volume': '102404329'},
+//   '2021-09-14': {'1. open': '150.3500', '2. high': '151.0700', '3. low': '146.9100', '4. close': '148.1200', '5. volume': '109296295'},
+//   '2021-09-15': {'1. open': '148.5600', '2. high': '149.4400', '3. low': '146.3700', '4. close': '149.0300', '5. volume': '83281315'},
+//   '2021-09-16': {'1. open': '148.4400', '2. high': '148.9700', '3. low': '147.2210', '4. close': '148.7900', '5. volume': '68034149'},
+//   '2021-09-17': {'1. open': '148.8200', '2. high': '148.8200', '3. low': '145.7600', '4. close': '146.0600', '5. volume': '129868824'},
+//   '2021-09-20': {'1. open': '143.8000', '2. high': '144.8400', '3. low': '141.2700', '4. close': '142.9400', '5. volume': '123478863'},
+//   '2021-09-21': {'1. open': '143.9300', '2. high': '144.6000', '3. low': '142.7800', '4. close': '143.4300', '5. volume': '75833962'},
+//   '2021-09-22': {'1. open': '144.4500', '2. high': '146.4300', '3. low': '143.7001', '4. close': '145.8500', '5. volume': '76404341'},
+//   '2021-09-23': {'1. open': '146.6500', '2. high': '147.0800', '3. low': '145.6400', '4. close': '146.8300', '5. volume': '64838170'},
+//   '2021-09-24': {'1. open': '145.6600', '2. high': '147.4701', '3. low': '145.5600', '4. close': '146.9200', '5. volume': '53477869'},
+//   '2021-09-27': {'1. open': '145.4700', '2. high': '145.9600', '3. low': '143.8200', '4. close': '145.3700', '5. volume': '74150729'},
+//   '2021-09-28': {'1. open': '143.2500', '2. high': '144.7500', '3. low': '141.6900', '4. close': '141.9100', '5. volume': '108972340'},
+//   '2021-09-29': {'1. open': '142.4700', '2. high': '144.4500', '3. low': '142.0300', '4. close': '142.8300', '5. volume': '74602044'},
+//   '2021-09-30': {'1. open': '143.6600', '2. high': '144.3780', '3. low': '141.2800', '4. close': '141.5000', '5. volume': '89056664'},
+//   '2021-10-01': {'1. open': '141.9000', '2. high': '142.9200', '3. low': '139.1101', '4. close': '142.6500', '5. volume': '94639581'},
+//   '2021-10-04': {'1. open': '141.7600', '2. high': '142.2100', '3. low': '138.2700', '4. close': '139.1400', '5. volume': '98322008'},
+//   '2021-10-05': {'1. open': '139.4900', '2. high': '142.2400', '3. low': '139.3600', '4. close': '141.1100', '5. volume': '80861062'},
+//   '2021-10-06': {'1. open': '139.4700', '2. high': '142.1500', '3. low': '138.3700', '4. close': '142.0000', '5. volume': '83221119'},
+//   '2021-10-07': {'1. open': '143.0600', '2. high': '144.2150', '3. low': '142.7200', '4. close': '143.2900', '5. volume': '61732656'},
+//   '2021-10-08': {'1. open': '144.0300', '2. high': '144.1781', '3. low': '142.5600', '4. close': '142.9000', '5. volume': '58773155'},
+//   '2021-10-11': {'1. open': '142.2700', '2. high': '144.8100', '3. low': '141.8100', '4. close': '142.8100', '5. volume': '64452219'},
+//   '2021-10-12': {'1. open': '143.2300', '2. high': '143.2500', '3. low': '141.0401', '4. close': '141.5100', '5. volume': '73035859'},
+//   '2021-10-13': {'1. open': '141.2350', '2. high': '141.4000', '3. low': '139.2000', '4. close': '140.9100', '5. volume': '78762721'},
+//   '2021-10-14': {'1. open': '142.1100', '2. high': '143.8800', '3. low': '141.5100', '4. close': '143.7600', '5. volume': '69907100'},
+//   '2021-10-15': {'1. open': '143.7700', '2. high': '144.8950', '3. low': '143.5100', '4. close': '144.8400', '5. volume': '67940334'},
+//   '2021-10-18': {'1. open': '143.4450', '2. high': '146.8400', '3. low': '143.1600', '4. close': '146.5500', '5. volume': '85589175'},
+//   '2021-10-19': {'1. open': '147.0100', '2. high': '149.1700', '3. low': '146.5500', '4. close': '148.7600', '5. volume': '76378894'},
+//   '2021-10-20': {'1. open': '148.7000', '2. high': '149.7539', '3. low': '148.1200', '4. close': '149.2600', '5. volume': '58418788'},
+//   '2021-10-21': {'1. open': '148.8100', '2. high': '149.6400', '3. low': '147.8700', '4. close': '149.4800', '5. volume': '61420990'},
+//   '2021-10-22': {'1. open': '149.6900', '2. high': '150.1800', '3. low': '148.6400', '4. close': '148.6900', '5. volume': '58883443'},
+//   '2021-10-25': {'1. open': '148.6800', '2. high': '149.3700', '3. low': '147.6211', '4. close': '148.6400', '5. volume': '50720556'},
+//   '2021-10-26': {'1. open': '149.3300', '2. high': '150.8400', '3. low': '149.0101', '4. close': '149.3200', '5. volume': '60893395'},
+//   '2021-10-27': {'1. open': '149.3600', '2. high': '149.7300', '3. low': '148.4900', '4. close': '148.8500', '5. volume': '56094929'},
+//   '2021-10-28': {'1. open': '149.8200', '2. high': '153.1650', '3. low': '149.7200', '4. close': '152.5700', '5. volume': '100077888'},
+//   '2021-10-29': {'1. open': '147.2150', '2. high': '149.9400', '3. low': '146.4128', '4. close': '149.8000', '5. volume': '124953168'},
+//   '2021-11-01': {'1. open': '148.9850', '2. high': '149.7000', '3. low': '147.8000', '4. close': '148.9600', '5. volume': '73396551'},
+//   '2021-11-02': {'1. open': '148.6600', '2. high': '151.5700', '3. low': '148.6500', '4. close': '150.0200', '5. volume': '68922374'},
+//   '2021-11-03': {'1. open': '150.3900', '2. high': '151.9700', '3. low': '149.8200', '4. close': '151.4900', '5. volume': '54511534'},
+//   '2021-11-04': {'1. open': '151.5800', '2. high': '152.4300', '3. low': '150.6400', '4. close': '150.9600', '5. volume': '60394616'},
+//   '2021-11-05': {'1. open': '151.8900', '2. high': '152.2000', '3. low': '150.0600', '4. close': '151.2800', '5. volume': '65463883'},
+//   '2021-11-08': {'1. open': '151.4100', '2. high': '151.5700', '3. low': '150.1600', '4. close': '150.4400', '5. volume': '55020868'},
+//   '2021-11-09': {'1. open': '150.2000', '2. high': '151.4280', '3. low': '150.0601', '4. close': '150.8100', '5. volume': '56573449'},
+//   '2021-11-10': {'1. open': '150.0200', '2. high': '150.1300', '3. low': '147.8500', '4. close': '147.9200', '5. volume': '65187092'},
+//   '2021-11-11': {'1. open': '148.9600', '2. high': '149.4300', '3. low': '147.6810', '4. close': '147.8700', '5. volume': '40999950'},
+//   '2021-11-12': {'1. open': '148.4300', '2. high': '150.4000', '3. low': '147.4800', '4. close': '149.9900', '5. volume': '63245197'},
+//   '2021-11-15': {'1. open': '150.3700', '2. high': '151.8800', '3. low': '149.4300', '4. close': '150.0000', '5. volume': '59222803'},
+//   '2021-11-16': {'1. open': '149.9400', '2. high': '151.4880', '3. low': '149.3400', '4. close': '151.0000', '5. volume': '59256210'},
+//   '2021-11-17': {'1. open': '150.9950', '2. high': '155.0000', '3. low': '150.9900', '4. close': '153.4900', '5. volume': '88807000'},
+//   '2021-11-18': {'1. open': '153.7100', '2. high': '158.6700', '3. low': '153.0500', '4. close': '157.8700', '5. volume': '137827673'},
+//   '2021-11-19': {'1. open': '157.6500', '2. high': '161.0200', '3. low': '156.5328', '4. close': '160.5500', '5. volume': '117305597'},
+//   '2021-11-22': {'1. open': '161.6800', '2. high': '165.7000', '3. low': '161.0000', '4. close': '161.0200', '5. volume': '117467889'},
+//   '2021-11-23': {'1. open': '161.1200', '2. high': '161.8000', '3. low': '159.0601', '4. close': '161.4100', '5. volume': '96041899'},
+//   '2021-11-24': {'1. open': '160.7500', '2. high': '162.1400', '3. low': '159.6400', '4. close': '161.9400', '5. volume': '69463623'},
+//   '2021-11-26': {'1. open': '159.5650', '2. high': '160.4500', '3. low': '156.3600', '4. close': '156.8100', '5. volume': '76959752'},
+//   '2021-11-29': {'1. open': '159.3700', '2. high': '161.1900', '3. low': '158.7901', '4. close': '160.2400', '5. volume': '88748217'},
+//   '2021-11-30': {'1. open': '159.9850', '2. high': '165.5200', '3. low': '159.9200', '4. close': '165.3000', '5. volume': '174048056'},
+//   '2021-12-01': {'1. open': '167.4800', '2. high': '170.3000', '3. low': '164.5300', '4. close': '164.7700', '5. volume': '152423003'},
+//   '2021-12-02': {'1. open': '158.7350', '2. high': '164.2000', '3. low': '157.8000', '4. close': '163.7600', '5. volume': '136739174'}
+// };
+// export default stockPriceObj;
 
 /***/ }),
 
@@ -3369,32 +2841,70 @@ var stockPriceObj = {
 /*!***************************************!*\
   !*** ./client/src/helperFunctions.js ***!
   \***************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+/***/ (() => {
 
-var axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js"); // import { setStockPrice, stockSymbol } from './components/StockInterface.jsx';
+// const axios = require('axios');
+// // const { StockInterface } = require('./StockInterface.jsx');
+// // import { StockInterface } from './components/StockInterface';
+// // import { setStockPrice, stockSymbol } from './components/StockInterface.jsx';
+// const getPrice = () => {
+//   axios.get('https://alpha-vantage.p.rapidapi.com/query', {
+//     headers: {
+//       'x-rapidapi-host': 'alpha-vantage.p.rapidapi.com',
+//       'x-rapidapi-key': '1b1e7cf330mshfe2a919e34e9dd1p12059bjsna4c74a6efb05'
+//     },
+//     params: {
+//       function: 'GLOBAL_QUOTE',
+//       symbol: stockSymbol,
+//       datatype: 'json'
+//     }
+//   })
+//     .then((results) => {
+//       setStockPrice(Math.round(results.data['Global Quote']['05. price'] * 100) / 100);
+//     })
+//     .catch((err) => { console.log(err); });
+// };
+// module.exports = {
+//   getPrice
+// };
 
+/***/ }),
 
-var getPrice = function getPrice() {
-  axios.get('https://alpha-vantage.p.rapidapi.com/query', {
-    headers: {
-      'x-rapidapi-host': 'alpha-vantage.p.rapidapi.com',
-      'x-rapidapi-key': '1b1e7cf330mshfe2a919e34e9dd1p12059bjsna4c74a6efb05'
-    },
-    params: {
-      "function": 'GLOBAL_QUOTE',
-      symbol: stockSymbol,
-      datatype: 'json'
-    }
-  }).then(function (results) {
-    setStockPrice(Math.round(results.data['Global Quote']['05. price'] * 100) / 100);
-  })["catch"](function (err) {
-    console.log(err);
-  });
-};
+/***/ "./node_modules/history/index.js":
+/*!***************************************!*\
+  !*** ./node_modules/history/index.js ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-module.exports = {
-  getPrice: getPrice
-};
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Action": () => (/* binding */ r),
+/* harmony export */   "createBrowserHistory": () => (/* binding */ createBrowserHistory),
+/* harmony export */   "createHashHistory": () => (/* binding */ createHashHistory),
+/* harmony export */   "createMemoryHistory": () => (/* binding */ createMemoryHistory),
+/* harmony export */   "createPath": () => (/* binding */ I),
+/* harmony export */   "parsePath": () => (/* binding */ J)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+var r,B=r||(r={});B.Pop="POP";B.Push="PUSH";B.Replace="REPLACE";var C= true?function(b){return Object.freeze(b)}:0;function D(b,h){if(!b){"undefined"!==typeof console&&console.warn(h);try{throw Error(h);}catch(k){}}}function E(b){b.preventDefault();b.returnValue=""}
+function F(){var b=[];return{get length(){return b.length},push:function(h){b.push(h);return function(){b=b.filter(function(k){return k!==h})}},call:function(h){b.forEach(function(k){return k&&k(h)})}}}function H(){return Math.random().toString(36).substr(2,8)}function I(b){var h=b.pathname,k=b.search;b=b.hash;return(void 0===h?"/":h)+(void 0===k?"":k)+(void 0===b?"":b)}
+function J(b){var h={};if(b){var k=b.indexOf("#");0<=k&&(h.hash=b.substr(k),b=b.substr(0,k));k=b.indexOf("?");0<=k&&(h.search=b.substr(k),b=b.substr(0,k));b&&(h.pathname=b)}return h}
+function createBrowserHistory(b){function h(){var c=p.location,a=m.state||{};return[a.idx,C({pathname:c.pathname,search:c.search,hash:c.hash,state:a.usr||null,key:a.key||"default"})]}function k(c){return"string"===typeof c?c:I(c)}function x(c,a){void 0===a&&(a=null);return C((0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({pathname:q.pathname,hash:"",search:""},"string"===typeof c?J(c):c,{state:a,key:H()}))}function z(c){t=c;c=h();v=c[0];q=c[1];d.call({action:t,location:q})}function A(c,a){function e(){A(c,a)}var l=r.Push,g=x(c,
+a);if(!f.length||(f.call({action:l,location:g,retry:e}),!1)){var n=[{usr:g.state,key:g.key,idx:v+1},k(g)];g=n[0];n=n[1];try{m.pushState(g,"",n)}catch(G){p.location.assign(n)}z(l)}}function y(c,a){function e(){y(c,a)}var l=r.Replace,g=x(c,a);f.length&&(f.call({action:l,location:g,retry:e}),1)||(g=[{usr:g.state,key:g.key,idx:v},k(g)],m.replaceState(g[0],"",g[1]),z(l))}function w(c){m.go(c)}void 0===b&&(b={});b=b.window;var p=void 0===b?document.defaultView:b,m=p.history,u=null;p.addEventListener("popstate",
+function(){if(u)f.call(u),u=null;else{var c=r.Pop,a=h(),e=a[0];a=a[1];if(f.length)if(null!=e){var l=v-e;l&&(u={action:c,location:a,retry:function(){w(-1*l)}},w(l))}else true?D(!1,"You are trying to block a POP navigation to a location that was not created by the history library. The block will fail silently in production, but in general you should do all navigation with the history library (instead of using window.history.pushState directly) to avoid this situation."):
+0;else z(c)}});var t=r.Pop;b=h();var v=b[0],q=b[1],d=F(),f=F();null==v&&(v=0,m.replaceState((0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({},m.state,{idx:v}),""));return{get action(){return t},get location(){return q},createHref:k,push:A,replace:y,go:w,back:function(){w(-1)},forward:function(){w(1)},listen:function(c){return d.push(c)},block:function(c){var a=f.push(c);1===f.length&&p.addEventListener("beforeunload",E);return function(){a();f.length||p.removeEventListener("beforeunload",E)}}}};
+function createHashHistory(b){function h(){var a=J(m.location.hash.substr(1)),e=a.pathname,l=a.search;a=a.hash;var g=u.state||{};return[g.idx,C({pathname:void 0===e?"/":e,search:void 0===l?"":l,hash:void 0===a?"":a,state:g.usr||null,key:g.key||"default"})]}function k(){if(t)c.call(t),t=null;else{var a=r.Pop,e=h(),l=e[0];e=e[1];if(c.length)if(null!=l){var g=q-l;g&&(t={action:a,location:e,retry:function(){p(-1*g)}},p(g))}else true?D(!1,"You are trying to block a POP navigation to a location that was not created by the history library. The block will fail silently in production, but in general you should do all navigation with the history library (instead of using window.history.pushState directly) to avoid this situation."):
+0;else A(a)}}function x(a){var e=document.querySelector("base"),l="";e&&e.getAttribute("href")&&(e=m.location.href,l=e.indexOf("#"),l=-1===l?e:e.slice(0,l));return l+"#"+("string"===typeof a?a:I(a))}function z(a,e){void 0===e&&(e=null);return C((0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({pathname:d.pathname,hash:"",search:""},"string"===typeof a?J(a):a,{state:e,key:H()}))}function A(a){v=a;a=h();q=a[0];d=a[1];f.call({action:v,location:d})}function y(a,e){function l(){y(a,e)}var g=r.Push,n=z(a,e); true?
+D("/"===n.pathname.charAt(0),"Relative pathnames are not supported in hash history.push("+JSON.stringify(a)+")"):0;if(!c.length||(c.call({action:g,location:n,retry:l}),!1)){var G=[{usr:n.state,key:n.key,idx:q+1},x(n)];n=G[0];G=G[1];try{u.pushState(n,"",G)}catch(K){m.location.assign(G)}A(g)}}function w(a,e){function l(){w(a,e)}var g=r.Replace,n=z(a,e); true?D("/"===n.pathname.charAt(0),"Relative pathnames are not supported in hash history.replace("+JSON.stringify(a)+
+")"):0;c.length&&(c.call({action:g,location:n,retry:l}),1)||(n=[{usr:n.state,key:n.key,idx:q},x(n)],u.replaceState(n[0],"",n[1]),A(g))}function p(a){u.go(a)}void 0===b&&(b={});b=b.window;var m=void 0===b?document.defaultView:b,u=m.history,t=null;m.addEventListener("popstate",k);m.addEventListener("hashchange",function(){var a=h()[1];I(a)!==I(d)&&k()});var v=r.Pop;b=h();var q=b[0],d=b[1],f=F(),c=F();null==q&&(q=0,u.replaceState((0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({},u.state,{idx:q}),""));return{get action(){return v},get location(){return d},
+createHref:x,push:y,replace:w,go:p,back:function(){p(-1)},forward:function(){p(1)},listen:function(a){return f.push(a)},block:function(a){var e=c.push(a);1===c.length&&m.addEventListener("beforeunload",E);return function(){e();c.length||m.removeEventListener("beforeunload",E)}}}};
+function createMemoryHistory(b){function h(d,f){void 0===f&&(f=null);return C((0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({pathname:t.pathname,search:"",hash:""},"string"===typeof d?J(d):d,{state:f,key:H()}))}function k(d,f,c){return!q.length||(q.call({action:d,location:f,retry:c}),!1)}function x(d,f){u=d;t=f;v.call({action:u,location:t})}function z(d,f){var c=r.Push,a=h(d,f); true?D("/"===t.pathname.charAt(0),"Relative pathnames are not supported in memory history.push("+JSON.stringify(d)+")"):
+0;k(c,a,function(){z(d,f)})&&(m+=1,p.splice(m,p.length,a),x(c,a))}function A(d,f){var c=r.Replace,a=h(d,f); true?D("/"===t.pathname.charAt(0),"Relative pathnames are not supported in memory history.replace("+JSON.stringify(d)+")"):0;k(c,a,function(){A(d,f)})&&(p[m]=a,x(c,a))}function y(d){var f=Math.min(Math.max(m+d,0),p.length-1),c=r.Pop,a=p[f];k(c,a,function(){y(d)})&&(m=f,x(c,a))}void 0===b&&(b={});var w=b;b=w.initialEntries;w=w.initialIndex;var p=(void 0===
+b?["/"]:b).map(function(d){var f=C((0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({pathname:"/",search:"",hash:"",state:null,key:H()},"string"===typeof d?J(d):d)); true?D("/"===f.pathname.charAt(0),"Relative pathnames are not supported in createMemoryHistory({ initialEntries }) (invalid entry: "+JSON.stringify(d)+")"):0;return f}),m=Math.min(Math.max(null==w?p.length-1:w,0),p.length-1),u=r.Pop,t=p[m],v=F(),q=F();return{get index(){return m},get action(){return u},get location(){return t},createHref:function(d){return"string"===
+typeof d?d:I(d)},push:z,replace:A,go:y,back:function(){y(-1)},forward:function(){y(1)},listen:function(d){return v.push(d)},block:function(d){return q.push(d)}}};
+//# sourceMappingURL=index.js.map
+
 
 /***/ }),
 
@@ -29811,6 +29321,1431 @@ if (false) {} else {
 
 /***/ }),
 
+/***/ "./node_modules/react-router-dom/index.js":
+/*!************************************************!*\
+  !*** ./node_modules/react-router-dom/index.js ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "MemoryRouter": () => (/* reexport safe */ react_router__WEBPACK_IMPORTED_MODULE_1__.MemoryRouter),
+/* harmony export */   "Navigate": () => (/* reexport safe */ react_router__WEBPACK_IMPORTED_MODULE_1__.Navigate),
+/* harmony export */   "Outlet": () => (/* reexport safe */ react_router__WEBPACK_IMPORTED_MODULE_1__.Outlet),
+/* harmony export */   "Route": () => (/* reexport safe */ react_router__WEBPACK_IMPORTED_MODULE_1__.Route),
+/* harmony export */   "Router": () => (/* reexport safe */ react_router__WEBPACK_IMPORTED_MODULE_1__.Router),
+/* harmony export */   "Routes": () => (/* reexport safe */ react_router__WEBPACK_IMPORTED_MODULE_1__.Routes),
+/* harmony export */   "UNSAFE_LocationContext": () => (/* reexport safe */ react_router__WEBPACK_IMPORTED_MODULE_1__.UNSAFE_LocationContext),
+/* harmony export */   "UNSAFE_NavigationContext": () => (/* reexport safe */ react_router__WEBPACK_IMPORTED_MODULE_1__.UNSAFE_NavigationContext),
+/* harmony export */   "UNSAFE_RouteContext": () => (/* reexport safe */ react_router__WEBPACK_IMPORTED_MODULE_1__.UNSAFE_RouteContext),
+/* harmony export */   "createRoutesFromChildren": () => (/* reexport safe */ react_router__WEBPACK_IMPORTED_MODULE_1__.createRoutesFromChildren),
+/* harmony export */   "generatePath": () => (/* reexport safe */ react_router__WEBPACK_IMPORTED_MODULE_1__.generatePath),
+/* harmony export */   "matchPath": () => (/* reexport safe */ react_router__WEBPACK_IMPORTED_MODULE_1__.matchPath),
+/* harmony export */   "matchRoutes": () => (/* reexport safe */ react_router__WEBPACK_IMPORTED_MODULE_1__.matchRoutes),
+/* harmony export */   "renderMatches": () => (/* reexport safe */ react_router__WEBPACK_IMPORTED_MODULE_1__.renderMatches),
+/* harmony export */   "resolvePath": () => (/* reexport safe */ react_router__WEBPACK_IMPORTED_MODULE_1__.resolvePath),
+/* harmony export */   "useHref": () => (/* reexport safe */ react_router__WEBPACK_IMPORTED_MODULE_1__.useHref),
+/* harmony export */   "useInRouterContext": () => (/* reexport safe */ react_router__WEBPACK_IMPORTED_MODULE_1__.useInRouterContext),
+/* harmony export */   "useLocation": () => (/* reexport safe */ react_router__WEBPACK_IMPORTED_MODULE_1__.useLocation),
+/* harmony export */   "useMatch": () => (/* reexport safe */ react_router__WEBPACK_IMPORTED_MODULE_1__.useMatch),
+/* harmony export */   "useNavigate": () => (/* reexport safe */ react_router__WEBPACK_IMPORTED_MODULE_1__.useNavigate),
+/* harmony export */   "useNavigationType": () => (/* reexport safe */ react_router__WEBPACK_IMPORTED_MODULE_1__.useNavigationType),
+/* harmony export */   "useOutlet": () => (/* reexport safe */ react_router__WEBPACK_IMPORTED_MODULE_1__.useOutlet),
+/* harmony export */   "useOutletContext": () => (/* reexport safe */ react_router__WEBPACK_IMPORTED_MODULE_1__.useOutletContext),
+/* harmony export */   "useParams": () => (/* reexport safe */ react_router__WEBPACK_IMPORTED_MODULE_1__.useParams),
+/* harmony export */   "useResolvedPath": () => (/* reexport safe */ react_router__WEBPACK_IMPORTED_MODULE_1__.useResolvedPath),
+/* harmony export */   "useRoutes": () => (/* reexport safe */ react_router__WEBPACK_IMPORTED_MODULE_1__.useRoutes),
+/* harmony export */   "BrowserRouter": () => (/* binding */ BrowserRouter),
+/* harmony export */   "HashRouter": () => (/* binding */ HashRouter),
+/* harmony export */   "Link": () => (/* binding */ Link),
+/* harmony export */   "NavLink": () => (/* binding */ NavLink),
+/* harmony export */   "createSearchParams": () => (/* binding */ createSearchParams),
+/* harmony export */   "unstable_HistoryRouter": () => (/* binding */ HistoryRouter),
+/* harmony export */   "useLinkClickHandler": () => (/* binding */ useLinkClickHandler),
+/* harmony export */   "useSearchParams": () => (/* binding */ useSearchParams)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var history__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! history */ "./node_modules/history/index.js");
+/* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router */ "./node_modules/react-router/index.js");
+/**
+ * React Router DOM v6.1.1
+ *
+ * Copyright (c) Remix Software Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE.md file in the root directory of this source tree.
+ *
+ * @license MIT
+ */
+
+
+
+
+
+function _extends() {
+  _extends = Object.assign || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+
+    return target;
+  };
+
+  return _extends.apply(this, arguments);
+}
+
+function _objectWithoutPropertiesLoose(source, excluded) {
+  if (source == null) return {};
+  var target = {};
+  var sourceKeys = Object.keys(source);
+  var key, i;
+
+  for (i = 0; i < sourceKeys.length; i++) {
+    key = sourceKeys[i];
+    if (excluded.indexOf(key) >= 0) continue;
+    target[key] = source[key];
+  }
+
+  return target;
+}
+
+const _excluded = ["onClick", "reloadDocument", "replace", "state", "target", "to"],
+      _excluded2 = ["aria-current", "caseSensitive", "className", "end", "style", "to", "children"];
+
+function warning(cond, message) {
+  if (!cond) {
+    // eslint-disable-next-line no-console
+    if (typeof console !== "undefined") console.warn(message);
+
+    try {
+      // Welcome to debugging React Router!
+      //
+      // This error is thrown as a convenience so you can more easily
+      // find the source for a warning that appears in the console by
+      // enabling "pause on exceptions" in your JavaScript debugger.
+      throw new Error(message); // eslint-disable-next-line no-empty
+    } catch (e) {}
+  }
+} ////////////////////////////////////////////////////////////////////////////////
+// COMPONENTS
+////////////////////////////////////////////////////////////////////////////////
+
+/**
+ * A `<Router>` for use in web browsers. Provides the cleanest URLs.
+ */
+function BrowserRouter(_ref) {
+  let {
+    basename,
+    children,
+    window
+  } = _ref;
+  let historyRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
+
+  if (historyRef.current == null) {
+    historyRef.current = (0,history__WEBPACK_IMPORTED_MODULE_2__.createBrowserHistory)({
+      window
+    });
+  }
+
+  let history = historyRef.current;
+  let [state, setState] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+    action: history.action,
+    location: history.location
+  });
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useLayoutEffect)(() => history.listen(setState), [history]);
+  return /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_router__WEBPACK_IMPORTED_MODULE_1__.Router, {
+    basename: basename,
+    children: children,
+    location: state.location,
+    navigationType: state.action,
+    navigator: history
+  });
+}
+
+/**
+ * A `<Router>` for use in web browsers. Stores the location in the hash
+ * portion of the URL so it is not sent to the server.
+ */
+function HashRouter(_ref2) {
+  let {
+    basename,
+    children,
+    window
+  } = _ref2;
+  let historyRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
+
+  if (historyRef.current == null) {
+    historyRef.current = (0,history__WEBPACK_IMPORTED_MODULE_2__.createHashHistory)({
+      window
+    });
+  }
+
+  let history = historyRef.current;
+  let [state, setState] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+    action: history.action,
+    location: history.location
+  });
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useLayoutEffect)(() => history.listen(setState), [history]);
+  return /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_router__WEBPACK_IMPORTED_MODULE_1__.Router, {
+    basename: basename,
+    children: children,
+    location: state.location,
+    navigationType: state.action,
+    navigator: history
+  });
+}
+
+/**
+ * A `<Router>` that accepts a pre-instantiated history object. It's important
+ * to note that using your own history object is highly discouraged and may add
+ * two versions of the history library to your bundles unless you use the same
+ * version of the history library that React Router uses internally.
+ */
+function HistoryRouter(_ref3) {
+  let {
+    basename,
+    children,
+    history
+  } = _ref3;
+  const [state, setState] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+    action: history.action,
+    location: history.location
+  });
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useLayoutEffect)(() => history.listen(setState), [history]);
+  return /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_router__WEBPACK_IMPORTED_MODULE_1__.Router, {
+    basename: basename,
+    children: children,
+    location: state.location,
+    navigationType: state.action,
+    navigator: history
+  });
+}
+
+if (true) {
+  HistoryRouter.displayName = "unstable_HistoryRouter";
+}
+
+function isModifiedEvent(event) {
+  return !!(event.metaKey || event.altKey || event.ctrlKey || event.shiftKey);
+}
+
+/**
+ * The public API for rendering a history-aware <a>.
+ */
+const Link = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.forwardRef)(function LinkWithRef(_ref4, ref) {
+  let {
+    onClick,
+    reloadDocument,
+    replace = false,
+    state,
+    target,
+    to
+  } = _ref4,
+      rest = _objectWithoutPropertiesLoose(_ref4, _excluded);
+
+  let href = (0,react_router__WEBPACK_IMPORTED_MODULE_1__.useHref)(to);
+  let internalOnClick = useLinkClickHandler(to, {
+    replace,
+    state,
+    target
+  });
+
+  function handleClick(event) {
+    if (onClick) onClick(event);
+
+    if (!event.defaultPrevented && !reloadDocument) {
+      internalOnClick(event);
+    }
+  }
+
+  return (
+    /*#__PURE__*/
+    // eslint-disable-next-line jsx-a11y/anchor-has-content
+    (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", _extends({}, rest, {
+      href: href,
+      onClick: handleClick,
+      ref: ref,
+      target: target
+    }))
+  );
+});
+
+if (true) {
+  Link.displayName = "Link";
+}
+
+/**
+ * A <Link> wrapper that knows if it's "active" or not.
+ */
+const NavLink = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.forwardRef)(function NavLinkWithRef(_ref5, ref) {
+  let {
+    "aria-current": ariaCurrentProp = "page",
+    caseSensitive = false,
+    className: classNameProp = "",
+    end = false,
+    style: styleProp,
+    to,
+    children
+  } = _ref5,
+      rest = _objectWithoutPropertiesLoose(_ref5, _excluded2);
+
+  let location = (0,react_router__WEBPACK_IMPORTED_MODULE_1__.useLocation)();
+  let path = (0,react_router__WEBPACK_IMPORTED_MODULE_1__.useResolvedPath)(to);
+  let locationPathname = location.pathname;
+  let toPathname = path.pathname;
+
+  if (!caseSensitive) {
+    locationPathname = locationPathname.toLowerCase();
+    toPathname = toPathname.toLowerCase();
+  }
+
+  let isActive = locationPathname === toPathname || !end && locationPathname.startsWith(toPathname) && locationPathname.charAt(toPathname.length) === "/";
+  let ariaCurrent = isActive ? ariaCurrentProp : undefined;
+  let className;
+
+  if (typeof classNameProp === "function") {
+    className = classNameProp({
+      isActive
+    });
+  } else {
+    // If the className prop is not a function, we use a default `active`
+    // class for <NavLink />s that are active. In v5 `active` was the default
+    // value for `activeClassName`, but we are removing that API and can still
+    // use the old default behavior for a cleaner upgrade path and keep the
+    // simple styling rules working as they currently do.
+    className = [classNameProp, isActive ? "active" : null].filter(Boolean).join(" ");
+  }
+
+  let style = typeof styleProp === "function" ? styleProp({
+    isActive
+  }) : styleProp;
+  return /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Link, _extends({}, rest, {
+    "aria-current": ariaCurrent,
+    className: className,
+    ref: ref,
+    style: style,
+    to: to
+  }), typeof children === "function" ? children({
+    isActive
+  }) : children);
+});
+
+if (true) {
+  NavLink.displayName = "NavLink";
+} ////////////////////////////////////////////////////////////////////////////////
+// HOOKS
+////////////////////////////////////////////////////////////////////////////////
+
+/**
+ * Handles the click behavior for router `<Link>` components. This is useful if
+ * you need to create custom `<Link>` components with the same click behavior we
+ * use in our exported `<Link>`.
+ */
+
+
+function useLinkClickHandler(to, _temp) {
+  let {
+    target,
+    replace: replaceProp,
+    state
+  } = _temp === void 0 ? {} : _temp;
+  let navigate = (0,react_router__WEBPACK_IMPORTED_MODULE_1__.useNavigate)();
+  let location = (0,react_router__WEBPACK_IMPORTED_MODULE_1__.useLocation)();
+  let path = (0,react_router__WEBPACK_IMPORTED_MODULE_1__.useResolvedPath)(to);
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(event => {
+    if (event.button === 0 && ( // Ignore everything but left clicks
+    !target || target === "_self") && // Let browser handle "target=_blank" etc.
+    !isModifiedEvent(event) // Ignore clicks with modifier keys
+    ) {
+      event.preventDefault(); // If the URL hasn't changed, a regular <a> will do a replace instead of
+      // a push, so do the same here.
+
+      let replace = !!replaceProp || (0,history__WEBPACK_IMPORTED_MODULE_2__.createPath)(location) === (0,history__WEBPACK_IMPORTED_MODULE_2__.createPath)(path);
+      navigate(to, {
+        replace,
+        state
+      });
+    }
+  }, [location, navigate, path, replaceProp, state, target, to]);
+}
+/**
+ * A convenient wrapper for reading and writing search parameters via the
+ * URLSearchParams interface.
+ */
+
+function useSearchParams(defaultInit) {
+   true ? warning(typeof URLSearchParams !== "undefined", "You cannot use the `useSearchParams` hook in a browser that does not " + "support the URLSearchParams API. If you need to support Internet " + "Explorer 11, we recommend you load a polyfill such as " + "https://github.com/ungap/url-search-params\n\n" + "If you're unsure how to load polyfills, we recommend you check out " + "https://polyfill.io/v3/ which provides some recommendations about how " + "to load polyfills only for users that need them, instead of for every " + "user.") : 0;
+  let defaultSearchParamsRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(createSearchParams(defaultInit));
+  let location = (0,react_router__WEBPACK_IMPORTED_MODULE_1__.useLocation)();
+  let searchParams = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => {
+    let searchParams = createSearchParams(location.search);
+
+    for (let key of defaultSearchParamsRef.current.keys()) {
+      if (!searchParams.has(key)) {
+        defaultSearchParamsRef.current.getAll(key).forEach(value => {
+          searchParams.append(key, value);
+        });
+      }
+    }
+
+    return searchParams;
+  }, [location.search]);
+  let navigate = (0,react_router__WEBPACK_IMPORTED_MODULE_1__.useNavigate)();
+  let setSearchParams = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)((nextInit, navigateOptions) => {
+    navigate("?" + createSearchParams(nextInit), navigateOptions);
+  }, [navigate]);
+  return [searchParams, setSearchParams];
+}
+
+/**
+ * Creates a URLSearchParams object using the given initializer.
+ *
+ * This is identical to `new URLSearchParams(init)` except it also
+ * supports arrays as values in the object form of the initializer
+ * instead of just strings. This is convenient when you need multiple
+ * values for a given key, but don't want to use an array initializer.
+ *
+ * For example, instead of:
+ *
+ *   let searchParams = new URLSearchParams([
+ *     ['sort', 'name'],
+ *     ['sort', 'price']
+ *   ]);
+ *
+ * you can do:
+ *
+ *   let searchParams = createSearchParams({
+ *     sort: ['name', 'price']
+ *   });
+ */
+function createSearchParams(init) {
+  if (init === void 0) {
+    init = "";
+  }
+
+  return new URLSearchParams(typeof init === "string" || Array.isArray(init) || init instanceof URLSearchParams ? init : Object.keys(init).reduce((memo, key) => {
+    let value = init[key];
+    return memo.concat(Array.isArray(value) ? value.map(v => [key, v]) : [[key, value]]);
+  }, []));
+}
+
+
+//# sourceMappingURL=index.js.map
+
+
+/***/ }),
+
+/***/ "./node_modules/react-router/index.js":
+/*!********************************************!*\
+  !*** ./node_modules/react-router/index.js ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "MemoryRouter": () => (/* binding */ MemoryRouter),
+/* harmony export */   "Navigate": () => (/* binding */ Navigate),
+/* harmony export */   "Outlet": () => (/* binding */ Outlet),
+/* harmony export */   "Route": () => (/* binding */ Route),
+/* harmony export */   "Router": () => (/* binding */ Router),
+/* harmony export */   "Routes": () => (/* binding */ Routes),
+/* harmony export */   "UNSAFE_LocationContext": () => (/* binding */ LocationContext),
+/* harmony export */   "UNSAFE_NavigationContext": () => (/* binding */ NavigationContext),
+/* harmony export */   "UNSAFE_RouteContext": () => (/* binding */ RouteContext),
+/* harmony export */   "createRoutesFromChildren": () => (/* binding */ createRoutesFromChildren),
+/* harmony export */   "generatePath": () => (/* binding */ generatePath),
+/* harmony export */   "matchPath": () => (/* binding */ matchPath),
+/* harmony export */   "matchRoutes": () => (/* binding */ matchRoutes),
+/* harmony export */   "renderMatches": () => (/* binding */ renderMatches),
+/* harmony export */   "resolvePath": () => (/* binding */ resolvePath),
+/* harmony export */   "useHref": () => (/* binding */ useHref),
+/* harmony export */   "useInRouterContext": () => (/* binding */ useInRouterContext),
+/* harmony export */   "useLocation": () => (/* binding */ useLocation),
+/* harmony export */   "useMatch": () => (/* binding */ useMatch),
+/* harmony export */   "useNavigate": () => (/* binding */ useNavigate),
+/* harmony export */   "useNavigationType": () => (/* binding */ useNavigationType),
+/* harmony export */   "useOutlet": () => (/* binding */ useOutlet),
+/* harmony export */   "useOutletContext": () => (/* binding */ useOutletContext),
+/* harmony export */   "useParams": () => (/* binding */ useParams),
+/* harmony export */   "useResolvedPath": () => (/* binding */ useResolvedPath),
+/* harmony export */   "useRoutes": () => (/* binding */ useRoutes)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var history__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! history */ "./node_modules/history/index.js");
+/**
+ * React Router v6.1.1
+ *
+ * Copyright (c) Remix Software Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE.md file in the root directory of this source tree.
+ *
+ * @license MIT
+ */
+
+
+
+function invariant(cond, message) {
+  if (!cond) throw new Error(message);
+}
+
+function warning(cond, message) {
+  if (!cond) {
+    // eslint-disable-next-line no-console
+    if (typeof console !== "undefined") console.warn(message);
+
+    try {
+      // Welcome to debugging React Router!
+      //
+      // This error is thrown as a convenience so you can more easily
+      // find the source for a warning that appears in the console by
+      // enabling "pause on exceptions" in your JavaScript debugger.
+      throw new Error(message); // eslint-disable-next-line no-empty
+    } catch (e) {}
+  }
+}
+
+const alreadyWarned = {};
+
+function warningOnce(key, cond, message) {
+  if (!cond && !alreadyWarned[key]) {
+    alreadyWarned[key] = true;
+     true ? warning(false, message) : 0;
+  }
+} ///////////////////////////////////////////////////////////////////////////////
+// CONTEXT
+///////////////////////////////////////////////////////////////////////////////
+
+/**
+ * A Navigator is a "location changer"; it's how you get to different locations.
+ *
+ * Every history instance conforms to the Navigator interface, but the
+ * distinction is useful primarily when it comes to the low-level <Router> API
+ * where both the location and a navigator must be provided separately in order
+ * to avoid "tearing" that may occur in a suspense-enabled app if the action
+ * and/or location were to be read directly from the history instance.
+ */
+
+
+const NavigationContext = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.createContext)(null);
+
+if (true) {
+  NavigationContext.displayName = "Navigation";
+}
+
+const LocationContext = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.createContext)(null);
+
+if (true) {
+  LocationContext.displayName = "Location";
+}
+
+const RouteContext = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.createContext)({
+  outlet: null,
+  matches: []
+});
+
+if (true) {
+  RouteContext.displayName = "Route";
+} ///////////////////////////////////////////////////////////////////////////////
+// COMPONENTS
+///////////////////////////////////////////////////////////////////////////////
+
+
+/**
+ * A <Router> that stores all entries in memory.
+ *
+ * @see https://reactrouter.com/docs/en/v6/api#memoryrouter
+ */
+function MemoryRouter(_ref) {
+  let {
+    basename,
+    children,
+    initialEntries,
+    initialIndex
+  } = _ref;
+  let historyRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
+
+  if (historyRef.current == null) {
+    historyRef.current = (0,history__WEBPACK_IMPORTED_MODULE_1__.createMemoryHistory)({
+      initialEntries,
+      initialIndex
+    });
+  }
+
+  let history = historyRef.current;
+  let [state, setState] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+    action: history.action,
+    location: history.location
+  });
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useLayoutEffect)(() => history.listen(setState), [history]);
+  return /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Router, {
+    basename: basename,
+    children: children,
+    location: state.location,
+    navigationType: state.action,
+    navigator: history
+  });
+}
+
+/**
+ * Changes the current location.
+ *
+ * Note: This API is mostly useful in React.Component subclasses that are not
+ * able to use hooks. In functional components, we recommend you use the
+ * `useNavigate` hook instead.
+ *
+ * @see https://reactrouter.com/docs/en/v6/api#navigate
+ */
+function Navigate(_ref2) {
+  let {
+    to,
+    replace,
+    state
+  } = _ref2;
+  !useInRouterContext() ?  true ? invariant(false, // TODO: This error is probably because they somehow have 2 versions of
+  // the router loaded. We can help them understand how to avoid that.
+  "<Navigate> may be used only in the context of a <Router> component.") : 0 : void 0;
+   true ? warning(!(0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(NavigationContext).static, "<Navigate> must not be used on the initial render in a <StaticRouter>. " + "This is a no-op, but you should modify your code so the <Navigate> is " + "only ever rendered in response to some user interaction or state change.") : 0;
+  let navigate = useNavigate();
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    navigate(to, {
+      replace,
+      state
+    });
+  });
+  return null;
+}
+
+/**
+ * Renders the child route's element, if there is one.
+ *
+ * @see https://reactrouter.com/docs/en/v6/api#outlet
+ */
+function Outlet(props) {
+  return useOutlet(props.context);
+}
+
+/**
+ * Declares an element that should be rendered at a certain URL path.
+ *
+ * @see https://reactrouter.com/docs/en/v6/api#route
+ */
+function Route(_props) {
+    true ? invariant(false, "A <Route> is only ever to be used as the child of <Routes> element, " + "never rendered directly. Please wrap your <Route> in a <Routes>.") : 0 ;
+}
+
+/**
+ * Provides location context for the rest of the app.
+ *
+ * Note: You usually won't render a <Router> directly. Instead, you'll render a
+ * router that is more specific to your environment such as a <BrowserRouter>
+ * in web browsers or a <StaticRouter> for server rendering.
+ *
+ * @see https://reactrouter.com/docs/en/v6/api#router
+ */
+function Router(_ref3) {
+  let {
+    basename: basenameProp = "/",
+    children = null,
+    location: locationProp,
+    navigationType = history__WEBPACK_IMPORTED_MODULE_1__.Action.Pop,
+    navigator,
+    static: staticProp = false
+  } = _ref3;
+  !!useInRouterContext() ?  true ? invariant(false, "You cannot render a <Router> inside another <Router>." + " You should never have more than one in your app.") : 0 : void 0;
+  let basename = normalizePathname(basenameProp);
+  let navigationContext = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => ({
+    basename,
+    navigator,
+    static: staticProp
+  }), [basename, navigator, staticProp]);
+
+  if (typeof locationProp === "string") {
+    locationProp = (0,history__WEBPACK_IMPORTED_MODULE_1__.parsePath)(locationProp);
+  }
+
+  let {
+    pathname = "/",
+    search = "",
+    hash = "",
+    state = null,
+    key = "default"
+  } = locationProp;
+  let location = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => {
+    let trailingPathname = stripBasename(pathname, basename);
+
+    if (trailingPathname == null) {
+      return null;
+    }
+
+    return {
+      pathname: trailingPathname,
+      search,
+      hash,
+      state,
+      key
+    };
+  }, [basename, pathname, search, hash, state, key]);
+   true ? warning(location != null, "<Router basename=\"" + basename + "\"> is not able to match the URL " + ("\"" + pathname + search + hash + "\" because it does not start with the ") + "basename, so the <Router> won't render anything.") : 0;
+
+  if (location == null) {
+    return null;
+  }
+
+  return /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(NavigationContext.Provider, {
+    value: navigationContext
+  }, /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(LocationContext.Provider, {
+    children: children,
+    value: {
+      location,
+      navigationType
+    }
+  }));
+}
+
+/**
+ * A container for a nested tree of <Route> elements that renders the branch
+ * that best matches the current location.
+ *
+ * @see https://reactrouter.com/docs/en/v6/api#routes
+ */
+function Routes(_ref4) {
+  let {
+    children,
+    location
+  } = _ref4;
+  return useRoutes(createRoutesFromChildren(children), location);
+} ///////////////////////////////////////////////////////////////////////////////
+// HOOKS
+///////////////////////////////////////////////////////////////////////////////
+
+/**
+ * Returns the full href for the given "to" value. This is useful for building
+ * custom links that are also accessible and preserve right-click behavior.
+ *
+ * @see https://reactrouter.com/docs/en/v6/api#usehref
+ */
+
+function useHref(to) {
+  !useInRouterContext() ?  true ? invariant(false, // TODO: This error is probably because they somehow have 2 versions of the
+  // router loaded. We can help them understand how to avoid that.
+  "useHref() may be used only in the context of a <Router> component.") : 0 : void 0;
+  let {
+    basename,
+    navigator
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(NavigationContext);
+  let {
+    hash,
+    pathname,
+    search
+  } = useResolvedPath(to);
+  let joinedPathname = pathname;
+
+  if (basename !== "/") {
+    let toPathname = getToPathname(to);
+    let endsWithSlash = toPathname != null && toPathname.endsWith("/");
+    joinedPathname = pathname === "/" ? basename + (endsWithSlash ? "/" : "") : joinPaths([basename, pathname]);
+  }
+
+  return navigator.createHref({
+    pathname: joinedPathname,
+    search,
+    hash
+  });
+}
+/**
+ * Returns true if this component is a descendant of a <Router>.
+ *
+ * @see https://reactrouter.com/docs/en/v6/api#useinroutercontext
+ */
+
+function useInRouterContext() {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(LocationContext) != null;
+}
+/**
+ * Returns the current location object, which represents the current URL in web
+ * browsers.
+ *
+ * Note: If you're using this it may mean you're doing some of your own
+ * "routing" in your app, and we'd like to know what your use case is. We may
+ * be able to provide something higher-level to better suit your needs.
+ *
+ * @see https://reactrouter.com/docs/en/v6/api#uselocation
+ */
+
+function useLocation() {
+  !useInRouterContext() ?  true ? invariant(false, // TODO: This error is probably because they somehow have 2 versions of the
+  // router loaded. We can help them understand how to avoid that.
+  "useLocation() may be used only in the context of a <Router> component.") : 0 : void 0;
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(LocationContext).location;
+}
+
+/**
+ * Returns the current navigation action which describes how the router came to
+ * the current location, either by a pop, push, or replace on the history stack.
+ *
+ * @see https://reactrouter.com/docs/en/v6/api#usenavigationtype
+ */
+function useNavigationType() {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(LocationContext).navigationType;
+}
+/**
+ * Returns true if the URL for the given "to" value matches the current URL.
+ * This is useful for components that need to know "active" state, e.g.
+ * <NavLink>.
+ *
+ * @see https://reactrouter.com/docs/en/v6/api#usematch
+ */
+
+function useMatch(pattern) {
+  !useInRouterContext() ?  true ? invariant(false, // TODO: This error is probably because they somehow have 2 versions of the
+  // router loaded. We can help them understand how to avoid that.
+  "useMatch() may be used only in the context of a <Router> component.") : 0 : void 0;
+  let {
+    pathname
+  } = useLocation();
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => matchPath(pattern, pathname), [pathname, pattern]);
+}
+/**
+ * The interface for the navigate() function returned from useNavigate().
+ */
+
+/**
+ * Returns an imperative method for changing the location. Used by <Link>s, but
+ * may also be used by other elements to change the location.
+ *
+ * @see https://reactrouter.com/docs/en/v6/api#usenavigate
+ */
+function useNavigate() {
+  !useInRouterContext() ?  true ? invariant(false, // TODO: This error is probably because they somehow have 2 versions of the
+  // router loaded. We can help them understand how to avoid that.
+  "useNavigate() may be used only in the context of a <Router> component.") : 0 : void 0;
+  let {
+    basename,
+    navigator
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(NavigationContext);
+  let {
+    matches
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(RouteContext);
+  let {
+    pathname: locationPathname
+  } = useLocation();
+  let routePathnamesJson = JSON.stringify(matches.map(match => match.pathnameBase));
+  let activeRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(false);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    activeRef.current = true;
+  });
+  let navigate = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function (to, options) {
+    if (options === void 0) {
+      options = {};
+    }
+
+     true ? warning(activeRef.current, "You should call navigate() in a React.useEffect(), not when " + "your component is first rendered.") : 0;
+    if (!activeRef.current) return;
+
+    if (typeof to === "number") {
+      navigator.go(to);
+      return;
+    }
+
+    let path = resolveTo(to, JSON.parse(routePathnamesJson), locationPathname);
+
+    if (basename !== "/") {
+      path.pathname = joinPaths([basename, path.pathname]);
+    }
+
+    (!!options.replace ? navigator.replace : navigator.push)(path, options.state);
+  }, [basename, navigator, routePathnamesJson, locationPathname]);
+  return navigate;
+}
+const OutletContext = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.createContext)(null);
+/**
+ * Returns the context (if provided) for the child route at this level of the route
+ * hierarchy.
+ * @see https://reactrouter.com/docs/en/v6/api#useoutletcontext
+ */
+
+function useOutletContext() {
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(OutletContext);
+}
+/**
+ * Returns the element for the child route at this level of the route
+ * hierarchy. Used internally by <Outlet> to render child routes.
+ *
+ * @see https://reactrouter.com/docs/en/v6/api#useoutlet
+ */
+
+function useOutlet(context) {
+  let outlet = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(RouteContext).outlet;
+  return /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(OutletContext.Provider, {
+    value: context
+  }, outlet);
+}
+/**
+ * Returns an object of key/value pairs of the dynamic params from the current
+ * URL that were matched by the route path.
+ *
+ * @see https://reactrouter.com/docs/en/v6/api#useparams
+ */
+
+function useParams() {
+  let {
+    matches
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(RouteContext);
+  let routeMatch = matches[matches.length - 1];
+  return routeMatch ? routeMatch.params : {};
+}
+/**
+ * Resolves the pathname of the given `to` value against the current location.
+ *
+ * @see https://reactrouter.com/docs/en/v6/api#useresolvedpath
+ */
+
+function useResolvedPath(to) {
+  let {
+    matches
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(RouteContext);
+  let {
+    pathname: locationPathname
+  } = useLocation();
+  let routePathnamesJson = JSON.stringify(matches.map(match => match.pathnameBase));
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => resolveTo(to, JSON.parse(routePathnamesJson), locationPathname), [to, routePathnamesJson, locationPathname]);
+}
+/**
+ * Returns the element of the route that matched the current location, prepared
+ * with the correct context to render the remainder of the route tree. Route
+ * elements in the tree must render an <Outlet> to render their child route's
+ * element.
+ *
+ * @see https://reactrouter.com/docs/en/v6/api#useroutes
+ */
+
+function useRoutes(routes, locationArg) {
+  !useInRouterContext() ?  true ? invariant(false, // TODO: This error is probably because they somehow have 2 versions of the
+  // router loaded. We can help them understand how to avoid that.
+  "useRoutes() may be used only in the context of a <Router> component.") : 0 : void 0;
+  let {
+    matches: parentMatches
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(RouteContext);
+  let routeMatch = parentMatches[parentMatches.length - 1];
+  let parentParams = routeMatch ? routeMatch.params : {};
+  let parentPathname = routeMatch ? routeMatch.pathname : "/";
+  let parentPathnameBase = routeMatch ? routeMatch.pathnameBase : "/";
+  let parentRoute = routeMatch && routeMatch.route;
+
+  if (true) {
+    // You won't get a warning about 2 different <Routes> under a <Route>
+    // without a trailing *, but this is a best-effort warning anyway since we
+    // cannot even give the warning unless they land at the parent route.
+    //
+    // Example:
+    //
+    // <Routes>
+    //   {/* This route path MUST end with /* because otherwise
+    //       it will never match /blog/post/123 */}
+    //   <Route path="blog" element={<Blog />} />
+    //   <Route path="blog/feed" element={<BlogFeed />} />
+    // </Routes>
+    //
+    // function Blog() {
+    //   return (
+    //     <Routes>
+    //       <Route path="post/:id" element={<Post />} />
+    //     </Routes>
+    //   );
+    // }
+    let parentPath = parentRoute && parentRoute.path || "";
+    warningOnce(parentPathname, !parentRoute || parentPath.endsWith("*"), "You rendered descendant <Routes> (or called `useRoutes()`) at " + ("\"" + parentPathname + "\" (under <Route path=\"" + parentPath + "\">) but the ") + "parent route path has no trailing \"*\". This means if you navigate " + "deeper, the parent won't match anymore and therefore the child " + "routes will never render.\n\n" + ("Please change the parent <Route path=\"" + parentPath + "\"> to <Route ") + ("path=\"" + (parentPath === "/" ? "*" : parentPath + "/*") + "\">."));
+  }
+
+  let locationFromContext = useLocation();
+  let location;
+
+  if (locationArg) {
+    var _parsedLocationArg$pa;
+
+    let parsedLocationArg = typeof locationArg === "string" ? (0,history__WEBPACK_IMPORTED_MODULE_1__.parsePath)(locationArg) : locationArg;
+    !(parentPathnameBase === "/" || ((_parsedLocationArg$pa = parsedLocationArg.pathname) == null ? void 0 : _parsedLocationArg$pa.startsWith(parentPathnameBase))) ?  true ? invariant(false, "When overriding the location using `<Routes location>` or `useRoutes(routes, location)`, " + "the location pathname must begin with the portion of the URL pathname that was " + ("matched by all parent routes. The current pathname base is \"" + parentPathnameBase + "\" ") + ("but pathname \"" + parsedLocationArg.pathname + "\" was given in the `location` prop.")) : 0 : void 0;
+    location = parsedLocationArg;
+  } else {
+    location = locationFromContext;
+  }
+
+  let pathname = location.pathname || "/";
+  let remainingPathname = parentPathnameBase === "/" ? pathname : pathname.slice(parentPathnameBase.length) || "/";
+  let matches = matchRoutes(routes, {
+    pathname: remainingPathname
+  });
+
+  if (true) {
+     true ? warning(parentRoute || matches != null, "No routes matched location \"" + location.pathname + location.search + location.hash + "\" ") : 0;
+     true ? warning(matches == null || matches[matches.length - 1].route.element !== undefined, "Matched leaf route at location \"" + location.pathname + location.search + location.hash + "\" does not have an element. " + "This means it will render an <Outlet /> with a null value by default resulting in an \"empty\" page.") : 0;
+  }
+
+  return _renderMatches(matches && matches.map(match => Object.assign({}, match, {
+    params: Object.assign({}, parentParams, match.params),
+    pathname: joinPaths([parentPathnameBase, match.pathname]),
+    pathnameBase: match.pathnameBase === "/" ? parentPathnameBase : joinPaths([parentPathnameBase, match.pathnameBase])
+  })), parentMatches);
+} ///////////////////////////////////////////////////////////////////////////////
+// UTILS
+///////////////////////////////////////////////////////////////////////////////
+
+/**
+ * Creates a route config from a React "children" object, which is usually
+ * either a `<Route>` element or an array of them. Used internally by
+ * `<Routes>` to create a route config from its children.
+ *
+ * @see https://reactrouter.com/docs/en/v6/api#createroutesfromchildren
+ */
+
+function createRoutesFromChildren(children) {
+  let routes = [];
+  react__WEBPACK_IMPORTED_MODULE_0__.Children.forEach(children, element => {
+    if (! /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.isValidElement)(element)) {
+      // Ignore non-elements. This allows people to more easily inline
+      // conditionals in their route config.
+      return;
+    }
+
+    if (element.type === react__WEBPACK_IMPORTED_MODULE_0__.Fragment) {
+      // Transparently support React.Fragment and its children.
+      routes.push.apply(routes, createRoutesFromChildren(element.props.children));
+      return;
+    }
+
+    !(element.type === Route) ?  true ? invariant(false, "[" + (typeof element.type === "string" ? element.type : element.type.name) + "] is not a <Route> component. All component children of <Routes> must be a <Route> or <React.Fragment>") : 0 : void 0;
+    let route = {
+      caseSensitive: element.props.caseSensitive,
+      element: element.props.element,
+      index: element.props.index,
+      path: element.props.path
+    };
+
+    if (element.props.children) {
+      route.children = createRoutesFromChildren(element.props.children);
+    }
+
+    routes.push(route);
+  });
+  return routes;
+}
+/**
+ * The parameters that were parsed from the URL path.
+ */
+
+/**
+ * Returns a path with params interpolated.
+ *
+ * @see https://reactrouter.com/docs/en/v6/api#generatepath
+ */
+function generatePath(path, params) {
+  if (params === void 0) {
+    params = {};
+  }
+
+  return path.replace(/:(\w+)/g, (_, key) => {
+    !(params[key] != null) ?  true ? invariant(false, "Missing \":" + key + "\" param") : 0 : void 0;
+    return params[key];
+  }).replace(/\/*\*$/, _ => params["*"] == null ? "" : params["*"].replace(/^\/*/, "/"));
+}
+/**
+ * A RouteMatch contains info about how a route matched a URL.
+ */
+
+/**
+ * Matches the given routes to a location and returns the match data.
+ *
+ * @see https://reactrouter.com/docs/en/v6/api#matchroutes
+ */
+function matchRoutes(routes, locationArg, basename) {
+  if (basename === void 0) {
+    basename = "/";
+  }
+
+  let location = typeof locationArg === "string" ? (0,history__WEBPACK_IMPORTED_MODULE_1__.parsePath)(locationArg) : locationArg;
+  let pathname = stripBasename(location.pathname || "/", basename);
+
+  if (pathname == null) {
+    return null;
+  }
+
+  let branches = flattenRoutes(routes);
+  rankRouteBranches(branches);
+  let matches = null;
+
+  for (let i = 0; matches == null && i < branches.length; ++i) {
+    matches = matchRouteBranch(branches[i], pathname);
+  }
+
+  return matches;
+}
+
+function flattenRoutes(routes, branches, parentsMeta, parentPath) {
+  if (branches === void 0) {
+    branches = [];
+  }
+
+  if (parentsMeta === void 0) {
+    parentsMeta = [];
+  }
+
+  if (parentPath === void 0) {
+    parentPath = "";
+  }
+
+  routes.forEach((route, index) => {
+    let meta = {
+      relativePath: route.path || "",
+      caseSensitive: route.caseSensitive === true,
+      childrenIndex: index,
+      route
+    };
+
+    if (meta.relativePath.startsWith("/")) {
+      !meta.relativePath.startsWith(parentPath) ?  true ? invariant(false, "Absolute route path \"" + meta.relativePath + "\" nested under path " + ("\"" + parentPath + "\" is not valid. An absolute child route path ") + "must start with the combined path of all its parent routes.") : 0 : void 0;
+      meta.relativePath = meta.relativePath.slice(parentPath.length);
+    }
+
+    let path = joinPaths([parentPath, meta.relativePath]);
+    let routesMeta = parentsMeta.concat(meta); // Add the children before adding this route to the array so we traverse the
+    // route tree depth-first and child routes appear before their parents in
+    // the "flattened" version.
+
+    if (route.children && route.children.length > 0) {
+      !(route.index !== true) ?  true ? invariant(false, "Index routes must not have child routes. Please remove " + ("all child routes from route path \"" + path + "\".")) : 0 : void 0;
+      flattenRoutes(route.children, branches, routesMeta, path);
+    } // Routes without a path shouldn't ever match by themselves unless they are
+    // index routes, so don't add them to the list of possible branches.
+
+
+    if (route.path == null && !route.index) {
+      return;
+    }
+
+    branches.push({
+      path,
+      score: computeScore(path, route.index),
+      routesMeta
+    });
+  });
+  return branches;
+}
+
+function rankRouteBranches(branches) {
+  branches.sort((a, b) => a.score !== b.score ? b.score - a.score // Higher score first
+  : compareIndexes(a.routesMeta.map(meta => meta.childrenIndex), b.routesMeta.map(meta => meta.childrenIndex)));
+}
+
+const paramRe = /^:\w+$/;
+const dynamicSegmentValue = 3;
+const indexRouteValue = 2;
+const emptySegmentValue = 1;
+const staticSegmentValue = 10;
+const splatPenalty = -2;
+
+const isSplat = s => s === "*";
+
+function computeScore(path, index) {
+  let segments = path.split("/");
+  let initialScore = segments.length;
+
+  if (segments.some(isSplat)) {
+    initialScore += splatPenalty;
+  }
+
+  if (index) {
+    initialScore += indexRouteValue;
+  }
+
+  return segments.filter(s => !isSplat(s)).reduce((score, segment) => score + (paramRe.test(segment) ? dynamicSegmentValue : segment === "" ? emptySegmentValue : staticSegmentValue), initialScore);
+}
+
+function compareIndexes(a, b) {
+  let siblings = a.length === b.length && a.slice(0, -1).every((n, i) => n === b[i]);
+  return siblings ? // If two routes are siblings, we should try to match the earlier sibling
+  // first. This allows people to have fine-grained control over the matching
+  // behavior by simply putting routes with identical paths in the order they
+  // want them tried.
+  a[a.length - 1] - b[b.length - 1] : // Otherwise, it doesn't really make sense to rank non-siblings by index,
+  // so they sort equally.
+  0;
+}
+
+function matchRouteBranch(branch, pathname) {
+  let {
+    routesMeta
+  } = branch;
+  let matchedParams = {};
+  let matchedPathname = "/";
+  let matches = [];
+
+  for (let i = 0; i < routesMeta.length; ++i) {
+    let meta = routesMeta[i];
+    let end = i === routesMeta.length - 1;
+    let remainingPathname = matchedPathname === "/" ? pathname : pathname.slice(matchedPathname.length) || "/";
+    let match = matchPath({
+      path: meta.relativePath,
+      caseSensitive: meta.caseSensitive,
+      end
+    }, remainingPathname);
+    if (!match) return null;
+    Object.assign(matchedParams, match.params);
+    let route = meta.route;
+    matches.push({
+      params: matchedParams,
+      pathname: joinPaths([matchedPathname, match.pathname]),
+      pathnameBase: joinPaths([matchedPathname, match.pathnameBase]),
+      route
+    });
+
+    if (match.pathnameBase !== "/") {
+      matchedPathname = joinPaths([matchedPathname, match.pathnameBase]);
+    }
+  }
+
+  return matches;
+}
+/**
+ * Renders the result of `matchRoutes()` into a React element.
+ */
+
+
+function renderMatches(matches) {
+  return _renderMatches(matches);
+}
+
+function _renderMatches(matches, parentMatches) {
+  if (parentMatches === void 0) {
+    parentMatches = [];
+  }
+
+  if (matches == null) return null;
+  return matches.reduceRight((outlet, match, index) => {
+    return /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(RouteContext.Provider, {
+      children: match.route.element !== undefined ? match.route.element : /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Outlet, null),
+      value: {
+        outlet,
+        matches: parentMatches.concat(matches.slice(0, index + 1))
+      }
+    });
+  }, null);
+}
+/**
+ * A PathPattern is used to match on some portion of a URL pathname.
+ */
+
+
+/**
+ * Performs pattern matching on a URL pathname and returns information about
+ * the match.
+ *
+ * @see https://reactrouter.com/docs/en/v6/api#matchpath
+ */
+function matchPath(pattern, pathname) {
+  if (typeof pattern === "string") {
+    pattern = {
+      path: pattern,
+      caseSensitive: false,
+      end: true
+    };
+  }
+
+  let [matcher, paramNames] = compilePath(pattern.path, pattern.caseSensitive, pattern.end);
+  let match = pathname.match(matcher);
+  if (!match) return null;
+  let matchedPathname = match[0];
+  let pathnameBase = matchedPathname.replace(/(.)\/+$/, "$1");
+  let captureGroups = match.slice(1);
+  let params = paramNames.reduce((memo, paramName, index) => {
+    // We need to compute the pathnameBase here using the raw splat value
+    // instead of using params["*"] later because it will be decoded then
+    if (paramName === "*") {
+      let splatValue = captureGroups[index] || "";
+      pathnameBase = matchedPathname.slice(0, matchedPathname.length - splatValue.length).replace(/(.)\/+$/, "$1");
+    }
+
+    memo[paramName] = safelyDecodeURIComponent(captureGroups[index] || "", paramName);
+    return memo;
+  }, {});
+  return {
+    params,
+    pathname: matchedPathname,
+    pathnameBase,
+    pattern
+  };
+}
+
+function compilePath(path, caseSensitive, end) {
+  if (caseSensitive === void 0) {
+    caseSensitive = false;
+  }
+
+  if (end === void 0) {
+    end = true;
+  }
+
+   true ? warning(path === "*" || !path.endsWith("*") || path.endsWith("/*"), "Route path \"" + path + "\" will be treated as if it were " + ("\"" + path.replace(/\*$/, "/*") + "\" because the `*` character must ") + "always follow a `/` in the pattern. To get rid of this warning, " + ("please change the route path to \"" + path.replace(/\*$/, "/*") + "\".")) : 0;
+  let paramNames = [];
+  let regexpSource = "^" + path.replace(/\/*\*?$/, "") // Ignore trailing / and /*, we'll handle it below
+  .replace(/^\/*/, "/") // Make sure it has a leading /
+  .replace(/[\\.*+^$?{}|()[\]]/g, "\\$&") // Escape special regex chars
+  .replace(/:(\w+)/g, (_, paramName) => {
+    paramNames.push(paramName);
+    return "([^\\/]+)";
+  });
+
+  if (path.endsWith("*")) {
+    paramNames.push("*");
+    regexpSource += path === "*" || path === "/*" ? "(.*)$" // Already matched the initial /, just match the rest
+    : "(?:\\/(.+)|\\/*)$"; // Don't include the / in params["*"]
+  } else {
+    regexpSource += end ? "\\/*$" // When matching to the end, ignore trailing slashes
+    : // Otherwise, match a word boundary or a proceeding /. The word boundary restricts
+    // parent routes to matching only their own words and nothing more, e.g. parent
+    // route "/home" should not match "/home2".
+    "(?:\\b|\\/|$)";
+  }
+
+  let matcher = new RegExp(regexpSource, caseSensitive ? undefined : "i");
+  return [matcher, paramNames];
+}
+
+function safelyDecodeURIComponent(value, paramName) {
+  try {
+    return decodeURIComponent(value);
+  } catch (error) {
+     true ? warning(false, "The value for the URL param \"" + paramName + "\" will not be decoded because" + (" the string \"" + value + "\" is a malformed URL segment. This is probably") + (" due to a bad percent encoding (" + error + ").")) : 0;
+    return value;
+  }
+}
+/**
+ * Returns a resolved path object relative to the given pathname.
+ *
+ * @see https://reactrouter.com/docs/en/v6/api#resolvepath
+ */
+
+
+function resolvePath(to, fromPathname) {
+  if (fromPathname === void 0) {
+    fromPathname = "/";
+  }
+
+  let {
+    pathname: toPathname,
+    search = "",
+    hash = ""
+  } = typeof to === "string" ? (0,history__WEBPACK_IMPORTED_MODULE_1__.parsePath)(to) : to;
+  let pathname = toPathname ? toPathname.startsWith("/") ? toPathname : resolvePathname(toPathname, fromPathname) : fromPathname;
+  return {
+    pathname,
+    search: normalizeSearch(search),
+    hash: normalizeHash(hash)
+  };
+}
+
+function resolvePathname(relativePath, fromPathname) {
+  let segments = fromPathname.replace(/\/+$/, "").split("/");
+  let relativeSegments = relativePath.split("/");
+  relativeSegments.forEach(segment => {
+    if (segment === "..") {
+      // Keep the root "" segment so the pathname starts at /
+      if (segments.length > 1) segments.pop();
+    } else if (segment !== ".") {
+      segments.push(segment);
+    }
+  });
+  return segments.length > 1 ? segments.join("/") : "/";
+}
+
+function resolveTo(toArg, routePathnames, locationPathname) {
+  let to = typeof toArg === "string" ? (0,history__WEBPACK_IMPORTED_MODULE_1__.parsePath)(toArg) : toArg;
+  let toPathname = toArg === "" || to.pathname === "" ? "/" : to.pathname; // If a pathname is explicitly provided in `to`, it should be relative to the
+  // route context. This is explained in `Note on `<Link to>` values` in our
+  // migration guide from v5 as a means of disambiguation between `to` values
+  // that begin with `/` and those that do not. However, this is problematic for
+  // `to` values that do not provide a pathname. `to` can simply be a search or
+  // hash string, in which case we should assume that the navigation is relative
+  // to the current location's pathname and *not* the route pathname.
+
+  let from;
+
+  if (toPathname == null) {
+    from = locationPathname;
+  } else {
+    let routePathnameIndex = routePathnames.length - 1;
+
+    if (toPathname.startsWith("..")) {
+      let toSegments = toPathname.split("/"); // Each leading .. segment means "go up one route" instead of "go up one
+      // URL segment".  This is a key difference from how <a href> works and a
+      // major reason we call this a "to" value instead of a "href".
+
+      while (toSegments[0] === "..") {
+        toSegments.shift();
+        routePathnameIndex -= 1;
+      }
+
+      to.pathname = toSegments.join("/");
+    } // If there are more ".." segments than parent routes, resolve relative to
+    // the root / URL.
+
+
+    from = routePathnameIndex >= 0 ? routePathnames[routePathnameIndex] : "/";
+  }
+
+  let path = resolvePath(to, from); // Ensure the pathname has a trailing slash if the original to value had one.
+
+  if (toPathname && toPathname !== "/" && toPathname.endsWith("/") && !path.pathname.endsWith("/")) {
+    path.pathname += "/";
+  }
+
+  return path;
+}
+
+function getToPathname(to) {
+  // Empty strings should be treated the same as / paths
+  return to === "" || to.pathname === "" ? "/" : typeof to === "string" ? (0,history__WEBPACK_IMPORTED_MODULE_1__.parsePath)(to).pathname : to.pathname;
+}
+
+function stripBasename(pathname, basename) {
+  if (basename === "/") return pathname;
+
+  if (!pathname.toLowerCase().startsWith(basename.toLowerCase())) {
+    return null;
+  }
+
+  let nextChar = pathname.charAt(basename.length);
+
+  if (nextChar && nextChar !== "/") {
+    // pathname does not start with basename/
+    return null;
+  }
+
+  return pathname.slice(basename.length) || "/";
+}
+
+const joinPaths = paths => paths.join("/").replace(/\/\/+/g, "/");
+
+const normalizePathname = pathname => pathname.replace(/\/+$/, "").replace(/^\/*/, "/");
+
+const normalizeSearch = search => !search || search === "?" ? "" : search.startsWith("?") ? search : "?" + search;
+
+const normalizeHash = hash => !hash || hash === "#" ? "" : hash.startsWith("#") ? hash : "#" + hash; ///////////////////////////////////////////////////////////////////////////////
+
+
+//# sourceMappingURL=index.js.map
+
+
+/***/ }),
+
 /***/ "./node_modules/react/cjs/react.development.js":
 /*!*****************************************************!*\
   !*** ./node_modules/react/cjs/react.development.js ***!
@@ -33301,6 +34236,37 @@ function _defineProperty(obj, key, value) {
   }
 
   return obj;
+}
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/esm/extends.js":
+/*!************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/extends.js ***!
+  \************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ _extends)
+/* harmony export */ });
+function _extends() {
+  _extends = Object.assign || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+
+    return target;
+  };
+
+  return _extends.apply(this, arguments);
 }
 
 /***/ }),
