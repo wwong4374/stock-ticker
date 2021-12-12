@@ -6,11 +6,12 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { StockContext } from './StockInterface';
 
-const StockTile = ({ stockObj, getPortfolio, incrementStockQuantity, setStockSymbol, host }) => {
+const StockTile = ({ stockObj, selectedStocks, host }) => {
   const [className, setClassName] = useState('stockTile');
   const [stockPrice, setStockPrice] = useState(0.00);
-  const [stockTileClicked, setStockTileClicked] = useState(false);
+  // const [stockTileClicked, setStockTileClicked] = useState(false);
 
+  // HELPER FUNCTIONS
   const getStockPrice = () => {
     axios.get(`${host}/api/stocks/${stockObj.stockSymbol}/price`)
       .then((results) => {
@@ -31,7 +32,7 @@ const StockTile = ({ stockObj, getPortfolio, incrementStockQuantity, setStockSym
             onClick={() => {
               if (className === 'stockTile') { setClassName('stockTileClicked'); }
               else { setClassName('stockTile'); }
-              // Stock();
+              // TODO: Add this stock to selectedStocks array
             }}
             role="button"
             tabIndex={0}

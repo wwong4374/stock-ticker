@@ -1,7 +1,82 @@
-import React from 'react';
+/* eslint-disable comma-dangle */
+/* eslint-disable react/function-component-definition */
+/* eslint-disable arrow-body-style */
+import axios from 'axios';
+import React, { useState, useEffect } from 'react';
 
 const StockResearch = () => {
-  return (<div></div>);
+  const [stockSymbol, setStockSymbol] = useState('TSLA');
+  const [stockToSearch, setStockToSearch] = useState('');
+  const [stockPrice, setStockPrice] = useState(0);
+
+  // HELPER FUNCTIONS
+  const getPrice = () => {
+    axios.get('https://alpha-vantage.p.rapidapi.com/query', {
+      headers: {
+        'x-rapidapi-host': 'alpha-vantage.p.rapidapi.com',
+        'x-rapidapi-key': '1b1e7cf330mshfe2a919e34e9dd1p12059bjsna4c74a6efb05'
+      },
+      params: {
+        function: 'GLOBAL_QUOTE',
+        symbol: stockSymbol,
+        datatype: 'json'
+      }
+    })
+      .then((results) => {
+        if (results.data['Global Quote']['05. price'] === undefined
+            || Number.isNaN(results.data['Global Quote']['05. price'])) {
+          alert('Please enter a valid stock symbol.');
+          setStockToSearch('');
+          return;
+        }
+        setStockPrice(Math.round(results.data['Global Quote']['05. price'] * 100) / 100);
+      })
+      .catch((err) => { console.log(err); });
+  };
+
+  const addStockToPortfolio = () => {
+    axios.post(`${host}/api/stocks`, { stockSymbol: stockSymbol, quantity: 1 })
+      .then()
+      .catch((err) => { console.log(err); });
+  };
+
+  const handleStockSearch = () => {
+    if (stockToSearch === '') {
+      alert('Please enter a stock symbol.');
+      return;
+    }
+    getPrice();
+    setStockSymbol(stockToSearch.toUpperCase());
+    setStockToSearch('');
+  };
+
+  // USE EFFECT
+  useEffect(() => {
+    getPrice();
+  }, [stockSymbol]);
+
+  return (
+    <div>
+      <h1>Stock Research</h1>
+      {/* <div className="upperContainer">
+        <div className="stockPriceTitle">
+          {stockSymbol}
+          {':'}
+          {' '}
+          {'$'}
+          {(Math.round(stockPrice * 100) / 100).toLocaleString()}
+        </div>
+        <div className="stockSearch">
+          <input placeholder="Symbol..." onChange={handleStockInput}></input>
+          <button type="submit" onClick={handleStockSearch}>Search</button>
+        </div>
+        <div className="buttons">
+          <button type="submit" onClick={handleBuyStock}>Buy</button>
+          <button type="submit">YOLO</button>
+        </div>
+      </div> */}
+    </div>
+  );
 };
 
 export default StockResearch;

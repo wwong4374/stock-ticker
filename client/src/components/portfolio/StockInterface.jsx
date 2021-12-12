@@ -12,10 +12,9 @@ export const StockContext = React.createContext();
 
 export const StockInterface = () => {
   const [timeInterval, setTimeInterval] = useState('TIME_SERIES_DAILY');
-  const [cash, setCash] = useState(10000);
-  const [stockSymbol, setStockSymbol] = useState('TSLA');
-  const [stockToSearch, setStockToSearch] = useState('');
-  const [stockPrice, setStockPrice] = useState(0);
+  // const [stockSymbol, setStockSymbol] = useState('TSLA');
+  // const [stockToSearch, setStockToSearch] = useState('');
+  // const [stockPrice, setStockPrice] = useState(0);
   const [stockPriceHistory, setStockPriceHistory] = useState({});
   const [selectedStock, setSelectedStock] = useState(null);
   const [portfolio, setPortfolio] = useState([]); // array of stockObj objects
@@ -26,29 +25,29 @@ export const StockInterface = () => {
   const host = 'http://localhost:1234';
 
   // HELPER FUNCTIONS
-  const getPrice = () => {
-    axios.get('https://alpha-vantage.p.rapidapi.com/query', {
-      headers: {
-        'x-rapidapi-host': 'alpha-vantage.p.rapidapi.com',
-        'x-rapidapi-key': '1b1e7cf330mshfe2a919e34e9dd1p12059bjsna4c74a6efb05'
-      },
-      params: {
-        function: 'GLOBAL_QUOTE',
-        symbol: stockSymbol,
-        datatype: 'json'
-      }
-    })
-      .then((results) => {
-        if (results.data['Global Quote']['05. price'] === undefined
-            || Number.isNaN(results.data['Global Quote']['05. price'])) {
-          alert('Please enter a valid stock symbol.');
-          setStockToSearch('');
-          return;
-        }
-        setStockPrice(Math.round(results.data['Global Quote']['05. price'] * 100) / 100);
-      })
-      .catch((err) => { console.log(err); });
-  };
+  // const getPrice = () => {
+  //   axios.get('https://alpha-vantage.p.rapidapi.com/query', {
+  //     headers: {
+  //       'x-rapidapi-host': 'alpha-vantage.p.rapidapi.com',
+  //       'x-rapidapi-key': '1b1e7cf330mshfe2a919e34e9dd1p12059bjsna4c74a6efb05'
+  //     },
+  //     params: {
+  //       function: 'GLOBAL_QUOTE',
+  //       symbol: stockSymbol,
+  //       datatype: 'json'
+  //     }
+  //   })
+  //     .then((results) => {
+  //       if (results.data['Global Quote']['05. price'] === undefined
+  //           || Number.isNaN(results.data['Global Quote']['05. price'])) {
+  //         alert('Please enter a valid stock symbol.');
+  //         setStockToSearch('');
+  //         return;
+  //       }
+  //       setStockPrice(Math.round(results.data['Global Quote']['05. price'] * 100) / 100);
+  //     })
+  //     .catch((err) => { console.log(err); });
+  // };
 
   const getStockPriceHistory = () => {
     axios.get('https://alpha-vantage.p.rapidapi.com/query', {
@@ -81,15 +80,11 @@ export const StockInterface = () => {
       .catch((err) => { console.log(err); });
   };
 
-  const addStockToPortfolio = () => {
-    axios.post(`${host}/api/stocks`, { stockSymbol: stockSymbol, quantity: 1 })
-      .then()
-      .catch((err) => { console.log(err); });
-  };
-
-  useEffect(() => {
-    getPrice();
-  }, [stockSymbol]);
+  // const addStockToPortfolio = () => {
+  //   axios.post(`${host}/api/stocks`, { stockSymbol: stockSymbol, quantity: 1 })
+  //     .then()
+  //     .catch((err) => { console.log(err); });
+  // };
 
   // HELPER FUNCTIONS AND CLICK HANDLERS
   const addTradeToDB = (tradeType) => {
@@ -108,32 +103,32 @@ export const StockInterface = () => {
       .catch((err) => { console.log(err); });
   };
 
-  const handleBuyStock = () => {
-    axios.get(`${host}/api/stocks/symbols`)
-      .then((results) => {
-        const stockSymbolsInPortfolio = results.data;
-        if (stockSymbolsInPortfolio.includes(stockSymbol)) {
-          incrementStockQuantity();
-        } else {
-          addStockToPortfolio();
-        }
-      })
-      .then(getPortfolio)
-      .catch((err) => { console.log(err); });
-  };
+  // const handleBuyStock = () => {
+  //   axios.get(`${host}/api/stocks/symbols`)
+  //     .then((results) => {
+  //       const stockSymbolsInPortfolio = results.data;
+  //       if (stockSymbolsInPortfolio.includes(stockSymbol)) {
+  //         incrementStockQuantity();
+  //       } else {
+  //         addStockToPortfolio();
+  //       }
+  //     })
+  //     .then(getPortfolio)
+  //     .catch((err) => { console.log(err); });
+  // };
 
   const handleStockInput = (e) => {
     setStockToSearch(e.nativeEvent.target.value);
   };
-  const handleStockSearch = () => {
-    if (stockToSearch === '') {
-      alert('Please enter a stock symbol.');
-      return;
-    }
-    getPrice();
-    setStockSymbol(stockToSearch.toUpperCase());
-    setStockToSearch('');
-  };
+  // const handleStockSearch = () => {
+  //   if (stockToSearch === '') {
+  //     alert('Please enter a stock symbol.');
+  //     return;
+  //   }
+  //   getPrice();
+  //   setStockSymbol(stockToSearch.toUpperCase());
+  //   setStockToSearch('');
+  // };
 
   const handleSellStock = () => {
     axios.put(`${host}/api/stocks`, { stockSymbol: stockObj.stockSymbol, quantity: stockObj.quantity - 1 })
@@ -173,8 +168,9 @@ export const StockInterface = () => {
 
   return (
     <StockContext.Provider value={{ setSelectedStock }}>
+        <span className="stockPortfolioTitle">Portfolio</span>
         <div className="stockInterface">
-          <h1>Stock Tracker</h1>
+          {/* <h1>Stock Tracker</h1>
           <div className="upperContainer">
             <div className="stockPriceTitle">
               {stockSymbol}
@@ -191,7 +187,7 @@ export const StockInterface = () => {
               <button type="submit" onClick={handleBuyStock}>Buy</button>
               <button type="submit">YOLO</button>
             </div>
-          </div>
+          </div> */}
           <StockPortfolio
             portfolio={portfolio}
             getPortfolio={getPortfolio}

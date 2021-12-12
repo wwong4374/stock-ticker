@@ -4,13 +4,20 @@ body {
   background: linear-gradient(hsl(127, 75%, 68%),#01FF70);
 }
 
+.app {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 /* PORTFOLIO */
 .stockInterface {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 15px;
+  margin-top: 25px;
 }
 
 .upperContainer {
@@ -67,6 +74,7 @@ input {
   font-size: 25px;
   font-weight: bold;
   margin: 10px;
+  margin-top: 120px;
 }
 
 .stockPortfolioLabelContainer,
@@ -80,6 +88,7 @@ input {
 
 .stockPortfolioLabel {
   font-weight: bold;
+  margin-top: 20px;
 }
 
 .stockTiles {
@@ -117,6 +126,7 @@ input {
 }
 
 .stockTileButton {
+  font-size: 15px;
   font-weight: bold;
   height: 35px;
   width: 100px;
@@ -129,11 +139,20 @@ input {
   align-items: center;
   list-style-type: none;
   height: 50px;
+  width: 95%;
   border: solid 2px black;
 }
 
 .navBarOption {
-  height: 20px;
-  width: 60px;
-  border: solid 1px black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 25px;
+  width: 70px;
+  border-radius: 5px;
+}
+
+li a {
+  font-size: 20px;
+  text-decoration: none;
 }

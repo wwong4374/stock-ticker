@@ -2160,10 +2160,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/index.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/index.js");
-/* harmony import */ var _portfolio_StockInterface_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./portfolio/StockInterface.jsx */ "./client/src/components/portfolio/StockInterface.jsx");
-/* harmony import */ var _portfolio_StockPortfolio_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./portfolio/StockPortfolio.jsx */ "./client/src/components/portfolio/StockPortfolio.jsx");
-/* harmony import */ var _graph_StockGraph_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./graph/StockGraph.jsx */ "./client/src/components/graph/StockGraph.jsx");
-/* harmony import */ var _navbar_NavBar_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./navbar/NavBar.jsx */ "./client/src/components/navbar/NavBar.jsx");
+/* harmony import */ var _navbar_NavBar_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./navbar/NavBar.jsx */ "./client/src/components/navbar/NavBar.jsx");
+/* harmony import */ var _portfolio_StockInterface_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./portfolio/StockInterface.jsx */ "./client/src/components/portfolio/StockInterface.jsx");
+/* harmony import */ var _research_StockResearch_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./research/StockResearch.jsx */ "./client/src/components/research/StockResearch.jsx");
+/* harmony import */ var _graph_StockGraph_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./graph/StockGraph.jsx */ "./client/src/components/graph/StockGraph.jsx");
 /* eslint-disable react/function-component-definition */
 
 /* eslint-disable import/extensions */
@@ -2177,13 +2177,16 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var App = function App() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.BrowserRouter, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_navbar_NavBar_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Routes, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.BrowserRouter, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_navbar_NavBar_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Routes, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
     path: "/",
     exact: true,
-    element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_portfolio_StockInterface_jsx__WEBPACK_IMPORTED_MODULE_1__.StockInterface, null)
+    element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_portfolio_StockInterface_jsx__WEBPACK_IMPORTED_MODULE_2__.StockInterface, null)
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
+    path: "/research",
+    element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_research_StockResearch_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], null)
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
     path: "/graph",
-    element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_graph_StockGraph_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], null)
+    element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_graph_StockGraph_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], null)
   })));
 };
 
@@ -2242,6 +2245,10 @@ var NavBar = function NavBar() {
   }, "Portfolio")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
     className: "navBarOption"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
+    to: "research"
+  }, "Research")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+    className: "navBarOption"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
     to: "/graph"
   }, "Graph")));
 };
@@ -2297,42 +2304,25 @@ var StockInterface = function StockInterface() {
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_4__.useState)('TIME_SERIES_DAILY'),
       _useState2 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_2__["default"])(_useState, 2),
       timeInterval = _useState2[0],
-      setTimeInterval = _useState2[1];
+      setTimeInterval = _useState2[1]; // const [stockSymbol, setStockSymbol] = useState('TSLA');
+  // const [stockToSearch, setStockToSearch] = useState('');
+  // const [stockPrice, setStockPrice] = useState(0);
 
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_4__.useState)(10000),
+
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_4__.useState)({}),
       _useState4 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_2__["default"])(_useState3, 2),
-      cash = _useState4[0],
-      setCash = _useState4[1];
+      stockPriceHistory = _useState4[0],
+      setStockPriceHistory = _useState4[1];
 
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_4__.useState)('TSLA'),
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_4__.useState)(null),
       _useState6 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_2__["default"])(_useState5, 2),
-      stockSymbol = _useState6[0],
-      setStockSymbol = _useState6[1];
+      selectedStock = _useState6[0],
+      setSelectedStock = _useState6[1];
 
-  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_4__.useState)(''),
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_4__.useState)([]),
       _useState8 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_2__["default"])(_useState7, 2),
-      stockToSearch = _useState8[0],
-      setStockToSearch = _useState8[1];
-
-  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_4__.useState)(0),
-      _useState10 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_2__["default"])(_useState9, 2),
-      stockPrice = _useState10[0],
-      setStockPrice = _useState10[1];
-
-  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_4__.useState)({}),
-      _useState12 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_2__["default"])(_useState11, 2),
-      stockPriceHistory = _useState12[0],
-      setStockPriceHistory = _useState12[1];
-
-  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_4__.useState)(null),
-      _useState14 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_2__["default"])(_useState13, 2),
-      selectedStock = _useState14[0],
-      setSelectedStock = _useState14[1];
-
-  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_4__.useState)([]),
-      _useState16 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_2__["default"])(_useState15, 2),
-      portfolio = _useState16[0],
-      setPortfolio = _useState16[1]; // array of stockObj objects
+      portfolio = _useState8[0],
+      setPortfolio = _useState8[1]; // array of stockObj objects
 
 
   var timeSeriesMapping = {
@@ -2340,30 +2330,29 @@ var StockInterface = function StockInterface() {
     TIME_SERIES_WEEKLY: 'Weekly Time Series'
   };
   var host = 'http://localhost:1234'; // HELPER FUNCTIONS
-
-  var getPrice = function getPrice() {
-    axios__WEBPACK_IMPORTED_MODULE_3___default().get('https://alpha-vantage.p.rapidapi.com/query', {
-      headers: {
-        'x-rapidapi-host': 'alpha-vantage.p.rapidapi.com',
-        'x-rapidapi-key': '1b1e7cf330mshfe2a919e34e9dd1p12059bjsna4c74a6efb05'
-      },
-      params: {
-        "function": 'GLOBAL_QUOTE',
-        symbol: stockSymbol,
-        datatype: 'json'
-      }
-    }).then(function (results) {
-      if (results.data['Global Quote']['05. price'] === undefined || Number.isNaN(results.data['Global Quote']['05. price'])) {
-        alert('Please enter a valid stock symbol.');
-        setStockToSearch('');
-        return;
-      }
-
-      setStockPrice(Math.round(results.data['Global Quote']['05. price'] * 100) / 100);
-    })["catch"](function (err) {
-      console.log(err);
-    });
-  };
+  // const getPrice = () => {
+  //   axios.get('https://alpha-vantage.p.rapidapi.com/query', {
+  //     headers: {
+  //       'x-rapidapi-host': 'alpha-vantage.p.rapidapi.com',
+  //       'x-rapidapi-key': '1b1e7cf330mshfe2a919e34e9dd1p12059bjsna4c74a6efb05'
+  //     },
+  //     params: {
+  //       function: 'GLOBAL_QUOTE',
+  //       symbol: stockSymbol,
+  //       datatype: 'json'
+  //     }
+  //   })
+  //     .then((results) => {
+  //       if (results.data['Global Quote']['05. price'] === undefined
+  //           || Number.isNaN(results.data['Global Quote']['05. price'])) {
+  //         alert('Please enter a valid stock symbol.');
+  //         setStockToSearch('');
+  //         return;
+  //       }
+  //       setStockPrice(Math.round(results.data['Global Quote']['05. price'] * 100) / 100);
+  //     })
+  //     .catch((err) => { console.log(err); });
+  // };
 
   var getStockPriceHistory = function getStockPriceHistory() {
     axios__WEBPACK_IMPORTED_MODULE_3___default().get('https://alpha-vantage.p.rapidapi.com/query', {
@@ -2394,20 +2383,13 @@ var StockInterface = function StockInterface() {
     })["catch"](function (err) {
       console.log(err);
     });
-  };
+  }; // const addStockToPortfolio = () => {
+  //   axios.post(`${host}/api/stocks`, { stockSymbol: stockSymbol, quantity: 1 })
+  //     .then()
+  //     .catch((err) => { console.log(err); });
+  // };
+  // HELPER FUNCTIONS AND CLICK HANDLERS
 
-  var addStockToPortfolio = function addStockToPortfolio() {
-    axios__WEBPACK_IMPORTED_MODULE_3___default().post("".concat(host, "/api/stocks"), {
-      stockSymbol: stockSymbol,
-      quantity: 1
-    }).then()["catch"](function (err) {
-      console.log(err);
-    });
-  };
-
-  (0,react__WEBPACK_IMPORTED_MODULE_4__.useEffect)(function () {
-    getPrice();
-  }, [stockSymbol]); // HELPER FUNCTIONS AND CLICK HANDLERS
 
   var addTradeToDB = function addTradeToDB(tradeType) {
     axios__WEBPACK_IMPORTED_MODULE_3___default().post();
@@ -2429,36 +2411,33 @@ var StockInterface = function StockInterface() {
     })["catch"](function (err) {
       console.log(err);
     });
-  };
+  }; // const handleBuyStock = () => {
+  //   axios.get(`${host}/api/stocks/symbols`)
+  //     .then((results) => {
+  //       const stockSymbolsInPortfolio = results.data;
+  //       if (stockSymbolsInPortfolio.includes(stockSymbol)) {
+  //         incrementStockQuantity();
+  //       } else {
+  //         addStockToPortfolio();
+  //       }
+  //     })
+  //     .then(getPortfolio)
+  //     .catch((err) => { console.log(err); });
+  // };
 
-  var handleBuyStock = function handleBuyStock() {
-    axios__WEBPACK_IMPORTED_MODULE_3___default().get("".concat(host, "/api/stocks/symbols")).then(function (results) {
-      var stockSymbolsInPortfolio = results.data;
-
-      if (stockSymbolsInPortfolio.includes(stockSymbol)) {
-        incrementStockQuantity();
-      } else {
-        addStockToPortfolio();
-      }
-    }).then(getPortfolio)["catch"](function (err) {
-      console.log(err);
-    });
-  };
 
   var handleStockInput = function handleStockInput(e) {
     setStockToSearch(e.nativeEvent.target.value);
-  };
+  }; // const handleStockSearch = () => {
+  //   if (stockToSearch === '') {
+  //     alert('Please enter a stock symbol.');
+  //     return;
+  //   }
+  //   getPrice();
+  //   setStockSymbol(stockToSearch.toUpperCase());
+  //   setStockToSearch('');
+  // };
 
-  var handleStockSearch = function handleStockSearch() {
-    if (stockToSearch === '') {
-      alert('Please enter a stock symbol.');
-      return;
-    }
-
-    getPrice();
-    setStockSymbol(stockToSearch.toUpperCase());
-    setStockToSearch('');
-  };
 
   var handleSellStock = function handleSellStock() {
     axios__WEBPACK_IMPORTED_MODULE_3___default().put("".concat(host, "/api/stocks"), {
@@ -2511,28 +2490,11 @@ var StockInterface = function StockInterface() {
     value: {
       setSelectedStock: setSelectedStock
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("span", {
+    className: "stockPortfolioTitle"
+  }, "Portfolio"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("div", {
     className: "stockInterface"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("h1", null, "Stock Tracker"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("div", {
-    className: "upperContainer"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("div", {
-    className: "stockPriceTitle"
-  }, stockSymbol, ':', ' ', '$', (Math.round(stockPrice * 100) / 100).toLocaleString()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("div", {
-    className: "stockSearch"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("input", {
-    placeholder: "Symbol...",
-    onChange: handleStockInput
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("button", {
-    type: "submit",
-    onClick: handleStockSearch
-  }, "Search")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("div", {
-    className: "buttons"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("button", {
-    type: "submit",
-    onClick: handleBuyStock
-  }, "Buy"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement("button", {
-    type: "submit"
-  }, "YOLO"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement(_StockPortfolio_jsx__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_4__.createElement(_StockPortfolio_jsx__WEBPACK_IMPORTED_MODULE_6__["default"], {
     portfolio: portfolio,
     getPortfolio: getPortfolio,
     incrementStockQuantity: incrementStockQuantity,
@@ -2573,13 +2535,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _StockTile_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./StockTile.jsx */ "./client/src/components/portfolio/StockTile.jsx");
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _StockTile_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./StockTile.jsx */ "./client/src/components/portfolio/StockTile.jsx");
+
+
 /* eslint-disable arrow-body-style */
 
 /* eslint-disable react/function-component-definition */
 
 /* eslint-disable comma-dangle */
+
 
 
 
@@ -2589,37 +2557,63 @@ var StockPortfolio = function StockPortfolio(_ref) {
       incrementStockQuantity = _ref.incrementStockQuantity,
       setStockSymbol = _ref.setStockSymbol,
       host = _ref.host;
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    getPortfolio();
-  }, []); // TODO: Implement getPortfolioValue function
+
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(10000),
+      _useState2 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState, 2),
+      cash = _useState2[0],
+      setCash = _useState2[1];
+
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)([]),
+      _useState4 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState3, 2),
+      selectedStocks = _useState4[0],
+      setSelectedStocks = _useState4[1]; // TODO: Implement getPortfolioValue function
+
 
   var getPortfolioValue = function getPortfolioValue() {
     var portfolioValue = 0;
     portfolio.forEach(function (stockObj) {});
   };
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+  var handleBuyStock = function handleBuyStock() {
+    axios__WEBPACK_IMPORTED_MODULE_1___default().get("".concat(host, "/api/stocks/symbols")).then(function (results) {
+      var stockSymbolsInPortfolio = results.data;
+
+      if (stockSymbolsInPortfolio.includes(stockSymbol)) {
+        incrementStockQuantity();
+      } else {
+        addStockToPortfolio();
+      }
+    }).then(function () {
+      getPortfolio;
+    })["catch"](function (err) {
+      console.log(err);
+    });
+  };
+
+  (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function () {
+    getPortfolio();
+  }, []);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", {
     className: "stockPortfolio"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
-    className: "stockPortfolioTitle"
-  }, "Portfolio"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", {
     className: "stockPortfolioLabelContainer"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("span", {
     className: "stockPortfolioLabel"
-  }, "Company"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
+  }, "Company"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("span", {
     className: "stockPortfolioLabel"
-  }, "Quantity"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
+  }, "Quantity"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("span", {
     className: "stockPortfolioLabel"
-  }, "Price"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
+  }, "Price"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("span", {
     className: "stockPortfolioLabel"
-  }, "Market Value")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+  }, "Market Value")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", {
     className: "stockTiles"
   }, portfolio.map(function (stockObj) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_StockTile_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(_StockTile_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
       stockObj: stockObj,
-      getPortfolio: getPortfolio,
-      incrementStockQuantity: incrementStockQuantity,
-      setStockSymbol: setStockSymbol,
+      selectedStocks: selectedStocks // getPortfolio={getPortfolio}
+      // incrementStockQuantity={incrementStockQuantity}
+      // setStockSymbol={setStockSymbol}
+      ,
       host: host,
       key: stockObj.stockSymbol
     });
@@ -2661,9 +2655,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var StockTile = function StockTile(_ref) {
   var stockObj = _ref.stockObj,
-      getPortfolio = _ref.getPortfolio,
-      incrementStockQuantity = _ref.incrementStockQuantity,
-      setStockSymbol = _ref.setStockSymbol,
+      selectedStocks = _ref.selectedStocks,
       host = _ref.host;
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)('stockTile'),
@@ -2674,12 +2666,9 @@ var StockTile = function StockTile(_ref) {
   var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(0.00),
       _useState4 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState3, 2),
       stockPrice = _useState4[0],
-      setStockPrice = _useState4[1];
+      setStockPrice = _useState4[1]; // const [stockTileClicked, setStockTileClicked] = useState(false);
+  // HELPER FUNCTIONS
 
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(false),
-      _useState6 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState5, 2),
-      stockTileClicked = _useState6[0],
-      setStockTileClicked = _useState6[1];
 
   var getStockPrice = function getStockPrice() {
     axios__WEBPACK_IMPORTED_MODULE_1___default().get("".concat(host, "/api/stocks/").concat(stockObj.stockSymbol, "/price")).then(function (results) {
@@ -2699,7 +2688,7 @@ var StockTile = function StockTile(_ref) {
           setClassName('stockTileClicked');
         } else {
           setClassName('stockTile');
-        } // Stock();
+        } // TODO: Add this stock to selectedStocks array
 
       },
       role: "button",
@@ -2719,6 +2708,103 @@ var StockTile = function StockTile(_ref) {
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (StockTile);
+
+/***/ }),
+
+/***/ "./client/src/components/research/StockResearch.jsx":
+/*!**********************************************************!*\
+  !*** ./client/src/components/research/StockResearch.jsx ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+/* eslint-disable comma-dangle */
+
+/* eslint-disable react/function-component-definition */
+
+/* eslint-disable arrow-body-style */
+
+
+
+var StockResearch = function StockResearch() {
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)('TSLA'),
+      _useState2 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState, 2),
+      stockSymbol = _useState2[0],
+      setStockSymbol = _useState2[1];
+
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(''),
+      _useState4 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState3, 2),
+      stockToSearch = _useState4[0],
+      setStockToSearch = _useState4[1];
+
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(0),
+      _useState6 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState5, 2),
+      stockPrice = _useState6[0],
+      setStockPrice = _useState6[1]; // HELPER FUNCTIONS
+
+
+  var getPrice = function getPrice() {
+    axios__WEBPACK_IMPORTED_MODULE_1___default().get('https://alpha-vantage.p.rapidapi.com/query', {
+      headers: {
+        'x-rapidapi-host': 'alpha-vantage.p.rapidapi.com',
+        'x-rapidapi-key': '1b1e7cf330mshfe2a919e34e9dd1p12059bjsna4c74a6efb05'
+      },
+      params: {
+        "function": 'GLOBAL_QUOTE',
+        symbol: stockSymbol,
+        datatype: 'json'
+      }
+    }).then(function (results) {
+      if (results.data['Global Quote']['05. price'] === undefined || Number.isNaN(results.data['Global Quote']['05. price'])) {
+        alert('Please enter a valid stock symbol.');
+        setStockToSearch('');
+        return;
+      }
+
+      setStockPrice(Math.round(results.data['Global Quote']['05. price'] * 100) / 100);
+    })["catch"](function (err) {
+      console.log(err);
+    });
+  };
+
+  var addStockToPortfolio = function addStockToPortfolio() {
+    axios__WEBPACK_IMPORTED_MODULE_1___default().post("".concat(host, "/api/stocks"), {
+      stockSymbol: stockSymbol,
+      quantity: 1
+    }).then()["catch"](function (err) {
+      console.log(err);
+    });
+  };
+
+  var handleStockSearch = function handleStockSearch() {
+    if (stockToSearch === '') {
+      alert('Please enter a stock symbol.');
+      return;
+    }
+
+    getPrice();
+    setStockSymbol(stockToSearch.toUpperCase());
+    setStockToSearch('');
+  }; // USE EFFECT
+
+
+  (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function () {
+    getPrice();
+  }, [stockSymbol]);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("h1", null, "Stock Research"));
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (StockResearch);
 
 /***/ }),
 
