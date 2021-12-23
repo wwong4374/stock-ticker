@@ -6,9 +6,12 @@ import React, { useEffect, useState } from 'react';
 import StockTile from './StockTile.jsx';
 
 const StockPortfolio = ({ portfolio, getPortfolio, incrementStockQuantity, setStockSymbol, host }) => {
+  // VARIABLES
   const [cash, setCash] = useState(10000);
   const [selectedStocks, setSelectedStocks] = useState([]);
+  const [selectedStocksString, setSelectedStocksString] = useState('');
 
+  // FUNCTIONS
   const getPortfolioValue = () => { // TODO: Implement this function
     let portfolioValue = 0;
     portfolio.forEach((stockObj) => {});
@@ -30,6 +33,7 @@ const StockPortfolio = ({ portfolio, getPortfolio, incrementStockQuantity, setSt
       .catch((err) => { console.log(err); });
   };
 
+  // TODO: Implement this function
   const handleBuySelectedStocks = () => {
     selectedStocks.forEach();
   };
@@ -49,7 +53,7 @@ const StockPortfolio = ({ portfolio, getPortfolio, incrementStockQuantity, setSt
   };
 
   const handleSellSelectedStocks = () => {
-    selectedStocks.forEach();
+    selectedStocks.forEach((stock) => {});
   };
 
   const handleSellStock = (stockObj) => {
@@ -72,8 +76,10 @@ const StockPortfolio = ({ portfolio, getPortfolio, incrementStockQuantity, setSt
       .catch((err) => { console.log(err); });
   };
 
+  // USEEFFECT
   useEffect(() => { getPortfolio(); }, []);
 
+  // COMPONENT
   return (
     <>
       <div className="stockPortfolio">
@@ -89,6 +95,9 @@ const StockPortfolio = ({ portfolio, getPortfolio, incrementStockQuantity, setSt
               <StockTile
                 stockObj={stockObj}
                 selectedStocks={selectedStocks}
+                setSelectedStocks={setSelectedStocks}
+                selectedStocksString={selectedStocksString}
+                setSelectedStocksString={setSelectedStocksString}
                 host={host}
                 key={stockObj.stockSymbol}
               />
@@ -96,8 +105,12 @@ const StockPortfolio = ({ portfolio, getPortfolio, incrementStockQuantity, setSt
           })}
         </div>
       </div>
+      <div>
+        {/* Selected Stocks:
+        {' '}
+        {selectedStocksString} */}
+      </div>
       <div className="stockTileButtons">
-        {/* <button type="button" className="stockTileButton" onClick={() => { incrementStockQuantity(stockObj.stockSymbol); }}>Buy</button> */}
         <button type="button" className="stockTileButton" onClick={handleBuySelectedStocks}>Buy</button>
         <button type="button" className="stockTileButton" onClick={handleSellSelectedStocks}>Sell</button>
         <button type="button" className="stockTileButton" onClick={updateStockPrice}>Quote</button>

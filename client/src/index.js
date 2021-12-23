@@ -1,8 +1,15 @@
+/* eslint-disable comma-dangle */
 /* eslint-disable import/extensions */
 /* eslint-disable react/jsx-filename-extension */
 /* eslint-disable import/no-unresolved */
 import React from 'react';
-import ReactDom from 'react-dom';
-import App from './components/App.jsx';
+import ReactDOM from 'react-dom';
+import { HashRouter } from 'react-router-dom';
+import { App } from './components/App.jsx';
 
-ReactDom.render(<App />, document.getElementById('app'));
+ReactDOM.render(
+  <HashRouter>
+    <App />
+  </HashRouter>,
+  document.getElementById('app')
+);

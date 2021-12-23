@@ -2,9 +2,11 @@
 /* eslint-disable react/function-component-definition */
 /* eslint-disable arrow-body-style */
 import axios from 'axios';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { AppContext } from '../App';
 
 const StockResearch = () => {
+  const { host } = useContext(AppContext);
   const [stockSymbol, setStockSymbol] = useState('TSLA');
   const [stockToSearch, setStockToSearch] = useState('');
   const [stockPrice, setStockPrice] = useState(0);
@@ -34,10 +36,26 @@ const StockResearch = () => {
       .catch((err) => { console.log(err); });
   };
 
-  const addStockToPortfolio = () => {
-    axios.post(`${host}/api/stocks`, { stockSymbol: stockSymbol, quantity: 1 })
-      .then()
+  const handleBuyStock = () => {
+    let today = new Date();
+    const dd = String(today.getDate()).padStart(2, '0');
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const yyyy = today.getFullYear();
+
+    today = `${mm}/${dd}/${yyyy}`;
+
+    axios.post('/api/trades', {
+      symbol: stockSymbol,
+      quantity: 1,
+      price: stockPrice,
+      date: today
+    })
+      .then((results) => { })
       .catch((err) => { console.log(err); });
+  };
+
+  const handleStockInput = (e) => {
+    setStockToSearch(e.nativeEvent.target.value);
   };
 
   const handleStockSearch = () => {
@@ -56,9 +74,9 @@ const StockResearch = () => {
   }, [stockSymbol]);
 
   return (
-    <div>
+    <div className="stockResearchContainer">
       <h1>Stock Research</h1>
-      {/* <div className="upperContainer">
+      <div className="upperContainer">
         <div className="stockPriceTitle">
           {stockSymbol}
           {':'}
@@ -74,7 +92,7 @@ const StockResearch = () => {
           <button type="submit" onClick={handleBuyStock}>Buy</button>
           <button type="submit">YOLO</button>
         </div>
-      </div> */}
+      </div>
     </div>
   );
 };

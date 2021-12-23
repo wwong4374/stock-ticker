@@ -1,3 +1,4 @@
+/* GENERAL */
 html,
 body {
   height: 100%;
@@ -9,33 +10,6 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-
-/* PORTFOLIO */
-.stockInterface {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-top: 25px;
-}
-
-.upperContainer {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 500px;
-  gap: 20px;
-}
-
-.stockPriceTitle {
-  font-weight: bold;
-  font-size: 30px;
-}
-
-.stockSearch {
-  flex-direction: column;
 }
 
 button,
@@ -58,6 +32,66 @@ input {
   cursor: auto;
 }
 
+/* NAVBAR */
+.navBar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  list-style-type: none;
+  height: 50px;
+  width: 95%;
+  border: solid 2px black;
+}
+
+.navBarOption {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 25px;
+  width: 70px;
+  border-radius: 5px;
+}
+
+li a {
+  font-size: 20px;
+  text-decoration: none;
+}
+
+/* INTERFACE */
+.stockInterface {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 25px;
+}
+
+.stockPriceTitle {
+  font-weight: bold;
+  font-size: 30px;
+}
+
+/* STOCK RESEARCH */
+.stockResearchContainer {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+}
+.upperContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 500px;
+  gap: 20px;
+}
+
+.stockSearch {
+  flex-direction: column;
+}
+
+/* PORTFOLIO */
 .stockPortfolio {
   display: flex;
   flex-direction: column;
@@ -130,29 +164,4 @@ input {
   font-weight: bold;
   height: 35px;
   width: 130px;
-}
-
-/* NAVBAR */
-.navBar {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  list-style-type: none;
-  height: 50px;
-  width: 95%;
-  border: solid 2px black;
-}
-
-.navBarOption {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 25px;
-  width: 70px;
-  border-radius: 5px;
-}
-
-li a {
-  font-size: 20px;
-  text-decoration: none;
 }
