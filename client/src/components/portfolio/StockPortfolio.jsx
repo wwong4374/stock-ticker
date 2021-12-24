@@ -89,8 +89,8 @@ const StockPortfolio = () => {
           <span className="stockPortfolioLabel">Company</span>
           <span className="stockPortfolioLabel">Quantity</span>
           <span className="stockPortfolioLabel">Cost Basis</span>
-          <span className="stockPortfolioLabel">Market Value</span>
-          <span className="stockPortfolioLabel">Price</span>
+          <span className="stockPortfolioLabel">Current Value</span>
+          <span className="stockPortfolioLabel">Current Price</span>
         </div>
         <div className="stockTiles">
           {portfolio.map((stockObj) => {
