@@ -34,7 +34,8 @@ export const StockInterface = () => {
 
   const getPortfolio = () => {
     axios.get('/api/portfolio')
-      .then((results) => { console.log(results.data); })
+      .then((results) => { setPortfolio([...results.data]); })
+      .then(() => { console.log(portfolio); })
       .catch((err) => { console.log(err); });
   };
 
@@ -84,7 +85,7 @@ export const StockInterface = () => {
   const handleSellAllStock = () => {
     axios.delete(`${host}/api/stocks/${stockObj.stockSymbol}`)
       .then(() => { setStockSymbol('TSLA'); })
-      .then((results) => { getSymbols(); })
+      // .then((results) => { getSymbols(); })
       .catch((err) => { console.log(err); });
   };
 

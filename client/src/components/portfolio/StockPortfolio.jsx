@@ -88,8 +88,9 @@ const StockPortfolio = () => {
         <div className="stockPortfolioLabelContainer">
           <span className="stockPortfolioLabel">Company</span>
           <span className="stockPortfolioLabel">Quantity</span>
-          <span className="stockPortfolioLabel">Price</span>
+          <span className="stockPortfolioLabel">Cost Basis</span>
           <span className="stockPortfolioLabel">Market Value</span>
+          <span className="stockPortfolioLabel">Price</span>
         </div>
         <div className="stockTiles">
           {portfolio.map((stockObj) => {
@@ -100,7 +101,7 @@ const StockPortfolio = () => {
                 setSelectedStocks={setSelectedStocks}
                 selectedStocksString={selectedStocksString}
                 setSelectedStocksString={setSelectedStocksString}
-                key={`${stockObj.stockSymbol}-${stockObj.date}`}
+                key={`${stockObj.symbol}-${stockObj.date}`}
               />
             );
           })}

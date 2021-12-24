@@ -42,7 +42,7 @@ app.get('/api/portfolio', (req, res) => {
     `SELECT DISTINCT
       symbol,
       (SELECT SUM(quantity) FROM trades AS b WHERE b.symbol=a.symbol) AS quantity,
-      (SELECT SUM(quantity * price) FROM trades AS c WHERE c.symbol=a.symbol) AS costBasis
+      (SELECT ROUND(SUM(quantity * price), 2) FROM trades AS c WHERE c.symbol=a.symbol) AS costBasis
     FROM trades AS a`,
     (err, data) => {
       if (err) { console.log(err); }

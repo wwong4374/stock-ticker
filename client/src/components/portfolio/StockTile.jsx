@@ -50,10 +50,11 @@ const StockTile = ({
             tabIndex={0}
           >
             <div className="stockTileLabels">
-              <div className="stockSymbol">{stockObj.stockSymbol}</div>
+              <div className="stockSymbol">{stockObj.symbol}</div>
               <div className="stockQuantity">{stockObj.quantity}</div>
-              <div className="stockPrice">{`$${stockPrice}`}</div>
+              <div className="stockCostBasis">{`$${stockObj.costBasis}`}</div>
               <div className="marketValue">{`$${(stockObj.quantity * stockPrice).toLocaleString()}`}</div>
+              <div className="stockPrice">{`$${stockPrice}`}</div>
             </div>
           </div>
 
