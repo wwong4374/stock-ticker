@@ -12,6 +12,13 @@ CREATE TABLE trades (
   date DATE
 );
 
+CREATE TABLE prices {
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  symbol VARCHAR(10),
+  latestPrice FLOAT,
+  FOREIGN KEY (symbol) REFERENCES trades(symbol)
+}
+
 -- ************************************************************************************
 
 -- CREATE TABLE stocks (

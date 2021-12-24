@@ -4,15 +4,13 @@
 /* eslint-disable react/function-component-definition */
 import axios from 'axios';
 import React, { useState } from 'react';
-import { StockContext } from './StockInterface';
+import { StockInterfaceContext } from './StockInterface';
 
 const StockTile = ({
   stockObj,
   selectedStocks,
-  setSelectedStocks,
-  selectedStocksString,
-  setSelectedStocksString,
-  host }) => {
+  setSelectedStocks
+}) => {
   const [className, setClassName] = useState('stockTile');
   const [stockPrice, setStockPrice] = useState(0.00);
 
@@ -34,10 +32,10 @@ const StockTile = ({
   //   setSelectedStocksString(stocksToDisplay);
   // }
 
-  getStockPrice();
+  // getStockPrice();
 
   return (
-    <StockContext.Consumer>
+    <StockInterfaceContext.Consumer>
       {() => {
         return (
           <div
@@ -46,12 +44,6 @@ const StockTile = ({
               if (className === 'stockTile') {
                 setClassName('stockTileClicked');
                 setSelectedStocks([stockObj, ...selectedStocks]);
-                // updateStocksToDisplay();
-                // if (selectedStocksString.length === 0) {
-                //   setSelectedStocksString(stockObj.stockSymbol);
-                // } else {
-                //   setSelectedStocksString(selectedStocksString + ', ' + stockObj.stockSymbol);
-                // }
               } else { setClassName('stockTile'); }
             }}
             role="button"
@@ -67,7 +59,7 @@ const StockTile = ({
 
         );
       }}
-    </StockContext.Consumer>
+    </StockInterfaceContext.Consumer>
   );
 };
 

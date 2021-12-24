@@ -5,17 +5,16 @@
 /* eslint-disable react/function-component-definition */
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
-import helperFunctions from '../../helperFunctions.js';
 import { AppContext } from '../App.jsx';
 import StockPortfolio from './StockPortfolio.jsx';
 
-export const StockContext = React.createContext();
+export const StockInterfaceContext = React.createContext();
 
 export const StockInterface = () => {
   const { host } = useContext(AppContext);
   const [timeInterval, setTimeInterval] = useState('TIME_SERIES_DAILY');
-  const [stockPriceHistory, setStockPriceHistory] = useState({});
   const [selectedStock, setSelectedStock] = useState(null);
+  const [tickerSymbols, setTickerSymbols] = useState([]);
   const [portfolio, setPortfolio] = useState([]); // array of stockObj objects
   const timeSeriesMapping = {
     TIME_SERIES_DAILY: 'Time Series (Daily)',
@@ -23,57 +22,19 @@ export const StockInterface = () => {
   };
 
   // HELPER FUNCTIONS
-  const getStockPriceHistory = () => {
-    axios.get('https://alpha-vantage.p.rapidapi.com/query', {
-      headers: {
-        'x-rapidapi-host': 'alpha-vantage.p.rapidapi.com',
-        'x-rapidapi-key': '1b1e7cf330mshfe2a919e34e9dd1p12059bjsna4c74a6efb05'
-      },
-      params: {
-        function: timeInterval,
-        symbol: stockSymbol,
-        datatype: 'json',
-        outputsize: 'compact'
-      }
-    })
+  const getSymbols = () => {
+    const symbols = [];
+    axios.get('/api/portfolio/symbols')
       .then((results) => {
-        const timeSeriesKey = timeSeriesMapping[timeInterval];
-        const priceHistory = results.data[timeSeriesKey];
-        setStockPriceHistory({ ...priceHistory });
-        getPrice();
+        results.data.forEach((symbolObj) => { symbols.push(symbolObj); });
       })
+      .then(() => { setTickerSymbols(symbols); })
       .catch((err) => { console.log(err); });
   };
 
   const getPortfolio = () => {
-    axios.get(`${host}/api/stocks`)
-      .then((results) => {
-        const data = results.data;
-        setPortfolio([...data]);
-      })
-      .catch((err) => { console.log(err); });
-  };
-
-  // const addStockToPortfolio = () => {
-  //   axios.post(`${host}/api/stocks`, { stockSymbol: stockSymbol, quantity: 1 })
-  //     .then()
-  //     .catch((err) => { console.log(err); });
-  // };
-
-  // HELPER FUNCTIONS AND CLICK HANDLERS
-  const addTradeToDB = (tradeType) => {
-    axios.post();
-  };
-
-  const incrementStockQuantity = () => {
-    let quantity = 0;
-    axios.get(`${host}/api/stocks/${stockSymbol}/quantity`)
-      .then((results) => { quantity = results.data.quantity; })
-      .then(() => {
-        axios.put(`${host}/api/stocks`, { stockSymbol: stockSymbol, quantity: quantity + 1 })
-          .then((results) => { getPortfolio(); })
-          .catch((err) => { console.log(err); });
-      })
+    axios.get('/api/portfolio')
+      .then((results) => { console.log(results.data); })
       .catch((err) => { console.log(err); });
   };
 
@@ -87,7 +48,7 @@ export const StockInterface = () => {
           addStockToPortfolio();
         }
       })
-      .then(getPortfolio)
+      .then(getSymbols)
       .catch((err) => { console.log(err); });
   };
 
@@ -100,7 +61,7 @@ export const StockInterface = () => {
           })
           .catch((err) => { console.log(err); });
       })
-      .then((results) => { getPortfolio(); })
+      .then((results) => { getSymbols(); })
       .catch((err) => { console.log(err); });
   };
 
@@ -123,21 +84,20 @@ export const StockInterface = () => {
   const handleSellAllStock = () => {
     axios.delete(`${host}/api/stocks/${stockObj.stockSymbol}`)
       .then(() => { setStockSymbol('TSLA'); })
-      .then((results) => { getPortfolio(); })
+      .then((results) => { getSymbols(); })
       .catch((err) => { console.log(err); });
   };
 
   return (
-    <StockContext.Provider value={{ setSelectedStock }}>
+    <StockInterfaceContext.Provider value={{
+      setSelectedStock,
+      portfolio,
+      getPortfolio
+      }}>
       <span className="stockPortfolioTitle">Portfolio</span>
       <div className="stockInterface">
-        <StockPortfolio
-          portfolio={portfolio}
-          getPortfolio={getPortfolio}
-          incrementStockQuantity={incrementStockQuantity}
-          host={host}
-        />
+        <StockPortfolio />
       </div>
-    </StockContext.Provider>
+    </StockInterfaceContext.Provider>
   );
 };

@@ -2,11 +2,13 @@
 /* eslint-disable react/function-component-definition */
 /* eslint-disable comma-dangle */
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import StockTile from './StockTile.jsx';
+import { StockInterface, StockInterfaceContext } from './StockInterface.jsx';
 
-const StockPortfolio = ({ portfolio, getPortfolio, incrementStockQuantity, setStockSymbol, host }) => {
+const StockPortfolio = () => {
   // VARIABLES
+  const { portfolio, getPortfolio } = useContext(StockInterfaceContext);
   const [cash, setCash] = useState(10000);
   const [selectedStocks, setSelectedStocks] = useState([]);
   const [selectedStocksString, setSelectedStocksString] = useState('');
@@ -39,17 +41,17 @@ const StockPortfolio = ({ portfolio, getPortfolio, incrementStockQuantity, setSt
   };
 
   const handleBuyStock = () => {
-    axios.get(`${host}/api/stocks/symbols`)
-      .then((results) => {
-        const stockSymbolsInPortfolio = results.data;
-        if (stockSymbolsInPortfolio.includes(stockSymbol)) {
-          incrementStockQuantity();
-        } else {
-          addStockToPortfolio();
-        }
-      })
-      .then(getPortfolio)
-      .catch((err) => { console.log(err); });
+    // axios.get(`${host}/api/stocks/symbols`)
+    //   .then((results) => {
+    //     const stockSymbolsInPortfolio = results.data;
+    //     if (stockSymbolsInPortfolio.includes(stockSymbol)) {
+    //       incrementStockQuantity();
+    //     } else {
+    //       addStockToPortfolio();
+    //     }
+    //   })
+    //   .then(getPortfolio)
+    //   .catch((err) => { console.log(err); });
   };
 
   const handleSellSelectedStocks = () => {
@@ -57,23 +59,23 @@ const StockPortfolio = ({ portfolio, getPortfolio, incrementStockQuantity, setSt
   };
 
   const handleSellStock = (stockObj) => {
-    axios.put(`${host}/api/stocks`, { stockSymbol: stockObj.stockSymbol, quantity: stockObj.quantity - 1 })
-      .then(() => {
-        axios.get(`${host}/api/stocks/${stockObj.stockSymbol}/quantity`)
-          .then((results) => {
-            if (results.data.quantity === 0) { handleSellAllShares(); }
-          })
-          .catch((err) => { console.log(err); });
-      })
-      .then((results) => { getPortfolio(); })
-      .catch((err) => { console.log(err); });
+    // axios.put(`${host}/api/stocks`, { stockSymbol: stockObj.stockSymbol, quantity: stockObj.quantity - 1 })
+    //   .then(() => {
+    //     axios.get(`${host}/api/stocks/${stockObj.stockSymbol}/quantity`)
+    //       .then((results) => {
+    //         if (results.data.quantity === 0) { handleSellAllShares(); }
+    //       })
+    //       .catch((err) => { console.log(err); });
+    //   })
+    //   .then((results) => { getPortfolio(); })
+    //   .catch((err) => { console.log(err); });
   };
 
   const handleSellAllShares = (stockObj) => {
-    axios.delete(`${host}/api/stocks/${stockObj.stockSymbol}`)
-      .then(() => { setStockSymbol('TSLA'); })
-      .then((results) => { getPortfolio(); })
-      .catch((err) => { console.log(err); });
+    // axios.delete(`${host}/api/stocks/${stockObj.stockSymbol}`)
+    //   .then(() => { setStockSymbol('TSLA'); })
+    //   .then((results) => { getPortfolio(); })
+    //   .catch((err) => { console.log(err); });
   };
 
   // USEEFFECT
@@ -98,17 +100,11 @@ const StockPortfolio = ({ portfolio, getPortfolio, incrementStockQuantity, setSt
                 setSelectedStocks={setSelectedStocks}
                 selectedStocksString={selectedStocksString}
                 setSelectedStocksString={setSelectedStocksString}
-                host={host}
-                key={stockObj.stockSymbol}
+                key={`${stockObj.stockSymbol}-${stockObj.date}`}
               />
             );
           })}
         </div>
-      </div>
-      <div>
-        {/* Selected Stocks:
-        {' '}
-        {selectedStocksString} */}
       </div>
       <div className="stockTileButtons">
         <button type="button" className="stockTileButton" onClick={handleBuySelectedStocks}>Buy</button>

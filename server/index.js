@@ -28,9 +28,30 @@ app.post('/api/trades', (req, res) => {
   );
 });
 
+// Get unique stock symbols in portfolio
+app.get('/api/portfolio/symbols', (req, res) => {
+  db.query('SELECT DISTINCT symbol FROM trades', (err, data) => {
+    if (err) { console.log(err); }
+    res.send(data);
+  });
+});
+
 // Render portfolio
 app.get('/api/portfolio', (req, res) => {
-  db.query('SELECT ');
+  db.query(
+    `SELECT JSON_ARRAYAGG(
+      JSON_OBJECT(
+        'symbol', a.symbol,
+        'quantity', (SELECT SUM(b.quantity) FROM trades AS b WHERE b.symbol=a.symbol)
+      )
+    ) FROM trades AS a`,
+    (err, data) => {
+      if (err) { console.log(err); }
+      const key = Object.keys(data[0])[0];
+      console.log(data[0][key]);
+      res.send(data);
+    }
+  );
 });
 
 app.listen(1234, () => {
