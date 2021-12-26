@@ -28,16 +28,8 @@ app.get('/api/prices', (req, res) => {
 // Add a new trade to trades table
 app.post('/api/trades', (req, res) => {
   const { symbol, quantity, date } = req.body;
-  // db.query(
-  //   `INSERT INTO trades (id, symbol, quantity, date) VALUES (DEFAULT, ?, ?, STR_TO_DATE('${date}', \'%m/%d/%Y\'))`,
-  //   [symbol, quantity],
-  //   (err, data) => {
-  //     if (err) { console.log(err); }
-  //     res.sendStatus(201);
-  //   }
-  // );
   db.query(
-    'INSERT INTO trades (id, symbol, quantity, price, date) VALUES (DEFAULT, ?, ?, STR_TO_DATE(?, \'%m/%d/%Y\'))',
+    'INSERT INTO trades (id, symbol, quantity, date) VALUES (DEFAULT, ?, ?, STR_TO_DATE(?, \'%m/%d/%Y\'))',
     [symbol, quantity, date],
     (err, data) => {
       if (err) { console.log(err); }

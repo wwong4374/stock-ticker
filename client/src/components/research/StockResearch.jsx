@@ -44,13 +44,13 @@ const StockResearch = () => {
 
     today = `${mm}/${dd}/${yyyy}`;
 
-    // axios.post('/api/trades', {
-    //   symbol: stockSymbol,
-    //   quantity: 1,
-    //   date: today
-    // })
-    //   .then()
-    //   .catch((err) => { console.log(err); });
+    axios.post('/api/trades', {
+      symbol: stockSymbol,
+      quantity: 1,
+      date: today
+    })
+      .then()
+      .catch((err) => { console.log(err); });
 
     axios.post('/api/prices', {
       symbol: stockSymbol,
