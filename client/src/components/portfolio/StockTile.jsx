@@ -24,16 +24,6 @@ const StockTile = ({
       .catch((err) => { console.log(err); });
   };
 
-  // const updateStocksToDisplay = () => {
-  //   let stocksToDisplay = '';
-  //   selectedStocks.forEach((stockObj) => {
-  //     stocksToDisplay += stockObj.stockSymbol;
-  //   });
-  //   setSelectedStocksString(stocksToDisplay);
-  // }
-
-  // getStockPrice();
-
   return (
     <StockInterfaceContext.Consumer>
       {() => {
@@ -44,7 +34,10 @@ const StockTile = ({
               if (className === 'stockTile') {
                 setClassName('stockTileClicked');
                 setSelectedStocks([stockObj, ...selectedStocks]);
-              } else { setClassName('stockTile'); }
+              } else {
+                setClassName('stockTile');
+                // TODO: Remove from selectedStocks array
+              }
             }}
             role="button"
             tabIndex={0}
@@ -52,9 +45,9 @@ const StockTile = ({
             <div className="stockTileLabels">
               <div className="stockSymbol">{stockObj.symbol}</div>
               <div className="stockQuantity">{stockObj.quantity}</div>
-              <div className="stockCostBasis">{`$${stockObj.costBasis}`}</div>
-              <div className="marketValue">{`$${(stockObj.quantity * stockObj.latestPrice).toLocaleString()}`}</div>
-              <div className="stockPrice">{`$${stockObj.latestPrice}`}</div>
+              <div className="stockCostBasis">{`$${Math.round((stockObj.costBasis * 100) / 100).toFixed(2)}`}</div>
+              <div className="marketValue">{`$${Math.round(((stockObj.quantity * stockObj.latestPrice) * 100) / 100).toFixed(2)}`}</div>
+              <div className="stockPrice">{`$${Math.round((stockObj.latestPrice * 100) / 100).toFixed(2)}`}</div>
             </div>
           </div>
 
