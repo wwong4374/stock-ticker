@@ -53,8 +53,8 @@ const StockTile = ({
               <div className="stockSymbol">{stockObj.symbol}</div>
               <div className="stockQuantity">{stockObj.quantity}</div>
               <div className="stockCostBasis">{`$${stockObj.costBasis}`}</div>
-              <div className="marketValue">{`$${(stockObj.quantity * stockPrice).toLocaleString()}`}</div>
-              <div className="stockPrice">{`$${stockPrice}`}</div>
+              <div className="marketValue">{`$${(stockObj.quantity * stockObj.latestPrice).toLocaleString()}`}</div>
+              <div className="stockPrice">{`$${stockObj.latestPrice}`}</div>
             </div>
           </div>
 
