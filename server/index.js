@@ -5,7 +5,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const db = require('../database/index.js');
-const { default: axios } = require('axios');
 const host = 'http://localhost:1234';
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -60,21 +59,18 @@ app.get('/api/portfolio/symbols', (req, res) => {
 
 // Render portfolio
 app.get('/api/portfolio', (req, res) => {
-  // db.query(
-  //   `SELECT DISTINCT
-  //     symbol,
-  //     (SELECT SUM(quantity) FROM trades AS b WHERE b.symbol=a.symbol) AS quantity,
-  //     (SELECT ROUND(SUM(
-  //       quantity
-  //       * price),
-  //     2) FROM trades AS c WHERE c.symbol=a.symbol) AS costBasis,
-  //     (SELECT ROUND(price, 2) FROM prices AS d WHERE d.symbol=a.symbol ORDER BY d.date LIMIT 1) AS latestPrice
-  //   FROM trades AS a`,
-  //   (err, data) => {
-  //     if (err) { console.log(err); }
-  //     res.send(data);
-  //   }
-  // );
+  db.query(
+    `SELECT DISTINCT
+      symbol,
+      (SELECT SUM(quantity) FROM trades AS b WHERE b.symbol=a.symbol) AS quantity,
+      (SELECT ROUND(SUM(quantity * (SELECT price FROM prices AS e WHERE e.symbol = c.symbol AND e.date = c.date)), 2) FROM trades AS c WHERE c.symbol=a.symbol) AS costBasis,
+      (SELECT ROUND(price, 2) FROM prices AS d WHERE d.symbol=a.symbol ORDER BY d.date LIMIT 1) AS latestPrice
+    FROM trades AS a`,
+    (err, data) => {
+      if (err) { console.log(err); }
+      res.send(data);
+    }
+  );
 });
 
 app.listen(1234, () => {
