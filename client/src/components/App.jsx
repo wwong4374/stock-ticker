@@ -5,7 +5,6 @@
 /* eslint-disable arrow-body-style */
 import axios from 'axios';
 import React from 'react';
-// import { Switch } from 'react-router';
 import { Routes, Route } from 'react-router-dom';
 import NavBar from './navbar/NavBar.jsx';
 import { StockInterface } from './portfolio/StockInterface.jsx';

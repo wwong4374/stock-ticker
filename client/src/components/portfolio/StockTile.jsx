@@ -2,7 +2,6 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable comma-dangle */
 /* eslint-disable react/function-component-definition */
-import axios from 'axios';
 import React, { useContext, useState } from 'react';
 import { StockInterfaceContext } from './StockInterface.jsx';
 
@@ -26,8 +25,8 @@ const StockTile = ({ stockObj }) => {
                 setClassName('stockTileClicked');
                 setSelectedStocks([stockObj, ...selectedStocks]);
               } else {
-                setClassName('stockTile');
                 // Remove the unclicked stock from selectedStocks
+                setClassName('stockTile');
                 const stocks = selectedStocks;
                 const stockToRemove = stocks.find((stock) => { return stock.symbol === symbol; });
                 const indexToRemove = stocks.indexOf(stockToRemove);

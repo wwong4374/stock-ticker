@@ -11,16 +11,9 @@ import StockPortfolio from './StockPortfolio.jsx';
 export const StockInterfaceContext = React.createContext();
 
 export const StockInterface = () => {
-  const { host } = useContext(AppContext);
-  const [timeInterval, setTimeInterval] = useState('TIME_SERIES_DAILY');
-  const [selectedStock, setSelectedStock] = useState(null);
-  const [tickerSymbols, setTickerSymbols] = useState([]);
+  // VARIABLES
   const [selectedStocks, setSelectedStocks] = useState([]);
   const [portfolio, setPortfolio] = useState([]); // array of stockObj objects
-  const timeSeriesMapping = {
-    TIME_SERIES_DAILY: 'Time Series (Daily)',
-    TIME_SERIES_WEEKLY: 'Weekly Time Series'
-  };
 
   // HELPER FUNCTIONS
   const getPortfolio = () => {
@@ -29,25 +22,9 @@ export const StockInterface = () => {
       .catch((err) => { console.log(err); });
   };
 
-  // const updateStockPrice = () => {
-  //   axios.get('https://alpha-vantage.p.rapidapi.com/query', {
-  //     headers: {
-  //       'x-rapidapi-host': 'alpha-vantage.p.rapidapi.com',
-  //       'x-rapidapi-key': '1b1e7cf330mshfe2a919e34e9dd1p12059bjsna4c74a6efb05'
-  //     },
-  //     params: {
-  //       function: 'GLOBAL_QUOTE',
-  //       symbol: stockObj.stockSymbol,
-  //       datatype: 'json'
-  //     }
-  //   })
-  //     .then((results) => { setStockPrice(Math.round(results.data['Global Quote']['05. price'] * 100) / 100); })
-  //     .catch((err) => { console.log(err); });
-  // };
-
+  // COMPONENT
   return (
     <StockInterfaceContext.Provider value={{
-      setSelectedStock,
       selectedStocks,
       setSelectedStocks,
       portfolio,

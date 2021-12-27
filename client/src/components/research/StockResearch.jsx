@@ -7,6 +7,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { AppContext } from '../App';
 
 const StockResearch = () => {
+  // VARIABLES
   const { handleBuyStock, saveLatestPrice } = useContext(AppContext);
   const [stockSymbol, setStockSymbol] = useState('TSLA');
   const [stockToSearch, setStockToSearch] = useState('');
@@ -52,11 +53,12 @@ const StockResearch = () => {
     setStockToSearch('');
   };
 
-  // USE EFFECT
+  // USEEFFECT
   useEffect(() => {
     getPrice(stockSymbol);
   }, [stockSymbol]);
 
+  // COMPONENT
   return (
     <div className="stockResearchContainer">
       <h1>Stock Research</h1>

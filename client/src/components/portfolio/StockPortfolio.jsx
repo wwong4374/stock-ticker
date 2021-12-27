@@ -13,7 +13,6 @@ const StockPortfolio = () => {
   // VARIABLES
   const { handleBuyStock, handleSellStock } = useContext(AppContext);
   const { portfolio, getPortfolio, selectedStocks } = useContext(StockInterfaceContext);
-  // const [cash, setCash] = useState(10000);
   const [selectedStocksString, setSelectedStocksString] = useState('');
 
   // FUNCTIONS
