@@ -7,21 +7,13 @@ import React, { useContext, useState } from 'react';
 import { StockInterfaceContext } from './StockInterface.jsx';
 
 const StockTile = ({ stockObj }) => {
+  // VARIABLES
   const { symbol, quantity, costBasis, latestPrice } = stockObj;
   const { selectedStocks, setSelectedStocks } = useContext(StockInterfaceContext);
   const [className, setClassName] = useState('stockTile');
   const [stockPrice, setStockPrice] = useState(0.00);
 
-  // HELPER FUNCTIONS
-  const getStockPrice = () => {
-    axios.get(`${host}/api/stocks/${symbol}/price`)
-      .then((results) => {
-        const price = results.data.price;
-        setStockPrice(price);
-      })
-      .catch((err) => { console.log(err); });
-  };
-
+  // COMPONENT
   return (
     <StockInterfaceContext.Consumer>
       {() => {
@@ -29,14 +21,18 @@ const StockTile = ({ stockObj }) => {
           <div
             className={className}
             onClick={() => {
-              console.log(selectedStocks);
               if (className === 'stockTile') {
+                // Add the clicked stock to selectedStocks
                 setClassName('stockTileClicked');
                 setSelectedStocks([stockObj, ...selectedStocks]);
               } else {
                 setClassName('stockTile');
-                // TODO: Remove from selectedStocks array
-                let stocks = selectedStocks;
+                // Remove the unclicked stock from selectedStocks
+                const stocks = selectedStocks;
+                const stockToRemove = stocks.find((stock) => { return stock.symbol === symbol; });
+                const indexToRemove = stocks.indexOf(stockToRemove);
+                stocks.splice(indexToRemove, 1);
+                setSelectedStocks(stocks);
               }
             }}
             role="button"
@@ -45,10 +41,10 @@ const StockTile = ({ stockObj }) => {
             <div className="stockTileLabels">
               <div className="stockSymbol">{symbol}</div>
               <div className="stockQuantity">{quantity}</div>
-              <div className="stockCostBasis">{`$${Math.round((costBasis * 100) / 100).toFixed(2)}`}</div>
-              <div className="marketValue">{`$${Math.round(((quantity * latestPrice) * 100) / 100).toFixed(2)}`}</div>
-              <div className="gainLoss">{`$${Math.round((quantity * latestPrice) - costBasis).toFixed(2)}`}</div>
-              <div className="stockPrice">{`$${Math.round((latestPrice * 100) / 100).toFixed(2)}`}</div>
+              <div className="stockCostBasis">{`$${((costBasis * 100) / 100).toFixed(2)}`}</div>
+              <div className="marketValue">{`$${(((quantity * latestPrice) * 100) / 100).toFixed(2)}`}</div>
+              <div className="gainLoss">{`$${((quantity * latestPrice) - costBasis).toFixed(2)}`}</div>
+              <div className="stockPrice">{`$${((latestPrice * 100) / 100).toFixed(2)}`}</div>
             </div>
           </div>
         );

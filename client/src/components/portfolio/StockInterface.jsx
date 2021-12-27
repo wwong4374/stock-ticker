@@ -23,42 +23,27 @@ export const StockInterface = () => {
   };
 
   // HELPER FUNCTIONS
-  // const getSymbols = () => {
-  //   const symbols = [];
-  //   axios.get('/api/portfolio/symbols')
-  //     .then((results) => { results.data.forEach((symbolObj) => { symbols.push(symbolObj); }); })
-  //     .then(() => { setTickerSymbols(symbols); })
-  //     .catch((err) => { console.log(err); });
-  // };
-
   const getPortfolio = () => {
     axios.get('/api/portfolio')
       .then((results) => { setPortfolio([...results.data]); })
       .catch((err) => { console.log(err); });
   };
 
-  const updateStockPrice = () => {
-    axios.get('https://alpha-vantage.p.rapidapi.com/query', {
-      headers: {
-        'x-rapidapi-host': 'alpha-vantage.p.rapidapi.com',
-        'x-rapidapi-key': '1b1e7cf330mshfe2a919e34e9dd1p12059bjsna4c74a6efb05'
-      },
-      params: {
-        function: 'GLOBAL_QUOTE',
-        symbol: stockObj.stockSymbol,
-        datatype: 'json'
-      }
-    })
-      .then((results) => { setStockPrice(Math.round(results.data['Global Quote']['05. price'] * 100) / 100); })
-      .catch((err) => { console.log(err); });
-  };
-
-  const handleSellAllStock = () => {
-    axios.delete(`${host}/api/stocks/${stockObj.stockSymbol}`)
-      .then(() => { setStockSymbol('TSLA'); })
-      // .then((results) => { getSymbols(); })
-      .catch((err) => { console.log(err); });
-  };
+  // const updateStockPrice = () => {
+  //   axios.get('https://alpha-vantage.p.rapidapi.com/query', {
+  //     headers: {
+  //       'x-rapidapi-host': 'alpha-vantage.p.rapidapi.com',
+  //       'x-rapidapi-key': '1b1e7cf330mshfe2a919e34e9dd1p12059bjsna4c74a6efb05'
+  //     },
+  //     params: {
+  //       function: 'GLOBAL_QUOTE',
+  //       symbol: stockObj.stockSymbol,
+  //       datatype: 'json'
+  //     }
+  //   })
+  //     .then((results) => { setStockPrice(Math.round(results.data['Global Quote']['05. price'] * 100) / 100); })
+  //     .catch((err) => { console.log(err); });
+  // };
 
   return (
     <StockInterfaceContext.Provider value={{

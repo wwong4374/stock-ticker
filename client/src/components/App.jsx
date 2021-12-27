@@ -34,29 +34,20 @@ export const App = () => {
       .catch((err) => { console.log(err); });
   };
 
-  const handleBuyStock = (symbol, price) => {
+  const handleBuyStock = (symbol) => {
     axios.post('/api/trades', {
       symbol: symbol,
       quantity: 1,
       date: today
     })
       .then(() => { alert(`Bought 1 share of ${symbol}!`); })
-      .then(() => { saveLatestPrice(symbol, price); })
       .catch((err) => { console.log(err); });
   };
 
-  const handleSellStock = (symbol, price) => {
+  const handleSellStock = (symbol) => {
     axios.post('/api/trades', {
       symbol: symbol,
       quantity: -1,
-      date: today
-    })
-      .then()
-      .catch((err) => { console.log(err); });
-
-    axios.post('/api/prices', {
-      symbol: symbol,
-      price: price,
       date: today
     })
       .then()

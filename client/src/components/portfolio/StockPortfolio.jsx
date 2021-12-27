@@ -22,7 +22,7 @@ const StockPortfolio = () => {
     portfolio.forEach((stockObj) => {});
   };
 
-  const updateStockPrice = () => {
+  const updateStockPrice = (symbol) => {
     axios.get('https://alpha-vantage.p.rapidapi.com/query', {
       headers: {
         'x-rapidapi-host': 'alpha-vantage.p.rapidapi.com',
@@ -30,7 +30,7 @@ const StockPortfolio = () => {
       },
       params: {
         function: 'GLOBAL_QUOTE',
-        symbol: stockObj.stockSymbol,
+        symbol: symbol,
         datatype: 'json'
       }
     })
@@ -39,26 +39,16 @@ const StockPortfolio = () => {
   };
 
   const handleBuySelectedStocks = () => {
-    selectedStocks.forEach((stockObj) => { handleBuyStock(stockObj.symbol, ); });
+    selectedStocks.forEach((stockObj) => { handleBuyStock(stockObj.symbol); });
+    getPortfolio();
   };
-
 
   const handleSellSelectedStocks = () => {
-    selectedStocks.forEach((stockObj) => { handleSellStock(stockObj); });
+    selectedStocks.forEach((stockObj) => { handleSellStock(stockObj.symbol); });
+    getPortfolio();
   };
 
-  // const handleSellStock = (stockObj) => {
-  //   // axios.put(`${host}/api/stocks`, { stockSymbol: stockObj.stockSymbol, quantity: stockObj.quantity - 1 })
-  //   //   .then(() => {
-  //   //     axios.get(`${host}/api/stocks/${stockObj.stockSymbol}/quantity`)
-  //   //       .then((results) => {
-  //   //         if (results.data.quantity === 0) { handleSellAllShares(); }
-  //   //       })
-  //   //       .catch((err) => { console.log(err); });
-  //   //   })
-  //   //   .then((results) => { getPortfolio(); })
-  //   //   .catch((err) => { console.log(err); });
-  // };
+  const handleQuoteSelectedStocks = () => {};
 
   const handleSellAllShares = (stockObj) => {
     // axios.delete(`${host}/api/stocks/${stockObj.stockSymbol}`)
@@ -88,12 +78,7 @@ const StockPortfolio = () => {
               <div className="stockTiles">
                 {portfolio.map((stockObj) => {
                   return (
-                    <StockTile
-                      stockObj={stockObj}
-                      selectedStocksString={selectedStocksString}
-                      setSelectedStocksString={setSelectedStocksString}
-                      key={`${stockObj.symbol}-${stockObj.date}`}
-                    />
+                    <StockTile stockObj={stockObj} key={`${stockObj.symbol}-${stockObj.date}`} />
                   );
                 })}
               </div>
@@ -102,7 +87,7 @@ const StockPortfolio = () => {
             <div className="stockTileButtons">
               <button type="button" className="stockTileButton" onClick={handleBuySelectedStocks}>Buy</button>
               <button type="button" className="stockTileButton" onClick={handleSellSelectedStocks}>Sell</button>
-              <button type="button" className="stockTileButton" onClick={updateStockPrice}>Quote</button>
+              <button type="button" className="stockTileButton" onClick={handleQuoteSelectedStocks}>Quote</button>
               <button type="button" className="stockTileButton" onClick={handleSellAllShares}>Sell All Shares</button>
             </div>
           </>
