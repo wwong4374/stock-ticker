@@ -64,7 +64,7 @@ export const App = () => {
   };
 
   return (
-    <AppContext.Provider value={{ host, handleBuyStock, handleSellStock }}>
+    <AppContext.Provider value={{ host, handleBuyStock, handleSellStock, saveLatestPrice }}>
       <NavBar />
       <Routes>
         <Route path="/" exact element={<StockInterface />} />

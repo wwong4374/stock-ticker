@@ -7,7 +7,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { AppContext } from '../App';
 
 const StockResearch = () => {
-  const { handleBuyStock } = useContext(AppContext);
+  const { handleBuyStock, saveLatestPrice } = useContext(AppContext);
   const [stockSymbol, setStockSymbol] = useState('TSLA');
   const [stockToSearch, setStockToSearch] = useState('');
   const [stockPrice, setStockPrice] = useState(0);
@@ -26,42 +26,11 @@ const StockResearch = () => {
       }
     })
       .then((results) => {
+        saveLatestPrice(symbol, Number(results.data['Global Quote']['05. price']));
         setStockPrice(results.data['Global Quote']['05. price']);
-        // return results.data['Global Quote']['05. price'];
-        // if (results.data['Global Quote']['05. price'] === undefined
-        //     || Number.isNaN(results.data['Global Quote']['05. price'])) {
-        //   alert('Please enter a valid stock symbol.');
-        //   setStockToSearch('');
-        //   return;
-        // }
-        // setStockPrice(Math.round(results.data['Global Quote']['05. price'] * 100) / 100);
       })
       .catch((err) => { console.log(err); });
   };
-
-  // const getPrice = () => {
-  //   axios.get('https://alpha-vantage.p.rapidapi.com/query', {
-  //     headers: {
-  //       'x-rapidapi-host': 'alpha-vantage.p.rapidapi.com',
-  //       'x-rapidapi-key': '1b1e7cf330mshfe2a919e34e9dd1p12059bjsna4c74a6efb05'
-  //     },
-  //     params: {
-  //       function: 'GLOBAL_QUOTE',
-  //       symbol: stockSymbol,
-  //       datatype: 'json'
-  //     }
-  //   })
-  //     .then((results) => {
-  //       if (results.data['Global Quote']['05. price'] === undefined
-  //           || Number.isNaN(results.data['Global Quote']['05. price'])) {
-  //         alert('Please enter a valid stock symbol.');
-  //         setStockToSearch('');
-  //         return;
-  //       }
-  //       setStockPrice(Math.round(results.data['Global Quote']['05. price'] * 100) / 100);
-  //     })
-  //     .catch((err) => { console.log(err); });
-  // };
 
   const handleStockInput = (e) => { setStockToSearch(e.nativeEvent.target.value); };
 
@@ -71,11 +40,14 @@ const StockResearch = () => {
       return;
     }
     setStockSymbol(stockToSearch.toUpperCase());
+
     if (stockPrice === undefined || Number.isNaN(stockPrice)) {
       alert('Please enter a valid stock symbol.');
       setStockToSearch('');
       return;
     }
+
+    getPrice(stockSymbol);
     setStockPrice(Math.round(stockPrice * 100) / 100);
     setStockToSearch('');
   };
