@@ -3,20 +3,18 @@
 /* eslint-disable comma-dangle */
 /* eslint-disable react/function-component-definition */
 import axios from 'axios';
-import React, { useState } from 'react';
-import { StockInterfaceContext } from './StockInterface';
+import React, { useContext, useState } from 'react';
+import { StockInterfaceContext } from './StockInterface.jsx';
 
-const StockTile = ({
-  stockObj,
-  selectedStocks,
-  setSelectedStocks
-}) => {
+const StockTile = ({ stockObj }) => {
+  const { symbol, quantity, costBasis, latestPrice } = stockObj;
+  const { selectedStocks, setSelectedStocks } = useContext(StockInterfaceContext);
   const [className, setClassName] = useState('stockTile');
   const [stockPrice, setStockPrice] = useState(0.00);
 
   // HELPER FUNCTIONS
   const getStockPrice = () => {
-    axios.get(`${host}/api/stocks/${stockObj.stockSymbol}/price`)
+    axios.get(`${host}/api/stocks/${symbol}/price`)
       .then((results) => {
         const price = results.data.price;
         setStockPrice(price);
@@ -31,26 +29,28 @@ const StockTile = ({
           <div
             className={className}
             onClick={() => {
+              console.log(selectedStocks);
               if (className === 'stockTile') {
                 setClassName('stockTileClicked');
                 setSelectedStocks([stockObj, ...selectedStocks]);
               } else {
                 setClassName('stockTile');
                 // TODO: Remove from selectedStocks array
+                let stocks = selectedStocks;
               }
             }}
             role="button"
             tabIndex={0}
           >
             <div className="stockTileLabels">
-              <div className="stockSymbol">{stockObj.symbol}</div>
-              <div className="stockQuantity">{stockObj.quantity}</div>
-              <div className="stockCostBasis">{`$${Math.round((stockObj.costBasis * 100) / 100).toFixed(2)}`}</div>
-              <div className="marketValue">{`$${Math.round(((stockObj.quantity * stockObj.latestPrice) * 100) / 100).toFixed(2)}`}</div>
-              <div className="stockPrice">{`$${Math.round((stockObj.latestPrice * 100) / 100).toFixed(2)}`}</div>
+              <div className="stockSymbol">{symbol}</div>
+              <div className="stockQuantity">{quantity}</div>
+              <div className="stockCostBasis">{`$${Math.round((costBasis * 100) / 100).toFixed(2)}`}</div>
+              <div className="marketValue">{`$${Math.round(((quantity * latestPrice) * 100) / 100).toFixed(2)}`}</div>
+              <div className="gainLoss">{`$${Math.round((quantity * latestPrice) - costBasis).toFixed(2)}`}</div>
+              <div className="stockPrice">{`$${Math.round((latestPrice * 100) / 100).toFixed(2)}`}</div>
             </div>
           </div>
-
         );
       }}
     </StockInterfaceContext.Consumer>

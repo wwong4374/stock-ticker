@@ -12,7 +12,7 @@ CREATE TABLE trades (
 );
 
 CREATE TABLE prices (
-  uniqueId VARCHAR(20) PRIMARY KEY,
+  quoteId VARCHAR(20) PRIMARY KEY,
   symbol VARCHAR(10),
   price FLOAT,
   date DATE

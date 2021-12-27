@@ -41,7 +41,7 @@ app.post('/api/trades', (req, res) => {
 app.post('/api/prices', (req, res) => {
   const { symbol, price, date } = req.body;
   db.query(
-    `INSERT IGNORE INTO prices (uniqueId, symbol, price, date) VALUES ('${symbol}:${date}', '${symbol}', ${price}, STR_TO_DATE('${date}', \'%m/%d/%Y\'))`,
+    `INSERT IGNORE INTO prices (quoteId, symbol, price, date) VALUES ('${symbol}:${date}', '${symbol}', ${price}, STR_TO_DATE('${date}', \'%m/%d/%Y\'))`,
     (err, data) => {
       if (err) { console.log(err); }
       res.sendStatus(201);

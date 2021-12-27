@@ -1,16 +1,19 @@
+/* eslint-disable import/extensions */
+/* eslint-disable import/no-cycle */
 /* eslint-disable arrow-body-style */
 /* eslint-disable react/function-component-definition */
 /* eslint-disable comma-dangle */
 import axios from 'axios';
 import React, { useEffect, useState, useContext } from 'react';
 import StockTile from './StockTile.jsx';
-import { StockInterface, StockInterfaceContext } from './StockInterface.jsx';
+import { AppContext } from '../App.jsx';
+import { StockInterfaceContext } from './StockInterface.jsx';
 
 const StockPortfolio = () => {
   // VARIABLES
-  const { portfolio, getPortfolio } = useContext(StockInterfaceContext);
-  const [cash, setCash] = useState(10000);
-  const [selectedStocks, setSelectedStocks] = useState([]);
+  const { handleBuyStock, handleSellStock } = useContext(AppContext);
+  const { portfolio, getPortfolio, selectedStocks } = useContext(StockInterfaceContext);
+  // const [cash, setCash] = useState(10000);
   const [selectedStocksString, setSelectedStocksString] = useState('');
 
   // FUNCTIONS
@@ -35,41 +38,27 @@ const StockPortfolio = () => {
       .catch((err) => { console.log(err); });
   };
 
-  // TODO: Implement this function
   const handleBuySelectedStocks = () => {
-    selectedStocks.forEach();
+    selectedStocks.forEach((stockObj) => { handleBuyStock(stockObj); });
   };
 
-  const handleBuyStock = () => {
-    // axios.get(`${host}/api/stocks/symbols`)
-    //   .then((results) => {
-    //     const stockSymbolsInPortfolio = results.data;
-    //     if (stockSymbolsInPortfolio.includes(stockSymbol)) {
-    //       incrementStockQuantity();
-    //     } else {
-    //       addStockToPortfolio();
-    //     }
-    //   })
-    //   .then(getPortfolio)
-    //   .catch((err) => { console.log(err); });
-  };
 
   const handleSellSelectedStocks = () => {
-    selectedStocks.forEach((stock) => {});
+    selectedStocks.forEach((stockObj) => { handleSellStock(); });
   };
 
-  const handleSellStock = (stockObj) => {
-    // axios.put(`${host}/api/stocks`, { stockSymbol: stockObj.stockSymbol, quantity: stockObj.quantity - 1 })
-    //   .then(() => {
-    //     axios.get(`${host}/api/stocks/${stockObj.stockSymbol}/quantity`)
-    //       .then((results) => {
-    //         if (results.data.quantity === 0) { handleSellAllShares(); }
-    //       })
-    //       .catch((err) => { console.log(err); });
-    //   })
-    //   .then((results) => { getPortfolio(); })
-    //   .catch((err) => { console.log(err); });
-  };
+  // const handleSellStock = (stockObj) => {
+  //   // axios.put(`${host}/api/stocks`, { stockSymbol: stockObj.stockSymbol, quantity: stockObj.quantity - 1 })
+  //   //   .then(() => {
+  //   //     axios.get(`${host}/api/stocks/${stockObj.stockSymbol}/quantity`)
+  //   //       .then((results) => {
+  //   //         if (results.data.quantity === 0) { handleSellAllShares(); }
+  //   //       })
+  //   //       .catch((err) => { console.log(err); });
+  //   //   })
+  //   //   .then((results) => { getPortfolio(); })
+  //   //   .catch((err) => { console.log(err); });
+  // };
 
   const handleSellAllShares = (stockObj) => {
     // axios.delete(`${host}/api/stocks/${stockObj.stockSymbol}`)
@@ -83,38 +72,43 @@ const StockPortfolio = () => {
 
   // COMPONENT
   return (
-    <>
-      <div className="stockPortfolio">
-        <div className="stockPortfolioLabelContainer">
-          <span className="stockPortfolioLabel">Company</span>
-          <span className="stockPortfolioLabel">Quantity</span>
-          <span className="stockPortfolioLabel">Cost Basis</span>
-          <span className="stockPortfolioLabel">Current Value</span>
-          <span className="stockPortfolioLabel">Gain/Loss</span>
-          <span className="stockPortfolioLabel">Current Price</span>
-        </div>
-        <div className="stockTiles">
-          {portfolio.map((stockObj) => {
-            return (
-              <StockTile
-                stockObj={stockObj}
-                selectedStocks={selectedStocks}
-                setSelectedStocks={setSelectedStocks}
-                selectedStocksString={selectedStocksString}
-                setSelectedStocksString={setSelectedStocksString}
-                key={`${stockObj.symbol}-${stockObj.date}`}
-              />
-            );
-          })}
-        </div>
-      </div>
-      <div className="stockTileButtons">
-        <button type="button" className="stockTileButton" onClick={handleBuySelectedStocks}>Buy</button>
-        <button type="button" className="stockTileButton" onClick={handleSellSelectedStocks}>Sell</button>
-        <button type="button" className="stockTileButton" onClick={updateStockPrice}>Quote</button>
-        <button type="button" className="stockTileButton" onClick={handleSellAllShares}>Sell All Shares</button>
-      </div>
-    </>
+    <StockInterfaceContext.Consumer>
+      {() => {
+        return (
+          <>
+            <div className="stockPortfolio">
+              <div className="stockPortfolioLabelContainer">
+                <span className="stockPortfolioLabel">Company</span>
+                <span className="stockPortfolioLabel">Quantity</span>
+                <span className="stockPortfolioLabel">Cost Basis</span>
+                <span className="stockPortfolioLabel">Current Value</span>
+                <span className="stockPortfolioLabel">Gain/Loss</span>
+                <span className="stockPortfolioLabel">Latest Price</span>
+              </div>
+              <div className="stockTiles">
+                {portfolio.map((stockObj) => {
+                  return (
+                    <StockTile
+                      stockObj={stockObj}
+                      selectedStocksString={selectedStocksString}
+                      setSelectedStocksString={setSelectedStocksString}
+                      key={`${stockObj.symbol}-${stockObj.date}`}
+                    />
+                  );
+                })}
+              </div>
+            </div>
+            <div>For selected stocks:</div>
+            <div className="stockTileButtons">
+              <button type="button" className="stockTileButton" onClick={handleBuySelectedStocks}>Buy</button>
+              <button type="button" className="stockTileButton" onClick={handleSellSelectedStocks}>Sell</button>
+              <button type="button" className="stockTileButton" onClick={updateStockPrice}>Quote</button>
+              <button type="button" className="stockTileButton" onClick={handleSellAllShares}>Sell All Shares</button>
+            </div>
+          </>
+        );
+      }}
+    </StockInterfaceContext.Consumer>
   );
 };
 

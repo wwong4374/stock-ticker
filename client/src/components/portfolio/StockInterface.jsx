@@ -15,6 +15,7 @@ export const StockInterface = () => {
   const [timeInterval, setTimeInterval] = useState('TIME_SERIES_DAILY');
   const [selectedStock, setSelectedStock] = useState(null);
   const [tickerSymbols, setTickerSymbols] = useState([]);
+  const [selectedStocks, setSelectedStocks] = useState([]);
   const [portfolio, setPortfolio] = useState([]); // array of stockObj objects
   const timeSeriesMapping = {
     TIME_SERIES_DAILY: 'Time Series (Daily)',
@@ -22,47 +23,17 @@ export const StockInterface = () => {
   };
 
   // HELPER FUNCTIONS
-  const getSymbols = () => {
-    const symbols = [];
-    axios.get('/api/portfolio/symbols')
-      .then((results) => {
-        results.data.forEach((symbolObj) => { symbols.push(symbolObj); });
-      })
-      .then(() => { setTickerSymbols(symbols); })
-      .catch((err) => { console.log(err); });
-  };
+  // const getSymbols = () => {
+  //   const symbols = [];
+  //   axios.get('/api/portfolio/symbols')
+  //     .then((results) => { results.data.forEach((symbolObj) => { symbols.push(symbolObj); }); })
+  //     .then(() => { setTickerSymbols(symbols); })
+  //     .catch((err) => { console.log(err); });
+  // };
 
   const getPortfolio = () => {
     axios.get('/api/portfolio')
       .then((results) => { setPortfolio([...results.data]); })
-      .then(() => { console.log(portfolio); })
-      .catch((err) => { console.log(err); });
-  };
-
-  const handleBuyStock = () => {
-    axios.get(`${host}/api/stocks/symbols`)
-      .then((results) => {
-        const stockSymbolsInPortfolio = results.data;
-        if (stockSymbolsInPortfolio.includes(stockSymbol)) {
-          incrementStockQuantity();
-        } else {
-          addStockToPortfolio();
-        }
-      })
-      .then(getSymbols)
-      .catch((err) => { console.log(err); });
-  };
-
-  const handleSellStock = () => {
-    axios.put(`${host}/api/stocks`, { stockSymbol: stockObj.stockSymbol, quantity: stockObj.quantity - 1 })
-      .then(() => {
-        axios.get(`${host}/api/stocks/${stockObj.stockSymbol}/quantity`)
-          .then((results) => {
-            if (results.data.quantity === 0) { handleSellAllStock(); }
-          })
-          .catch((err) => { console.log(err); });
-      })
-      .then((results) => { getSymbols(); })
       .catch((err) => { console.log(err); });
   };
 
@@ -92,9 +63,11 @@ export const StockInterface = () => {
   return (
     <StockInterfaceContext.Provider value={{
       setSelectedStock,
+      selectedStocks,
+      setSelectedStocks,
       portfolio,
       getPortfolio
-      }}>
+    }}>
       <span className="stockPortfolioTitle">Portfolio</span>
       <div className="stockInterface">
         <StockPortfolio />
