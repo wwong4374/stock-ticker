@@ -39,12 +39,12 @@ const StockPortfolio = () => {
   };
 
   const handleBuySelectedStocks = () => {
-    selectedStocks.forEach((stockObj) => { handleBuyStock(stockObj); });
+    selectedStocks.forEach((stockObj) => { handleBuyStock(stockObj.symbol, ); });
   };
 
 
   const handleSellSelectedStocks = () => {
-    selectedStocks.forEach((stockObj) => { handleSellStock(); });
+    selectedStocks.forEach((stockObj) => { handleSellStock(stockObj); });
   };
 
   // const handleSellStock = (stockObj) => {

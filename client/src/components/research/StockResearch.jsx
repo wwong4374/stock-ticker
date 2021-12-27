@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 /* eslint-disable comma-dangle */
 /* eslint-disable react/function-component-definition */
 /* eslint-disable arrow-body-style */
@@ -12,7 +13,7 @@ const StockResearch = () => {
   const [stockPrice, setStockPrice] = useState(0);
 
   // HELPER FUNCTIONS
-  const getPrice = () => {
+  const getPrice = (symbol) => {
     axios.get('https://alpha-vantage.p.rapidapi.com/query', {
       headers: {
         'x-rapidapi-host': 'alpha-vantage.p.rapidapi.com',
@@ -20,64 +21,68 @@ const StockResearch = () => {
       },
       params: {
         function: 'GLOBAL_QUOTE',
-        symbol: stockSymbol,
+        symbol: symbol,
         datatype: 'json'
       }
     })
       .then((results) => {
-        if (results.data['Global Quote']['05. price'] === undefined
-            || Number.isNaN(results.data['Global Quote']['05. price'])) {
-          alert('Please enter a valid stock symbol.');
-          setStockToSearch('');
-          return;
-        }
-        setStockPrice(Math.round(results.data['Global Quote']['05. price'] * 100) / 100);
+        setStockPrice(results.data['Global Quote']['05. price']);
+        // return results.data['Global Quote']['05. price'];
+        // if (results.data['Global Quote']['05. price'] === undefined
+        //     || Number.isNaN(results.data['Global Quote']['05. price'])) {
+        //   alert('Please enter a valid stock symbol.');
+        //   setStockToSearch('');
+        //   return;
+        // }
+        // setStockPrice(Math.round(results.data['Global Quote']['05. price'] * 100) / 100);
       })
       .catch((err) => { console.log(err); });
   };
 
-  // const handleBuyStock = (symbol, price) => {
-  //   let today = new Date();
-  //   const dd = String(today.getDate()).padStart(2, '0');
-  //   const mm = String(today.getMonth() + 1).padStart(2, '0');
-  //   const yyyy = today.getFullYear();
-
-  //   today = `${mm}/${dd}/${yyyy}`;
-
-  //   axios.post('/api/trades', {
-  //     symbol: symbol,
-  //     quantity: 1,
-  //     date: today
+  // const getPrice = () => {
+  //   axios.get('https://alpha-vantage.p.rapidapi.com/query', {
+  //     headers: {
+  //       'x-rapidapi-host': 'alpha-vantage.p.rapidapi.com',
+  //       'x-rapidapi-key': '1b1e7cf330mshfe2a919e34e9dd1p12059bjsna4c74a6efb05'
+  //     },
+  //     params: {
+  //       function: 'GLOBAL_QUOTE',
+  //       symbol: stockSymbol,
+  //       datatype: 'json'
+  //     }
   //   })
-  //     .then()
-  //     .catch((err) => { console.log(err); });
-
-  //   axios.post('/api/prices', {
-  //     symbol: symbol,
-  //     price: price,
-  //     date: today
-  //   })
-  //     .then()
+  //     .then((results) => {
+  //       if (results.data['Global Quote']['05. price'] === undefined
+  //           || Number.isNaN(results.data['Global Quote']['05. price'])) {
+  //         alert('Please enter a valid stock symbol.');
+  //         setStockToSearch('');
+  //         return;
+  //       }
+  //       setStockPrice(Math.round(results.data['Global Quote']['05. price'] * 100) / 100);
+  //     })
   //     .catch((err) => { console.log(err); });
   // };
 
-  const handleStockInput = (e) => {
-    setStockToSearch(e.nativeEvent.target.value);
-  };
+  const handleStockInput = (e) => { setStockToSearch(e.nativeEvent.target.value); };
 
   const handleStockSearch = () => {
     if (stockToSearch === '') {
       alert('Please enter a stock symbol.');
       return;
     }
-    getPrice();
     setStockSymbol(stockToSearch.toUpperCase());
+    if (stockPrice === undefined || Number.isNaN(stockPrice)) {
+      alert('Please enter a valid stock symbol.');
+      setStockToSearch('');
+      return;
+    }
+    setStockPrice(Math.round(stockPrice * 100) / 100);
     setStockToSearch('');
   };
 
   // USE EFFECT
   useEffect(() => {
-    getPrice();
+    getPrice(stockSymbol);
   }, [stockSymbol]);
 
   return (
