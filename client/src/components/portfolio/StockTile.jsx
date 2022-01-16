@@ -10,7 +10,6 @@ const StockTile = ({ stockObj }) => {
   const { symbol, quantity, costBasis, latestPrice } = stockObj;
   const { selectedStocks, setSelectedStocks } = useContext(StockInterfaceContext);
   const [className, setClassName] = useState('stockTile');
-  const [stockPrice, setStockPrice] = useState(0.00);
 
   // COMPONENT
   return (
@@ -43,6 +42,7 @@ const StockTile = ({ stockObj }) => {
               <div className="stockCostBasis">{`$${((costBasis * 100) / 100).toFixed(2)}`}</div>
               <div className="marketValue">{`$${(((quantity * latestPrice) * 100) / 100).toFixed(2)}`}</div>
               <div className="gainLoss">{`$${((quantity * latestPrice) - costBasis).toFixed(2)}`}</div>
+              <div className="averagePerformance">{`10`}</div>
               <div className="stockPrice">{`$${((latestPrice * 100) / 100).toFixed(2)}`}</div>
             </div>
           </div>

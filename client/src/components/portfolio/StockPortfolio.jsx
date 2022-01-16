@@ -47,8 +47,6 @@ const StockPortfolio = () => {
     getPortfolio();
   };
 
-  const handleQuoteSelectedStocks = () => {};
-
   const handleSellAllShares = (stockObj) => {
     // axios.delete(`${host}/api/stocks/${stockObj.stockSymbol}`)
     //   .then(() => { setStockSymbol('TSLA'); })
@@ -72,6 +70,7 @@ const StockPortfolio = () => {
                 <span className="stockPortfolioLabel">Cost Basis</span>
                 <span className="stockPortfolioLabel">Current Value</span>
                 <span className="stockPortfolioLabel">Gain/Loss</span>
+                <span className="stockPortfolioLabel">Performance %</span>
                 <span className="stockPortfolioLabel">Latest Price</span>
               </div>
               <div className="stockTiles">
@@ -86,7 +85,6 @@ const StockPortfolio = () => {
             <div className="stockTileButtons">
               <button type="button" className="stockTileButton" onClick={handleBuySelectedStocks}>Buy</button>
               <button type="button" className="stockTileButton" onClick={handleSellSelectedStocks}>Sell</button>
-              <button type="button" className="stockTileButton" onClick={handleQuoteSelectedStocks}>Quote</button>
               <button type="button" className="stockTileButton" onClick={handleSellAllShares}>Sell All Shares</button>
             </div>
           </>

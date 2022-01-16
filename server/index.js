@@ -57,7 +57,7 @@ app.get('/api/portfolio/symbols', (req, res) => {
   });
 });
 
-// Render portfolio
+// Get portfolio
 app.get('/api/portfolio', (req, res) => {
   db.query(
     `SELECT DISTINCT
