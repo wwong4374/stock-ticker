@@ -7,9 +7,13 @@ import { StockInterfaceContext } from './StockInterface.jsx';
 
 const StockTile = ({ stockObj }) => {
   // VARIABLES
-  const { symbol, quantity, costBasis, latestPrice } = stockObj;
+  const { symbol, quantity, costBasis, earliestPrice, latestPrice, earliestDate, latestDate } = stockObj;
   const { selectedStocks, setSelectedStocks } = useContext(StockInterfaceContext);
   const [className, setClassName] = useState('stockTile');
+  const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
+  const startDate = new Date(earliestDate);
+  const currentDate = new Date();
+  const daysElapsed = Math.round(Math.abs((currentDate - startDate) / oneDay));
 
   // COMPONENT
   return (
@@ -42,7 +46,9 @@ const StockTile = ({ stockObj }) => {
               <div className="stockCostBasis">{`$${((costBasis * 100) / 100).toFixed(2)}`}</div>
               <div className="marketValue">{`$${(((quantity * latestPrice) * 100) / 100).toFixed(2)}`}</div>
               <div className="gainLoss">{`$${((quantity * latestPrice) - costBasis).toFixed(2)}`}</div>
-              <div className="averagePerformance">{`10`}</div>
+              <div className="averagePerformance">
+                {`${((((latestPrice - earliestPrice) / earliestPrice) * (365 / daysElapsed) * 100) / 100).toFixed(2)}%`}
+              </div>
               <div className="stockPrice">{`$${((latestPrice * 100) / 100).toFixed(2)}`}</div>
             </div>
           </div>

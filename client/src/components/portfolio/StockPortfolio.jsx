@@ -33,7 +33,6 @@ const StockPortfolio = () => {
         datatype: 'json'
       }
     })
-      // .then((results) => { setStockPrice(Math.round(results.data['Global Quote']['05. price'] * 100) / 100); })
       .catch((err) => { console.log(err); });
   };
 
