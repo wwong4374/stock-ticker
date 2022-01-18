@@ -19,7 +19,6 @@ app.use(express.static(path.join(__dirname, '..', 'client', 'dist')));
 app.get('/api/prices', (req, res) => {
   db.query('SELECT symbol, price, date FROM prices', (err, data) => {
     if (err) { console.log(err); }
-    console.log(data);
     res.send(data);
   });
 });
